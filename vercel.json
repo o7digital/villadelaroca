@@ -3,72 +3,72 @@
     {
       "source": "/activities",
       "destination": "/activities/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/contact",
       "destination": "/contact/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/our-bb",
       "destination": "/our-bb/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/room/room",
       "destination": "/room/room/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/rooms-rates/rates",
       "destination": "/rooms-rates/rates/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/es",
       "destination": "/es/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/es/activities",
       "destination": "/es/activities/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/es/contact",
       "destination": "/es/contact/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/es/our-bb",
       "destination": "/es/our-bb/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/es/room/room",
       "destination": "/es/room/room/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/es/rooms-rates/rates",
       "destination": "/es/rooms-rates/rates/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/feed",
       "destination": "/feed/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/comments/feed",
       "destination": "/comments/feed/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/wp-json",
       "destination": "/wp-json/",
-      "permanent": false
+      "permanent": true
     }
   ],
   "rewrites": [
