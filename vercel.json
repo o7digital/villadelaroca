@@ -1,140 +1,38 @@
 {
+  "framework": "astro",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/activities",
-      "destination": "/activities/",
-      "permanent": true
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact/",
-      "permanent": true
-    },
-    {
-      "source": "/our-bb",
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "11" }],
       "destination": "/our-bb/",
       "permanent": true
     },
     {
-      "source": "/room/room",
-      "destination": "/room/room/",
-      "permanent": true
-    },
-    {
-      "source": "/rooms-rates/rates",
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "17" }],
       "destination": "/rooms-rates/rates/",
       "permanent": true
     },
     {
-      "source": "/es",
-      "destination": "/es/",
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "23" }],
+      "destination": "/contact/",
       "permanent": true
     },
-    {
-      "source": "/es/activities",
-      "destination": "/es/activities/",
-      "permanent": true
-    },
-    {
-      "source": "/es/contact",
-      "destination": "/es/contact/",
-      "permanent": true
-    },
-    {
-      "source": "/es/our-bb",
-      "destination": "/es/our-bb/",
-      "permanent": true
-    },
-    {
-      "source": "/es/room/room",
-      "destination": "/es/room/room/",
-      "permanent": true
-    },
-    {
-      "source": "/es/rooms-rates/rates",
-      "destination": "/es/rooms-rates/rates/",
-      "permanent": true
-    },
-    {
-      "source": "/feed",
-      "destination": "/feed/",
-      "permanent": true
-    },
-    {
-      "source": "/comments/feed",
-      "destination": "/comments/feed/",
-      "permanent": true
-    },
-    {
-      "source": "/wp-json",
-      "destination": "/wp-json/",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
     {
       "source": "/",
-      "destination": "/villadelaroca.com/index.html"
+      "has": [{ "type": "query", "key": "p", "value": "1443" }],
+      "destination": "/activities/",
+      "permanent": true
     },
     {
-      "source": "/activities/",
-      "destination": "/villadelaroca.com/activities/index.html"
-    },
-    {
-      "source": "/contact/",
-      "destination": "/villadelaroca.com/contact/index.html"
-    },
-    {
-      "source": "/our-bb/",
-      "destination": "/villadelaroca.com/our-bb/index.html"
-    },
-    {
-      "source": "/room/room/",
-      "destination": "/villadelaroca.com/room/room/index.html"
-    },
-    {
-      "source": "/rooms-rates/rates/",
-      "destination": "/villadelaroca.com/rooms-rates/rates/index.html"
-    },
-    {
-      "source": "/es/",
-      "destination": "/villadelaroca.com/es/index.html"
-    },
-    {
-      "source": "/es/activities/",
-      "destination": "/villadelaroca.com/es/activities/index.html"
-    },
-    {
-      "source": "/es/contact/",
-      "destination": "/villadelaroca.com/es/contact/index.html"
-    },
-    {
-      "source": "/es/our-bb/",
-      "destination": "/villadelaroca.com/es/our-bb/index.html"
-    },
-    {
-      "source": "/es/room/room/",
-      "destination": "/villadelaroca.com/es/room/room/index.html"
-    },
-    {
-      "source": "/es/rooms-rates/rates/",
-      "destination": "/villadelaroca.com/es/rooms-rates/rates/index.html"
-    },
-    {
-      "source": "/feed/",
-      "destination": "/villadelaroca.com/feed/index.html"
-    },
-    {
-      "source": "/comments/feed/",
-      "destination": "/villadelaroca.com/comments/feed/index.html"
-    },
-    {
-      "source": "/wp-json/",
-      "destination": "/villadelaroca.com/wp-json/index.html"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/villadelaroca.com/:path*"
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "1005" }],
+      "destination": "/room/room/",
+      "permanent": true
     }
   ]
 }
