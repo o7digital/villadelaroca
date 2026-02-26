@@ -59,6 +59,10 @@ Template: hotel-xenia
 		display: none !important;
 	}
 
+	.header .main_nav_wrapper .mobile-language-links {
+		display: none !important;
+	}
+
 	.header .header_tools .btn.btn-secondary {
 		margin-top: 0 !important;
 		padding: 11px 14px;
@@ -68,44 +72,28 @@ Template: hotel-xenia
 	}
 
 	.secondary_nav_widgetized_area .country-selector {
-		display: flex !important;
-		align-items: center;
-		justify-content: flex-start;
-		gap: 10px;
-		width: 100%;
-		margin: 14px 0 8px;
-		padding-left: 34px;
-		line-height: 0;
+		display: none !important;
 	}
 
-	.secondary_nav_widgetized_area .country-selector label {
-		margin-bottom: 0 !important;
-		display: inline-flex !important;
-		align-items: center;
-		justify-content: center;
-		width: 40px;
-		height: 28px;
-		padding: 0 !important;
+	.secondary_nav_widgetized_area .mobile-language-links {
+		display: block !important;
+		margin-top: 16px !important;
+		padding-top: 16px !important;
+		border-top: 1px solid rgba(255, 255, 255, 0.35);
 	}
 
-	.secondary_nav_widgetized_area .country-selector ul {
-		display: inline-flex;
-		align-items: center;
-		gap: 10px;
-		margin: 0;
-		padding: 0;
-		list-style: none;
+	.secondary_nav_widgetized_area .mobile-language-links > a {
+		display: none !important;
 	}
 
-	.secondary_nav_widgetized_area .country-selector ul li {
-		display: inline-flex !important;
+	.secondary_nav_widgetized_area .mobile-language-flags {
+		display: flex;
 		align-items: center;
-		justify-content: center;
-		margin: 0 !important;
-		padding: 0 !important;
+		gap: 12px;
+		padding-left: 0;
 	}
 
-	.secondary_nav_widgetized_area .country-selector .wg-li a {
+	.secondary_nav_widgetized_area .mobile-language-flags a {
 		display: inline-flex !important;
 		align-items: center;
 		justify-content: center;
@@ -114,7 +102,12 @@ Template: hotel-xenia
 		margin: 0 !important;
 		padding: 0 !important;
 		line-height: 0;
-		vertical-align: top;
+	}
+
+	.secondary_nav_widgetized_area .mobile-language-flags a.is-active {
+		outline: 1px solid rgba(255, 255, 255, 0.55);
+		outline-offset: 1px;
+		border-radius: 2px;
 	}
 }
 
@@ -126,5 +119,11 @@ Template: hotel-xenia
 	.header .header_tools .btn.btn-secondary {
 		padding: 10px 12px;
 		font-size: 14px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.mobile-language-links {
+		display: none !important;
 	}
 }

@@ -27,6 +27,8 @@ const switchWgClass = isSpanish ? "wg-en" : "wg-es";
 const currentDataCode = isSpanish ? "wg-es" : "wg-en";
 const switcherId = `wg-switcher-${locale}`;
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
+const englishHref = isSpanish ? switchHref : currentPath;
+const spanishHref = isSpanish ? currentPath : switchHref;
 
 function pageClass(base: string, active: boolean) {
   return active ? `${base} current-menu-item current_page_item active` : base;
@@ -74,6 +76,23 @@ const roomsParentClass = [
             </li>
             <li id="menu-item-25" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-25", currentPage === "contact")}>
               <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
+            </li>
+            <li class="menu-item mobile-language-links">
+              <a href={currentPath}>{isSpanish ? "Idioma" : "Language"}</a>
+              <div class="mobile-language-flags" data-wg-notranslate="">
+                <a
+                  href={englishHref}
+                  class={`weglot-language-en${!isSpanish ? " is-active" : ""}`}
+                  title="English"
+                  aria-label="English"
+                ></a>
+                <a
+                  href={spanishHref}
+                  class={`weglot-language-es${isSpanish ? " is-active" : ""}`}
+                  title="Español"
+                  aria-label="Español"
+                ></a>
+              </div>
             </li>
           </ul>
         </nav>
@@ -132,31 +151,3 @@ const roomsParentClass = [
     </div>
   </div>
 </div>
-
-<script is:inline>
-  (() => {
-    const mobileBreakpoint = 991;
-
-    const moveLanguageSwitcher = () => {
-      const switcher = document.querySelector(".header .js-language-switcher");
-      const mobileContainer = document.querySelector(".secondary_nav_widgetized_area");
-      const desktopContainer = document.querySelector(".header .toggler_and_tools");
-
-      if (!switcher || !mobileContainer || !desktopContainer) {
-        return;
-      }
-
-      if (window.innerWidth <= mobileBreakpoint) {
-        if (switcher.parentElement !== mobileContainer) {
-          mobileContainer.prepend(switcher);
-        }
-      } else if (switcher.parentElement !== desktopContainer) {
-        desktopContainer.prepend(switcher);
-      }
-    };
-
-    window.addEventListener("load", moveLanguageSwitcher);
-    window.addEventListener("resize", moveLanguageSwitcher);
-    document.addEventListener("DOMContentLoaded", moveLanguageSwitcher);
-  })();
-</script>
