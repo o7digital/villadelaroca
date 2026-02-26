@@ -247,6 +247,35 @@ body {
   color: var(--sand);
 }
 
+.footer-keywords {
+  padding-bottom: 1.25rem;
+}
+
+.keywords-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #cfd7e2;
+}
+
+.keywords-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keywords-list li {
+  font-size: 0.8rem;
+  color: #c8d2df;
+  border: 1px solid rgba(212, 193, 93, 0.35);
+  border-radius: 999px;
+  padding: 0.3rem 0.6rem;
+}
+
 @media (max-width: 980px) {
   .nav-shell {
     grid-template-columns: 1fr;
