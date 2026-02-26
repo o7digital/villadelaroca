@@ -70,14 +70,22 @@ Template: hotel-xenia
 	.secondary_nav_widgetized_area .country-selector {
 		display: flex !important;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		gap: 10px;
 		width: 100%;
 		margin: 14px 0 8px;
+		padding-left: 34px;
+		line-height: 0;
 	}
 
 	.secondary_nav_widgetized_area .country-selector label {
 		margin-bottom: 0 !important;
+		display: inline-flex !important;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 28px;
+		padding: 0 !important;
 	}
 
 	.secondary_nav_widgetized_area .country-selector ul {
@@ -86,6 +94,27 @@ Template: hotel-xenia
 		gap: 10px;
 		margin: 0;
 		padding: 0;
+		list-style: none;
+	}
+
+	.secondary_nav_widgetized_area .country-selector ul li {
+		display: inline-flex !important;
+		align-items: center;
+		justify-content: center;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.secondary_nav_widgetized_area .country-selector .wg-li a {
+		display: inline-flex !important;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 28px;
+		margin: 0 !important;
+		padding: 0 !important;
+		line-height: 0;
+		vertical-align: top;
 	}
 }
 
