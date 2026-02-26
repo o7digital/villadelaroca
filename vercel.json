@@ -1,140 +1,38 @@
 {
+  "framework": "astro",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/activities",
-      "destination": "/activities/",
-      "permanent": false
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact/",
-      "permanent": false
-    },
-    {
-      "source": "/our-bb",
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "11" }],
       "destination": "/our-bb/",
-      "permanent": false
+      "permanent": true
     },
-    {
-      "source": "/room/room",
-      "destination": "/room/room/",
-      "permanent": false
-    },
-    {
-      "source": "/rooms-rates/rates",
-      "destination": "/rooms-rates/rates/",
-      "permanent": false
-    },
-    {
-      "source": "/es",
-      "destination": "/es/",
-      "permanent": false
-    },
-    {
-      "source": "/es/activities",
-      "destination": "/es/activities/",
-      "permanent": false
-    },
-    {
-      "source": "/es/contact",
-      "destination": "/es/contact/",
-      "permanent": false
-    },
-    {
-      "source": "/es/our-bb",
-      "destination": "/es/our-bb/",
-      "permanent": false
-    },
-    {
-      "source": "/es/room/room",
-      "destination": "/es/room/room/",
-      "permanent": false
-    },
-    {
-      "source": "/es/rooms-rates/rates",
-      "destination": "/es/rooms-rates/rates/",
-      "permanent": false
-    },
-    {
-      "source": "/feed",
-      "destination": "/feed/",
-      "permanent": false
-    },
-    {
-      "source": "/comments/feed",
-      "destination": "/comments/feed/",
-      "permanent": false
-    },
-    {
-      "source": "/wp-json",
-      "destination": "/wp-json/",
-      "permanent": false
-    }
-  ],
-  "rewrites": [
     {
       "source": "/",
-      "destination": "/villadelaroca.com/index.html"
+      "has": [{ "type": "query", "key": "p", "value": "17" }],
+      "destination": "/rooms-rates/rates/",
+      "permanent": true
     },
     {
-      "source": "/activities/",
-      "destination": "/villadelaroca.com/activities/index.html"
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "23" }],
+      "destination": "/contact/",
+      "permanent": true
     },
     {
-      "source": "/contact/",
-      "destination": "/villadelaroca.com/contact/index.html"
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "1443" }],
+      "destination": "/activities/",
+      "permanent": true
     },
     {
-      "source": "/our-bb/",
-      "destination": "/villadelaroca.com/our-bb/index.html"
-    },
-    {
-      "source": "/room/room/",
-      "destination": "/villadelaroca.com/room/room/index.html"
-    },
-    {
-      "source": "/rooms-rates/rates/",
-      "destination": "/villadelaroca.com/rooms-rates/rates/index.html"
-    },
-    {
-      "source": "/es/",
-      "destination": "/villadelaroca.com/es/index.html"
-    },
-    {
-      "source": "/es/activities/",
-      "destination": "/villadelaroca.com/es/activities/index.html"
-    },
-    {
-      "source": "/es/contact/",
-      "destination": "/villadelaroca.com/es/contact/index.html"
-    },
-    {
-      "source": "/es/our-bb/",
-      "destination": "/villadelaroca.com/es/our-bb/index.html"
-    },
-    {
-      "source": "/es/room/room/",
-      "destination": "/villadelaroca.com/es/room/room/index.html"
-    },
-    {
-      "source": "/es/rooms-rates/rates/",
-      "destination": "/villadelaroca.com/es/rooms-rates/rates/index.html"
-    },
-    {
-      "source": "/feed/",
-      "destination": "/villadelaroca.com/feed/index.html"
-    },
-    {
-      "source": "/comments/feed/",
-      "destination": "/villadelaroca.com/comments/feed/index.html"
-    },
-    {
-      "source": "/wp-json/",
-      "destination": "/villadelaroca.com/wp-json/index.html"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/villadelaroca.com/:path*"
+      "source": "/",
+      "has": [{ "type": "query", "key": "p", "value": "1005" }],
+      "destination": "/room/room/",
+      "permanent": true
     }
   ]
 }

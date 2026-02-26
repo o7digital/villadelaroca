@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="es"
+  path="/es/activities/"
+  title="Actividades | Villa de la Roca"
+  description="Actividades cerca de Playa La Ropa: paseos en lancha, snorkel, paddle y atardeceres en la bahia."
+  ogImage="/wp-content/uploads/2022/12/actividades_test.jpg"
+>
+  <section
+    class="hero"
+    style="background-image: image-set(url('/wp-content/uploads/2022/12/actividades_test.webp') type('image/webp'), url('/wp-content/uploads/2022/12/actividades_test.jpg') type('image/jpeg'));"
+  >
+    <div class="container">
+      <h1>Actividades</h1>
+      <p>Disfruta la bahia con planes para cada ritmo de viaje.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <article class="card"><h2>Paseos en lancha</h2><p>Recorre playas y calas con capitanes locales.</p></article>
+      <article class="card"><h2>Snorkel</h2><p>Explora arrecifes y vida marina en aguas calidas.</p></article>
+      <article class="card"><h2>Paddle</h2><p>Perfecto para mananas tranquilas con vista panoramica.</p></article>
+      <article class="card"><h2>Pesca</h2><p>Opciones de medio dia y dia completo con guias de la zona.</p></article>
+      <article class="card"><h2>Atardeceres</h2><p>Caminatas y miradores para cerrar el dia frente al mar.</p></article>
+      <article class="card"><h2>Plan privado</h2><p>Te ayudamos a organizar experiencias a tu medida.</p></article>
+    </div>
+  </section>
+</BaseLayout>

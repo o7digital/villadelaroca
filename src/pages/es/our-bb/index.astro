@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="es"
+  path="/es/our-bb/"
+  title="Nuestro B&B | Villa de la Roca"
+  description="B&B boutique con vistas panoramicas, terraza, jacuzzi y ambiente privado en Playa La Ropa."
+  ogImage="/wp-content/uploads/2022/11/ourbb.jpeg"
+>
+  <section
+    class="hero"
+    style="background-image: image-set(url('/wp-content/uploads/2023/01/ourbnb_top2.webp') type('image/webp'), url('/wp-content/uploads/2023/01/ourbnb_top2.jpg') type('image/jpeg'));"
+  >
+    <div class="container">
+      <h1>Nuestro B&B</h1>
+      <p>Relajate con vistas al mar, jardines tropicales y atencion personalizada.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container video-grid grid grid-2">
+      <iframe src="https://www.youtube.com/embed/RcvP7Y-eapo" title="Video de Villa de la Roca" loading="lazy" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/iOWHdFhXcH8" title="Experiencia Villa de la Roca" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <img class="media" src="/wp-content/uploads/2022/11/ourbb.webp" alt="Suite con vista al mar" loading="lazy" />
+      <img class="media" src="/wp-content/uploads/2022/11/bed-and-breakfast-villa-rental-zihuatanejo-2.webp" alt="Area de piscina" loading="lazy" />
+      <img class="media" src="/wp-content/uploads/2022/11/bed-and-breakfast-villa-rental-zihuatanejo-3.webp" alt="Terraza y bahia" loading="lazy" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="es"
+  path="/es/room/room/"
+  title="Detalle de Habitacion | Villa de la Roca"
+  description="Detalles de las suites de Villa de la Roca con comodidad, vista y amenidades seleccionadas."
+  ogImage="/wp-content/uploads/2023/01/vdlr_suite_02.jpg"
+>
+  <section
+    class="hero"
+    style="background-image: image-set(url('/wp-content/uploads/2023/01/vdlr_suite_02.webp') type('image/webp'), url('/wp-content/uploads/2023/01/vdlr_suite_02.jpg') type('image/jpeg'));"
+  >
+    <div class="container">
+      <h1>Detalle de Habitacion</h1>
+      <p>Comodidad y vista privilegiada a la bahia de Zihuatanejo.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="card">
+        <h2>Incluye</h2>
+        <ul>
+          <li>Cama king size</li>
+          <li>Bano privado</li>
+          <li>Aire acondicionado</li>
+          <li>Wi-Fi</li>
+          <li>Desayuno diario</li>
+        </ul>
+      </article>
+      <img class="media" src="/wp-content/uploads/2023/01/vdlr_suite_03.webp" alt="Suite en Villa de la Roca" loading="lazy" />
+    </div>
+  </section>
+</BaseLayout>

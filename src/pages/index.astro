@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="en"
+  path="/"
+  title="Villa de la Roca | Bed and Breakfast in Ixtapa Zihuatanejo"
+  description="Ocean-view bed and breakfast in Ixtapa Zihuatanejo with private terraces, pool, and direct booking."
+  ogImage="/wp-content/uploads/2023/01/ourbnb_top2.jpg"
+>
+  <section
+    class="hero"
+    style="background-image: image-set(url('/wp-content/uploads/2023/01/ourbnb_top2.webp') type('image/webp'), url('/wp-content/uploads/2023/01/ourbnb_top2.jpg') type('image/jpeg'));"
+  >
+    <div class="container">
+      <h1>Villa de la Roca</h1>
+      <p>Sea-facing boutique bed and breakfast in Playa La Ropa, Zihuatanejo.</p>
+      <form class="booking-row" action="https://direct-book.com/properties/gub5966" method="get" target="_blank">
+        <input type="date" name="checkInDate" aria-label="Check in date" required />
+        <input type="date" name="checkOutDate" aria-label="Check out date" required />
+        <button type="submit">Reserve</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <article class="card">
+        <h2>Our B&B</h2>
+        <p>Discover terraces, panoramic views, and a warm hospitality experience.</p>
+        <a class="cta" href="/our-bb/">See details</a>
+      </article>
+      <article class="card">
+        <h2>Rooms & Rates</h2>
+        <p>Comfortable suites with ocean and bay views, ideal for couples.</p>
+        <a class="cta" href="/rooms-rates/rates/">View rates</a>
+      </article>
+      <article class="card">
+        <h2>Activities</h2>
+        <p>Explore beaches, snorkel spots, and unforgettable sunsets nearby.</p>
+        <a class="cta" href="/activities/">Explore</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <img class="media" src="/wp-content/uploads/2022/11/xxl_983-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp" alt="Villa terrace with ocean view" loading="lazy" />
+      <img class="media" src="/wp-content/uploads/2022/11/xxl_984-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp" alt="Bay view from Villa de la Roca" loading="lazy" />
+    </div>
+  </section>
+</BaseLayout>

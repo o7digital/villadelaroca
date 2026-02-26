@@ -1,0 +1,76 @@
+---
+interface Props {
+  lang: 'en' | 'es';
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const normalizedPath = currentPath.endsWith('/') ? currentPath : `${currentPath}/`;
+
+const nav = {
+  en: [
+    { href: '/', label: 'Home' },
+    { href: '/our-bb/', label: 'Our B&B' },
+    { href: '/rooms-rates/rates/', label: 'Rooms & Rates' },
+    { href: '/activities/', label: 'Activities' },
+    { href: '/contact/', label: 'Contact' }
+  ],
+  es: [
+    { href: '/es/', label: 'Inicio' },
+    { href: '/es/our-bb/', label: 'Nuestro B&B' },
+    { href: '/es/rooms-rates/rates/', label: 'Habitaciones y Tarifas' },
+    { href: '/es/activities/', label: 'Actividades' },
+    { href: '/es/contact/', label: 'Contacto' }
+  ]
+};
+
+const switchMap: Record<string, string> = {
+  '/': '/es/',
+  '/our-bb/': '/es/our-bb/',
+  '/rooms-rates/rates/': '/es/rooms-rates/rates/',
+  '/room/room/': '/es/room/room/',
+  '/activities/': '/es/activities/',
+  '/contact/': '/es/contact/',
+  '/es/': '/',
+  '/es/our-bb/': '/our-bb/',
+  '/es/rooms-rates/rates/': '/rooms-rates/rates/',
+  '/es/room/room/': '/room/room/',
+  '/es/activities/': '/activities/',
+  '/es/contact/': '/contact/'
+};
+
+const switchUrl = switchMap[normalizedPath] ?? (lang === 'en' ? '/es/' : '/');
+const bookLabel = lang === 'en' ? 'Book Now' : 'Reservar';
+const bookUrl = 'https://direct-book.com/properties/gub5966';
+const currentNav = nav[lang];
+
+const isActive = (href: string) => {
+  if (href === '/') return normalizedPath === '/';
+  if (href === '/es/') return normalizedPath === '/es/';
+  return normalizedPath.startsWith(href);
+};
+---
+
+<header class="site-header">
+  <div class="container nav-shell">
+    <a class="brand" href={lang === 'en' ? '/' : '/es/'}>
+      <span class="brand-main">VILLA DE LA ROCA</span>
+      <span class="brand-sub">Bed and Breakfast</span>
+    </a>
+
+    <nav aria-label={lang === 'en' ? 'Main navigation' : 'Navegacion principal'}>
+      <ul class="nav-list">
+        {currentNav.map((item) => (
+          <li>
+            <a class={isActive(item.href) ? 'active' : ''} href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="lang-link" href={switchUrl}>{lang === 'en' ? 'ES' : 'EN'}</a>
+      <a class="book-btn" href={bookUrl} target="_blank" rel="noopener noreferrer">{bookLabel}</a>
+    </div>
+  </div>
+</header>

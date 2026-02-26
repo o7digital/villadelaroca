@@ -1,0 +1,20 @@
+---
+interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+const privacyLabel = lang === 'en' ? 'Privacy Policy' : 'Politica de Privacidad';
+const noticeLabel = lang === 'en' ? 'Privacy Notice' : 'Aviso de Privacidad';
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <p>Casa Villa de la Roca Copyright 2026</p>
+    <p>
+      <a href="/wp-content/uploads/2025/08/Privacy-Police-LCQC.pdf" target="_blank" rel="noopener noreferrer">{privacyLabel}</a>
+      <span> | </span>
+      <a href="/wp-content/uploads/2025/08/Aviso-de-Privacidad-LCQC.pdf" target="_blank" rel="noopener noreferrer">{noticeLabel}</a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="en"
+  path="/rooms-rates/rates/"
+  title="Rooms & Rates | Villa de la Roca"
+  description="View room categories and rates at Villa de la Roca for your next stay in Playa La Ropa."
+  ogImage="/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.jpeg"
+>
+  <section
+    class="hero"
+    style="background-image: image-set(url('/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp') type('image/webp'), url('/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.jpeg') type('image/jpeg'));"
+  >
+    <div class="container">
+      <h1>Rooms & Rates</h1>
+      <p>Simple pricing with direct booking and personalized support.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="card">
+        <h2>Rates</h2>
+        <table class="rates-table">
+          <thead>
+            <tr><th>Room</th><th>From / night</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ocean View Suite</td><td>MXN 4,800</td></tr>
+            <tr><td>Bay View Suite</td><td>MXN 4,200</td></tr>
+            <tr><td>Private Villa (full)</td><td>On request</td></tr>
+          </tbody>
+        </table>
+        <p><a class="cta" href="https://direct-book.com/properties/gub5966" target="_blank" rel="noopener noreferrer">Book direct</a></p>
+      </article>
+      <picture>
+        <source srcset="/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp" type="image/webp" />
+        <img class="media" src="/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.jpeg" alt="Villa de la Roca terrace" loading="lazy" />
+      </picture>
+    </div>
+  </section>
+</BaseLayout>

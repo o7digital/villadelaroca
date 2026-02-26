@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="es"
+  path="/es/rooms-rates/rates/"
+  title="Habitaciones y Tarifas | Villa de la Roca"
+  description="Consulta categorias de habitaciones y tarifas de Villa de la Roca para tu estancia en Playa La Ropa."
+  ogImage="/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.jpeg"
+>
+  <section
+    class="hero"
+    style="background-image: image-set(url('/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp') type('image/webp'), url('/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.jpeg') type('image/jpeg'));"
+  >
+    <div class="container">
+      <h1>Habitaciones y Tarifas</h1>
+      <p>Tarifas claras con reserva directa y atencion personalizada.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <article class="card">
+        <h2>Tarifas</h2>
+        <table class="rates-table">
+          <thead>
+            <tr><th>Habitacion</th><th>Desde / noche</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Suite vista al mar</td><td>MXN 4,800</td></tr>
+            <tr><td>Suite vista a la bahia</td><td>MXN 4,200</td></tr>
+            <tr><td>Villa completa</td><td>Sujeto a consulta</td></tr>
+          </tbody>
+        </table>
+        <p><a class="cta" href="https://direct-book.com/properties/gub5966" target="_blank" rel="noopener noreferrer">Reservar</a></p>
+      </article>
+      <picture>
+        <source srcset="/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp" type="image/webp" />
+        <img class="media" src="/wp-content/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.jpeg" alt="Terraza de Villa de la Roca" loading="lazy" />
+      </picture>
+    </div>
+  </section>
+</BaseLayout>

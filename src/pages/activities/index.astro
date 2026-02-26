@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="en"
+  path="/activities/"
+  title="Activities | Villa de la Roca"
+  description="Discover activities near Playa La Ropa: boat tours, snorkeling, paddleboarding, and sunset outings."
+  ogImage="/wp-content/uploads/2022/12/actividades_test.jpg"
+>
+  <section
+    class="hero"
+    style="background-image: image-set(url('/wp-content/uploads/2022/12/actividades_test.webp') type('image/webp'), url('/wp-content/uploads/2022/12/actividades_test.jpg') type('image/jpeg'));"
+  >
+    <div class="container">
+      <h1>Activities</h1>
+      <p>Everything around the bay, from calm mornings on the water to lively evenings.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <article class="card"><h2>Boat Trips</h2><p>Visit nearby beaches and hidden coves with local captains.</p></article>
+      <article class="card"><h2>Snorkeling</h2><p>Explore reefs and marine life in warm Pacific waters.</p></article>
+      <article class="card"><h2>Paddleboarding</h2><p>Enjoy calm mornings in the bay with panoramic views.</p></article>
+      <article class="card"><h2>Fishing</h2><p>Half-day and full-day options with regional guides.</p></article>
+      <article class="card"><h2>Sunset Walks</h2><p>Beautiful routes around Playa La Ropa and viewpoints.</p></article>
+      <article class="card"><h2>Private Plans</h2><p>We help organize experiences adapted to your stay.</p></article>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,30 @@
+{
+  "name": "villadelaroca",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o7digital/villadelaroca.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/o7digital/villadelaroca/issues"
+  },
+  "homepage": "https://github.com/o7digital/villadelaroca#readme",
+  "description": "",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
+    "astro": "^5.18.0"
+  },
+  "type": "module"
+}
