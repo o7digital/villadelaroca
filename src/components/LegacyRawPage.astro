@@ -1,0 +1,13 @@
+---
+import LegacyPageLayout from "../layouts/LegacyPageLayout.astro";
+import { parseLegacyHtmlDocument } from "../lib/legacy-html";
+
+interface Props {
+  html: string;
+}
+
+const { html } = Astro.props;
+const legacyDoc = parseLegacyHtmlDocument(html);
+---
+
+<LegacyPageLayout {...legacyDoc} />
