@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/villadelaroca.com/$1"
+    }
+  ]
+}
