@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://villadelaroca.com/sitemap-index.xml
+Sitemap: https://villadelaroca.com/sitemap.xml
