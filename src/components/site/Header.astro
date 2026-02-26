@@ -82,7 +82,7 @@ const roomsParentClass = [
     <div class="toggler_and_tools">
       <aside
         data-wg-notranslate=""
-        class="country-selector weglot-inline weglot-custom-switcher wg-0"
+        class="country-selector weglot-inline weglot-custom-switcher wg-0 js-language-switcher"
         tabindex="0"
         aria-expanded="false"
         aria-label={`Language selected: ${currentLanguageLabel}`}
@@ -132,3 +132,31 @@ const roomsParentClass = [
     </div>
   </div>
 </div>
+
+<script is:inline>
+  (() => {
+    const mobileBreakpoint = 991;
+
+    const moveLanguageSwitcher = () => {
+      const switcher = document.querySelector(".header .js-language-switcher");
+      const mobileContainer = document.querySelector(".secondary_nav_widgetized_area");
+      const desktopContainer = document.querySelector(".header .toggler_and_tools");
+
+      if (!switcher || !mobileContainer || !desktopContainer) {
+        return;
+      }
+
+      if (window.innerWidth <= mobileBreakpoint) {
+        if (switcher.parentElement !== mobileContainer) {
+          mobileContainer.prepend(switcher);
+        }
+      } else if (switcher.parentElement !== desktopContainer) {
+        desktopContainer.prepend(switcher);
+      }
+    };
+
+    window.addEventListener("load", moveLanguageSwitcher);
+    window.addEventListener("resize", moveLanguageSwitcher);
+    document.addEventListener("DOMContentLoaded", moveLanguageSwitcher);
+  })();
+</script>

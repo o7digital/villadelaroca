@@ -27,3 +27,75 @@ Template: hotel-xenia
 	visibility: visible !important;
 	opacity: 1 !important;
 }
+
+/* Mobile header and language switcher polish */
+@media only screen and (max-width: 991px) {
+	.header .mainbar > [class^=container] {
+		display: flex;
+		align-items: center;
+		min-height: 72px;
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.header .logo {
+		max-width: 54%;
+		padding-right: 8px;
+	}
+
+	.header .logo .brand img {
+		width: 100%;
+		max-width: 220px;
+		height: auto;
+	}
+
+	.header .toggler_and_tools {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.header .toggler_and_tools > .country-selector {
+		display: none !important;
+	}
+
+	.header .header_tools .btn.btn-secondary {
+		margin-top: 0 !important;
+		padding: 11px 14px;
+		font-size: 15px;
+		line-height: 1.1;
+		min-height: 44px;
+	}
+
+	.secondary_nav_widgetized_area .country-selector {
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		width: 100%;
+		margin: 14px 0 8px;
+	}
+
+	.secondary_nav_widgetized_area .country-selector label {
+		margin-bottom: 0 !important;
+	}
+
+	.secondary_nav_widgetized_area .country-selector ul {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.header .logo {
+		max-width: 46%;
+	}
+
+	.header .header_tools .btn.btn-secondary {
+		padding: 10px 12px;
+		font-size: 14px;
+	}
+}
