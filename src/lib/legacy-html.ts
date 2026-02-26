@@ -5,6 +5,11 @@ export interface LegacyDocumentParts {
   bodyHtml: string;
 }
 
+export interface LegacyShellParts extends LegacyDocumentParts {
+  contentHtml: string;
+  tailHtml: string;
+}
+
 function extractMatch(input: string, regex: RegExp, label: string): string {
   const match = input.match(regex);
   if (!match || !match[1]) {
@@ -31,5 +36,31 @@ export function parseLegacyHtmlDocument(html: string): LegacyDocumentParts {
     headHtml,
     bodyClass,
     bodyHtml,
+  };
+}
+
+export function parseLegacyHtmlForShell(html: string): LegacyShellParts {
+  const doc = parseLegacyHtmlDocument(html);
+  const headerRegex = /<div class="header transparent">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/;
+  const headerMatch = doc.bodyHtml.match(headerRegex);
+  const footerIndex = doc.bodyHtml.indexOf('<div class="footer">');
+  const returnTopIndex = doc.bodyHtml.indexOf('<a href="javascript:" id="return-to-top">');
+
+  if (!headerMatch || headerMatch.index === undefined) {
+    throw new Error("Unable to extract header block from legacy body");
+  }
+
+  if (footerIndex < 0 || returnTopIndex < 0 || footerIndex >= returnTopIndex) {
+    throw new Error("Unable to split footer/tail blocks from legacy body");
+  }
+
+  const contentStart = headerMatch.index + headerMatch[0].length;
+  const contentHtml = doc.bodyHtml.slice(contentStart, footerIndex);
+  const tailHtml = doc.bodyHtml.slice(returnTopIndex);
+
+  return {
+    ...doc,
+    contentHtml,
+    tailHtml,
   };
 }

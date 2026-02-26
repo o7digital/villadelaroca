@@ -3,4 +3,10 @@ import LegacyRawPage from "../../../components/LegacyRawPage.astro";
 import html from "../../../raw-pages/rooms-rates/rates/index.html?raw";
 ---
 
-<LegacyRawPage html={html} />
+<LegacyRawPage
+  html={html}
+  locale="en"
+  currentPage="rates"
+  currentPath="/rooms-rates/rates/"
+  switchHref="/es/rooms-rates/rates/"
+/>

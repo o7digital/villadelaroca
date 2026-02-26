@@ -3,4 +3,10 @@ import LegacyRawPage from "../../components/LegacyRawPage.astro";
 import html from "../../raw-pages/activities/index.html?raw";
 ---
 
-<LegacyRawPage html={html} />
+<LegacyRawPage
+  html={html}
+  locale="en"
+  currentPage="activities"
+  currentPath="/activities/"
+  switchHref="/es/activities/"
+/>

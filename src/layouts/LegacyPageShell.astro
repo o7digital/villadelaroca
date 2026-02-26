@@ -1,0 +1,46 @@
+---
+import Header from "../components/site/Header.astro";
+import Footer from "../components/site/Footer.astro";
+
+type Locale = "en" | "es";
+type PageKey = "home" | "our-bb" | "room" | "rates" | "activities" | "contact";
+
+interface Props {
+  lang: string;
+  headHtml: string;
+  bodyClass: string;
+  locale: Locale;
+  currentPage: PageKey;
+  currentPath: string;
+  switchHref: string;
+  contentHtml: string;
+  tailHtml: string;
+}
+
+const {
+  lang,
+  headHtml,
+  bodyClass,
+  locale,
+  currentPage,
+  currentPath,
+  switchHref,
+  contentHtml,
+  tailHtml,
+} = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <Fragment set:html={headHtml} />
+  </head>
+  <body class={bodyClass}>
+    <div id="page_wrapper">
+      <Header locale={locale} currentPage={currentPage} currentPath={currentPath} switchHref={switchHref} />
+      <Fragment set:html={contentHtml} />
+      <Footer locale={locale} />
+      <div class="secondary_nav_widgetized_area"></div>
+    </div>
+    <Fragment set:html={tailHtml} />
+  </body>
+</html>

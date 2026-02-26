@@ -3,4 +3,10 @@ import LegacyRawPage from "../../components/LegacyRawPage.astro";
 import html from "../../raw-pages/our-bb/index.html?raw";
 ---
 
-<LegacyRawPage html={html} />
+<LegacyRawPage
+  html={html}
+  locale="en"
+  currentPage="our-bb"
+  currentPath="/our-bb/"
+  switchHref="/es/our-bb/"
+/>

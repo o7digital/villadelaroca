@@ -1,13 +1,30 @@
 ---
-import LegacyPageLayout from "../layouts/LegacyPageLayout.astro";
-import { parseLegacyHtmlDocument } from "../lib/legacy-html";
+import LegacyPageShell from "../layouts/LegacyPageShell.astro";
+import { parseLegacyHtmlForShell } from "../lib/legacy-html";
+
+type Locale = "en" | "es";
+type PageKey = "home" | "our-bb" | "room" | "rates" | "activities" | "contact";
 
 interface Props {
   html: string;
+  locale: Locale;
+  currentPage: PageKey;
+  currentPath: string;
+  switchHref: string;
 }
 
-const { html } = Astro.props;
-const legacyDoc = parseLegacyHtmlDocument(html);
+const { html, locale, currentPage, currentPath, switchHref } = Astro.props;
+const legacyDoc = parseLegacyHtmlForShell(html);
 ---
 
-<LegacyPageLayout {...legacyDoc} />
+<LegacyPageShell
+  lang={legacyDoc.lang}
+  headHtml={legacyDoc.headHtml}
+  bodyClass={legacyDoc.bodyClass}
+  locale={locale}
+  currentPage={currentPage}
+  currentPath={currentPath}
+  switchHref={switchHref}
+  contentHtml={legacyDoc.contentHtml}
+  tailHtml={legacyDoc.tailHtml}
+/>

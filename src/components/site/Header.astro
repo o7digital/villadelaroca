@@ -1,0 +1,134 @@
+---
+type Locale = "en" | "es";
+type PageKey = "home" | "our-bb" | "room" | "rates" | "activities" | "contact";
+
+interface Props {
+  locale: Locale;
+  currentPage: PageKey;
+  currentPath: string;
+  switchHref: string;
+}
+
+const { locale, currentPage, currentPath, switchHref } = Astro.props;
+const isSpanish = locale === "es";
+const homePath = isSpanish ? "/es/" : "/";
+const ourBbPath = isSpanish ? "/es/our-bb/" : "/our-bb/";
+const roomPath = isSpanish ? "/es/room/room/" : "/room/room/";
+const ratesPath = isSpanish ? "/es/rooms-rates/rates/" : "/rooms-rates/rates/";
+const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
+const contactPath = isSpanish ? "/es/contact/" : "/contact/";
+const roomsMenuPath = `${currentPath}#`;
+const currentLanguageLabel = isSpanish ? "Spanish" : "English";
+const switchLanguageLabel = isSpanish ? "English" : "Spanish";
+const switchLanguageClass = isSpanish ? "weglot-language-en" : "weglot-language-es";
+const switchLanguageCode = isSpanish ? "en" : "es";
+const currentWgClass = isSpanish ? "wg-es" : "wg-en";
+const switchWgClass = isSpanish ? "wg-en" : "wg-es";
+const currentDataCode = isSpanish ? "wg-es" : "wg-en";
+const switcherId = `wg-switcher-${locale}`;
+const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
+
+function pageClass(base: string, active: boolean) {
+  return active ? `${base} current-menu-item current_page_item active` : base;
+}
+
+const roomsParentClass = [
+  "menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1609 lihaschildren",
+  currentPage === "room" || currentPage === "rates" ? "current-menu-ancestor current-menu-parent" : "",
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class="header transparent">
+  <div class="mainbar">
+    <div class="container">
+      <div class="logo">
+        <a href={homePath} class="brand">
+          <img src="/wp-content/uploads/2022/11/logo_vdr_blanco_ok.png" alt="hotel-xenia" />
+        </a>
+      </div>
+      <div class="main_nav_wrapper">
+        <nav class="primary_nav hidden_on_header_stuck">
+          <ul id="menu-villa-de-la-roca" class="top_level_ul nav hover_menu">
+            <li id="menu-item-31" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-31", currentPage === "our-bb")}>
+              <a title={isSpanish ? "Nuestro B&B" : "Our B&B"} href={ourBbPath}>{isSpanish ? "Nuestro B&B" : "Our B&B"}</a>
+            </li>
+            <li id="menu-item-1609" class={roomsParentClass}>
+              <a title={isSpanish ? "Habitaciones y tarifas" : "Rooms & Rates"} href={roomsMenuPath}>
+                {isSpanish ? "Habitaciones y tarifas" : "Rooms & Rates"}
+              </a>
+              <ul role="menu">
+                <li id="menu-item-1020" class={pageClass("menu-item menu-item-type-post_type menu-item-object-room menu-item-1020", currentPage === "room")}>
+                  <a title={isSpanish ? "Detalles de la habitación" : "Room Details"} href={roomPath}>
+                    {isSpanish ? "Detalles de la habitación" : "Room Details"}
+                  </a>
+                </li>
+                <li id="menu-item-29" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-29", currentPage === "rates")}>
+                  <a title={isSpanish ? "Tarifas" : "Rates"} href={ratesPath}>{isSpanish ? "Tarifas" : "Rates"}</a>
+                </li>
+              </ul>
+            </li>
+            <li id="menu-item-1463" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-1463", currentPage === "activities")}>
+              <a title={isSpanish ? "Actividades" : "Activities"} href={activitiesPath}>{isSpanish ? "Actividades" : "Activities"}</a>
+            </li>
+            <li id="menu-item-25" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-25", currentPage === "contact")}>
+              <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="toggler_and_tools">
+      <aside
+        data-wg-notranslate=""
+        class="country-selector weglot-inline weglot-custom-switcher wg-0"
+        tabindex="0"
+        aria-expanded="false"
+        aria-label={`Language selected: ${currentLanguageLabel}`}
+      >
+        <input id={switcherId} class="weglot_choice" type="checkbox" name="menu" />
+        <label
+          data-l={locale}
+          tabindex="-1"
+          for={switcherId}
+          class={`wgcurrent wg-li weglot-lang weglot-language weglot-flags flag-1 ${currentWgClass}`}
+          data-code-language={currentDataCode}
+          data-name-language=""
+        >
+          <span class="wglanguage-name"></span>
+        </label>
+        <ul role="none">
+          <li
+            data-l={switchLanguageCode}
+            class={`wg-li weglot-lang weglot-language weglot-flags flag-1 ${switchWgClass}`}
+            data-code-language={switchLanguageCode}
+            role="option"
+          >
+            <a
+              title={`Language switcher : ${switchLanguageLabel}`}
+              class={switchLanguageClass}
+              role="option"
+              data-wg-notranslate=""
+              href={switchHref}
+            ></a>
+          </li>
+        </ul>
+      </aside>
+      <div class="header_tools">
+        <div class="nav_mini_tool_container">
+          <a
+            href="https://direct-book.com/properties/gub5966?locale=en&amp;items[0][adults]=2&amp;items[0][children]=0&amp;items[0][infants]=0&amp;currency=MXN&amp;checkInDate=2022-11-25&amp;checkOutDate=2022-11-26&amp;trackPage=yes"
+            class="btn btn-inv btn-secondary"
+            style="margin-top:-20px"
+          >
+            {bookLabel}
+          </a>
+        </div>
+      </div>
+      <a class="menu-toggler  hidden_above_threshold">
+        <span class="lines  hidden_above_threshold"></span>
+      </a>
+    </div>
+  </div>
+</div>
