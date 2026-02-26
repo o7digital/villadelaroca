@@ -33,6 +33,66 @@
       "has": [{ "type": "query", "key": "p", "value": "1005" }],
       "destination": "/room/room/",
       "permanent": true
+    },
+    {
+      "source": "/index.html%3Fwg-choose-original=true.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html%3Fwg-choose-original=false.html",
+      "destination": "/es/",
+      "permanent": true
+    },
+    {
+      "source": "/our-bb/index.html%3Fwg-choose-original=true.html",
+      "destination": "/our-bb/",
+      "permanent": true
+    },
+    {
+      "source": "/es/our-bb/index.html%3Fwg-choose-original=false.html",
+      "destination": "/es/our-bb/",
+      "permanent": true
+    },
+    {
+      "source": "/rooms-rates/rates/index.html%3Fwg-choose-original=true.html",
+      "destination": "/rooms-rates/rates/",
+      "permanent": true
+    },
+    {
+      "source": "/es/rooms-rates/rates/index.html%3Fwg-choose-original=false.html",
+      "destination": "/es/rooms-rates/rates/",
+      "permanent": true
+    },
+    {
+      "source": "/room/room/index.html%3Fwg-choose-original=true.html",
+      "destination": "/room/room/",
+      "permanent": true
+    },
+    {
+      "source": "/es/room/room/index.html%3Fwg-choose-original=false.html",
+      "destination": "/es/room/room/",
+      "permanent": true
+    },
+    {
+      "source": "/activities/index.html%3Fwg-choose-original=true.html",
+      "destination": "/activities/",
+      "permanent": true
+    },
+    {
+      "source": "/es/activities/index.html%3Fwg-choose-original=false.html",
+      "destination": "/es/activities/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/index.html%3Fwg-choose-original=true.html",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/es/contact/index.html%3Fwg-choose-original=false.html",
+      "destination": "/es/contact/",
+      "permanent": true
     }
   ]
 }
