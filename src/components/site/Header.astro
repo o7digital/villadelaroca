@@ -27,6 +27,7 @@ const switchWgClass = isSpanish ? "wg-en" : "wg-es";
 const currentDataCode = isSpanish ? "wg-es" : "wg-en";
 const switcherId = `wg-switcher-${locale}`;
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
+const bookingLocale = isSpanish ? "es" : "en";
 const englishHref = isSpanish ? switchHref : currentPath;
 const spanishHref = isSpanish ? currentPath : switchHref;
 
@@ -137,7 +138,7 @@ const roomsParentClass = [
       <div class="header_tools">
         <div class="nav_mini_tool_container">
           <a
-            href="https://direct-book.com/properties/gub5966?locale=en&amp;items[0][adults]=2&amp;items[0][children]=0&amp;items[0][infants]=0&amp;currency=MXN&amp;checkInDate=2022-11-25&amp;checkOutDate=2022-11-26&amp;trackPage=yes"
+            href={`https://direct-book.com/properties/gub5966?locale=${bookingLocale}&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=MXN&checkInDate=2022-11-25&checkOutDate=2022-11-26&trackPage=yes`}
             class="btn btn-inv btn-secondary"
             style="margin-top:-20px"
           >
