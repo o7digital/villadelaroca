@@ -75,22 +75,19 @@ const roomsParentClass = [
       </div>
     </div>
     <div class="toggler_and_tools">
-      <div class="lang-switcher" role="navigation" aria-label={isSpanish ? "Selector de idioma" : "Language selector"}>
-        <a
-          href={englishHref}
-          class={`lang-flag lang-flag-en${!isSpanish ? " is-active" : ""}`}
-          title="English"
-          aria-label="English"
-          hreflang="en"
-        ><span class="sr-only">English</span></a>
-        <a
-          href={spanishHref}
-          class={`lang-flag lang-flag-es${isSpanish ? " is-active" : ""}`}
-          title="Español"
-          aria-label="Español"
-          hreflang="es"
-        ><span class="sr-only">Español</span></a>
-      </div>
+      <details class="lang-switcher" role="navigation" aria-label={isSpanish ? "Selector de idioma" : "Language selector"}>
+        <summary>
+          {isSpanish ? "ES" : "EN"}
+          <svg class="lang-chevron" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        </summary>
+        <ul class="lang-dropdown">
+          <li>
+            <a href={isSpanish ? englishHref : spanishHref} hreflang={isSpanish ? "en" : "es"}>
+              {isSpanish ? "EN" : "ES"}
+            </a>
+          </li>
+        </ul>
+      </details>
       <div class="header_tools">
         <div class="nav_mini_tool_container">
           <a
@@ -110,61 +107,82 @@ const roomsParentClass = [
 </div>
 <style is:global>
   /* ============================================================
-     Sélecteur de langue — fonctionne sur desktop ET mobile
-     Placé dans .toggler_and_tools, en dehors du nav du thème
-     pour éviter toute interférence du JS de navigation.
+     Sélecteur de langue EN/ES — texte, dans .toggler_and_tools
+     Utilise <details>/<summary> natif : fonctionne sans JS,
+     desktop et mobile.
   ============================================================ */
   .toggler_and_tools .lang-switcher {
+    position: relative;
     display: inline-flex !important;
     align-items: center;
-    gap: 8px;
-    margin: 0 10px;
+    margin: 0 8px;
     flex-shrink: 0;
+    z-index: 200;
   }
 
-  .toggler_and_tools .lang-switcher .lang-flag {
-    display: inline-block !important;
-    width: 30px;
-    height: 20px;
-    border: 2px solid transparent;
-    border-radius: 3px;
-    overflow: hidden;
-    text-decoration: none !important;
-    transition: border-color 0.2s ease, transform 0.15s ease;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  .toggler_and_tools .lang-switcher summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 4px 2px;
+    user-select: none;
+    outline: none;
+    white-space: nowrap;
+  }
+
+  /* Masque le triangle natif de <details> dans tous les navigateurs */
+  .toggler_and_tools .lang-switcher summary::-webkit-details-marker { display: none; }
+  .toggler_and_tools .lang-switcher summary::marker { display: none; }
+
+  .toggler_and_tools .lang-switcher .lang-chevron {
+    transition: transform 0.2s ease;
     flex-shrink: 0;
-    position: relative;
-    z-index: 100;
+    color: #ffffff;
+    opacity: 0.85;
   }
 
-  .toggler_and_tools .lang-switcher .lang-flag-en {
-    background-image: url("/assets/site/flags/en.svg");
+  .toggler_and_tools .lang-switcher[open] .lang-chevron {
+    transform: rotate(180deg);
   }
 
-  .toggler_and_tools .lang-switcher .lang-flag-es {
-    background-image: url("/assets/site/flags/es.svg");
-  }
-
-  .toggler_and_tools .lang-switcher .lang-flag:hover {
-    border-color: rgba(209, 200, 95, 0.9);
-    transform: translateY(-2px);
-  }
-
-  .toggler_and_tools .lang-switcher .lang-flag.is-active {
-    border-color: rgba(255, 255, 255, 0.85);
-  }
-
-  .toggler_and_tools .lang-switcher .sr-only {
+  .toggler_and_tools .lang-switcher .lang-dropdown {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+    top: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    min-width: 52px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .toggler_and_tools .lang-switcher .lang-dropdown a {
+    display: block;
+    padding: 6px 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    transition: color 0.15s ease;
+  }
+
+  .toggler_and_tools .lang-switcher .lang-dropdown a:hover {
+    color: rgba(209, 200, 95, 1) !important;
   }
 </style>
