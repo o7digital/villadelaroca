@@ -28,6 +28,10 @@ const {
   contentHtml,
   tailHtml,
 } = Astro.props;
+
+const isSpanish = locale === "es";
+const englishHref = isSpanish ? switchHref : currentPath;
+const spanishHref = isSpanish ? currentPath : switchHref;
 ---
 
 <html lang={lang}>
@@ -48,7 +52,36 @@ const {
       <Header locale={locale} currentPage={currentPage} currentPath={currentPath} switchHref={switchHref} />
       <Fragment set:html={contentHtml} />
       <Footer locale={locale} />
-      <div class="secondary_nav_widgetized_area"></div>
+      <div class="secondary_nav_widgetized_area">
+        <div class="mobile-language-links" role="navigation" aria-label={isSpanish ? "Selector de idioma" : "Language selector"}>
+          <ul class="mobile-language-flags">
+            <li>
+              <a
+                href={englishHref}
+                hreflang="en"
+                title="English"
+                aria-label="Switch to English"
+                aria-current={!isSpanish ? "page" : undefined}
+                class={`lang-flag-mobile lang-flag-en${!isSpanish ? " is-active" : ""}`}
+              >
+                <span class="screen-reader-text">English</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={spanishHref}
+                hreflang="es"
+                title="Español"
+                aria-label="Cambiar a español"
+                aria-current={isSpanish ? "page" : undefined}
+                class={`lang-flag-mobile lang-flag-es${isSpanish ? " is-active" : ""}`}
+              >
+                <span class="screen-reader-text">Español</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <Fragment set:html={tailHtml} />
   </body>
