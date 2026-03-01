@@ -18,7 +18,6 @@ const ratesPath = isSpanish ? "/es/rooms-rates/rates/" : "/rooms-rates/rates/";
 const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
 const contactPath = isSpanish ? "/es/contact/" : "/contact/";
 const roomsMenuPath = `${currentPath}#`;
-const currentLangCode = isSpanish ? "ES" : "EN";
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
 const bookingLocale = isSpanish ? "es" : "en";
 const englishHref = isSpanish ? switchHref : currentPath;
@@ -72,14 +71,11 @@ const roomsParentClass = [
               <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
             </li>
             <li class="menu-item menu-item-language" data-wg-notranslate="">
-              <a href={isSpanish ? spanishHref : englishHref} class="language-inline__current" aria-label={isSpanish ? "Idioma actual: Español" : "Current language: English"}>
-                {currentLangCode}
-                <span class="language-inline__caret">&#9662;</span>
-              </a>
-              <ul role="menu" class="language-inline__menu" aria-label="Language selector">
-                <li role="none"><a role="menuitem" href={englishHref} class={!isSpanish ? "is-active" : ""}>EN</a></li>
-                <li role="none"><a role="menuitem" href={spanishHref} class={isSpanish ? "is-active" : ""}>ES</a></li>
-              </ul>
+              <div class="language-inline" aria-label="Language selector">
+                <a href={englishHref} class={!isSpanish ? "is-active" : ""} title="English" aria-label="English">EN</a>
+                <span>/</span>
+                <a href={spanishHref} class={isSpanish ? "is-active" : ""} title="Español" aria-label="Español">ES</a>
+              </div>
             </li>
           </ul>
         </nav>
@@ -105,76 +101,37 @@ const roomsParentClass = [
 </div>
 <style>
   .menu-item-language {
-    position: relative;
-  }
-
-  .menu-item-language .language-inline__current {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
   }
 
-  .menu-item-language .language-inline__caret {
-    font-size: 10px;
-    opacity: 0.85;
+  .menu-item-language .language-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .menu-item-language .language-inline__menu {
-    list-style: none;
-    margin: 8px 0 0 0;
-    padding: 6px 0;
-    min-width: 64px;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    display: none;
-    background: rgba(0, 0, 0, 0.88);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 20;
-  }
-
-  .menu-item-language:hover .language-inline__menu,
-  .menu-item-language:focus-within .language-inline__menu {
-    display: block;
-  }
-
-  .menu-item-language .language-inline__menu a {
-    display: block;
-    padding: 6px 12px;
+  .menu-item-language .language-inline a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 13px;
-  }
-
-  .menu-item-language .language-inline__menu a:hover,
-  .menu-item-language .language-inline__menu a.is-active {
-    color: #d1c85f;
-  }
-
-  .menu-item-language .language-inline__current,
-  .menu-item-language .language-inline__menu a {
+    font-size: 22px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 600;
   }
 
+  .menu-item-language .language-inline a.is-active,
+  .menu-item-language .language-inline a:hover {
+    color: #d1c85f;
+  }
+
+  .menu-item-language .language-inline span {
+    opacity: 0.8;
+  }
+
   @media only screen and (max-width: 991px) {
-    .menu-item-language .language-inline__menu {
-      position: static;
+    .menu-item-language {
       display: block;
-      background: transparent;
-      border: 0;
-      margin: 0;
-      padding: 0;
-    }
-
-    .menu-item-language .language-inline__menu li {
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    .menu-item-language .language-inline__caret {
-      display: none;
     }
   }
 </style>
