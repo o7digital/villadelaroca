@@ -71,9 +71,16 @@ const roomsParentClass = [
               <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
             </li>
             <li class="menu-item menu-item-language" data-wg-notranslate="" aria-label="Language selector">
-              <a href={englishHref} class={`language-link ${!isSpanish ? "is-active" : ""}`} title="English" aria-label="English">EN</a>
-              <span class="language-separator" aria-hidden="true">/</span>
-              <a href={spanishHref} class={`language-link ${isSpanish ? "is-active" : ""}`} title="Español" aria-label="Español">ES</a>
+              <button class="language-current" type="button" aria-haspopup="true">
+                {isSpanish ? "ES" : "EN"} <span class="language-caret" aria-hidden="true"></span>
+              </button>
+              <ul class="language-dropdown" role="menu">
+                <li role="none">
+                  <a href={isSpanish ? englishHref : spanishHref} role="menuitem" title={isSpanish ? "English" : "Español"} aria-label={isSpanish ? "English" : "Español"}>
+                    {isSpanish ? "EN" : "ES"}
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </nav>
@@ -101,14 +108,67 @@ const roomsParentClass = [
   .menu-item-language {
     display: inline-flex;
     align-items: center;
-    white-space: nowrap;
-    margin-left: 4px;
+    position: relative;
   }
 
-  .header nav.primary_nav ul li.menu-item-language > .language-link {
+  .header nav.primary_nav ul li.menu-item-language .language-current {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0 22px;
+    padding: 12px 0;
+    color: #ffffff;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: inherit;
+  }
+
+  .menu-item-language .language-caret {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid rgba(255, 255, 255, 0.75);
+    margin-top: 2px;
+  }
+
+  .menu-item-language .language-current,
+  .menu-item-language .language-current:hover,
+  .menu-item-language .language-dropdown a:hover {
+    color: #d1c85f;
+  }
+
+  .menu-item-language:hover .language-caret,
+  .menu-item-language:focus-within .language-caret {
+    border-top-color: #d1c85f;
+  }
+
+  .menu-item-language .language-dropdown {
+    display: none;
+    position: absolute;
+    right: 22px;
+    top: 100%;
+    margin: 2px 0 0;
+    padding: 0;
+    list-style: none;
+    min-width: 32px;
+    z-index: 20;
+  }
+
+  .menu-item-language .language-dropdown li {
+    display: block;
+  }
+
+  .header nav.primary_nav ul li.menu-item-language .language-dropdown a {
     display: inline-block;
     margin: 0;
-    padding: 12px 0;
+    padding: 6px 0;
     color: #ffffff;
     text-decoration: none;
     font-size: 15px;
@@ -117,31 +177,28 @@ const roomsParentClass = [
     font-weight: 600;
   }
 
-  .menu-item-language .language-separator {
-    margin: 0 12px;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 15px;
-    line-height: 1;
-  }
-
-  .menu-item-language .language-link.is-active,
-  .menu-item-language .language-link:hover {
-    color: #d1c85f;
+  .menu-item-language:hover .language-dropdown,
+  .menu-item-language:focus-within .language-dropdown {
+    display: block;
   }
 
   @media only screen and (max-width: 991px) {
     .menu-item-language {
       display: block;
-      margin-left: 0;
-      white-space: normal;
     }
 
-    .header nav.primary_nav ul li.menu-item-language > .language-link {
+    .header nav.primary_nav ul li.menu-item-language .language-current {
       margin: 0 22px;
     }
 
-    .menu-item-language .language-separator {
+    .menu-item-language .language-dropdown {
+      position: static;
       margin: 0;
+      padding-left: 22px;
+    }
+
+    .header nav.primary_nav ul li.menu-item-language .language-dropdown a {
+      padding: 4px 0 10px;
     }
   }
 </style>
