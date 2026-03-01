@@ -11,13 +11,22 @@ export interface LegacyShellParts extends LegacyDocumentParts {
 }
 
 function stripWeglotFromHead(headHtml: string): string {
+  // Les 4 premières remplacements ciblent des éléments précis (link/script avec identifiants uniques).
+  // Pour les <style> inline contenant du CSS Weglot, on utilise un "tempered greedy token"
+  // (?:(?!<\/style>)[\s\S])* afin de ne jamais traverser la frontière </style> d'un autre bloc.
+  const withinStyle = "(?:(?!</style>)[\\s\\S])*";
+  const weglotStyleBlock = (keyword: string) =>
+    new RegExp(`<style[^>]*>${withinStyle}${keyword}${withinStyle}</style>\\s*`, "gi");
+
   return headHtml
     .replace(/<link[^>]+href=["'][^"']*plugins\/weglot[^"']*["'][^>]*>\s*/gi, "")
+    .replace(/<link[^>]+id=["'](?:weglot-css|new-flag-css)[^"']*["'][^>]*>\s*/gi, "")
     .replace(/<script[^>]+src=["'][^"']*plugins\/weglot[^"']*["'][^>]*>\s*<\/script>\s*/gi, "")
     .replace(/<script[^>]+id=["']wp-weglot-js-js["'][^>]*>[\s\S]*?<\/script>\s*/gi, "")
     .replace(/<script[^>]+id=["']weglot-data["'][^>]*>[\s\S]*?<\/script>\s*/gi, "")
-    .replace(/<style[^>]*>[\s\S]*?weglot-flags[\s\S]*?<\/style>\s*/gi, "")
-    .replace(/<style[^>]*>[\s\S]*?country-selector\.weglot[\s\S]*?<\/style>\s*/gi, "");
+    .replace(weglotStyleBlock("weglot-flags"), "")
+    .replace(weglotStyleBlock("country-selector\\.weglot"), "")
+    .replace(weglotStyleBlock("weglot-inline"), "");
 }
 
 function extractMatch(input: string, regex: RegExp, label: string): string {
