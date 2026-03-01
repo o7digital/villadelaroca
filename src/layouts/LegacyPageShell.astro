@@ -33,6 +33,15 @@ const {
 <html lang={lang}>
   <head>
     <Fragment set:html={headHtml} />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6HKQY8FR76"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-6HKQY8FR76");
+    </script>
   </head>
   <body class={bodyClass}>
     <div id="page_wrapper">
