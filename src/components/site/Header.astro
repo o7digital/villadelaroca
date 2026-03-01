@@ -90,6 +90,25 @@ const roomsParentClass = [
                 <span class="sr-only">Español</span>
               </a>
             </li>
+            <li class="menu-item mobile-language-links">
+              <a href={currentPath}>{isSpanish ? "Idioma" : "Language"}</a>
+              <div class="mobile-language-flags" data-wg-notranslate="">
+                <a
+                  href={englishHref}
+                  class={`weglot-language-en${!isSpanish ? " is-active" : ""}`}
+                  title="English"
+                  aria-label="English"
+                  hreflang="en"
+                ></a>
+                <a
+                  href={spanishHref}
+                  class={`weglot-language-es${isSpanish ? " is-active" : ""}`}
+                  title="Español"
+                  aria-label="Español"
+                  hreflang="es"
+                ></a>
+              </div>
+            </li>
           </ul>
         </nav>
       </div>
@@ -174,16 +193,13 @@ const roomsParentClass = [
     border: 0;
   }
 
+  .mobile-language-links {
+    display: none;
+  }
+
   @media only screen and (max-width: 991px) {
     .menu-item-language {
-      display: flex;
-      margin: 0;
-      padding: 8px 22px 12px;
-    }
-
-    .header nav.primary_nav ul li.menu-item-language > .lang-flag {
-      width: 30px;
-      height: 20px;
+      display: none !important;
     }
   }
 </style>
