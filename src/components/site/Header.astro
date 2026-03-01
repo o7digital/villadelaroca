@@ -71,39 +71,21 @@ const roomsParentClass = [
             <li id="menu-item-25" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-25", currentPage === "contact")}>
               <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
             </li>
-            <li class="menu-item mobile-language-links">
-              <a href={currentPath}>{isSpanish ? "Idioma" : "Language"}</a>
-              <div class="mobile-language-inline" data-wg-notranslate="">
-                <a
-                  href={englishHref}
-                  class={!isSpanish ? "is-active" : ""}
-                  title="English"
-                  aria-label="English"
-                >EN</a>
-                <span>/</span>
-                <a
-                  href={spanishHref}
-                  class={isSpanish ? "is-active" : ""}
-                  title="Español"
-                  aria-label="Español"
-                >ES</a>
-              </div>
+            <li class="menu-item menu-item-language" data-wg-notranslate="">
+              <a href={isSpanish ? spanishHref : englishHref} class="language-inline__current" aria-label={isSpanish ? "Idioma actual: Español" : "Current language: English"}>
+                {currentLangCode}
+                <span class="language-inline__caret">&#9662;</span>
+              </a>
+              <ul role="menu" class="language-inline__menu" aria-label="Language selector">
+                <li role="none"><a role="menuitem" href={englishHref} class={!isSpanish ? "is-active" : ""}>EN</a></li>
+                <li role="none"><a role="menuitem" href={spanishHref} class={isSpanish ? "is-active" : ""}>ES</a></li>
+              </ul>
             </li>
           </ul>
         </nav>
       </div>
     </div>
     <div class="toggler_and_tools">
-      <div class="language-switcher" data-wg-notranslate="">
-        <a href={isSpanish ? spanishHref : englishHref} class="language-switcher__current" aria-label={isSpanish ? "Idioma actual: Español" : "Current language: English"}>
-          {currentLangCode}
-          <span class="language-switcher__caret">&#9662;</span>
-        </a>
-        <ul class="language-switcher__menu" role="menu" aria-label="Language selector">
-          <li role="none"><a role="menuitem" href={englishHref} class={!isSpanish ? "is-active" : ""}>EN</a></li>
-          <li role="none"><a role="menuitem" href={spanishHref} class={isSpanish ? "is-active" : ""}>ES</a></li>
-        </ul>
-      </div>
       <div class="header_tools">
         <div class="nav_mini_tool_container">
           <a
@@ -122,49 +104,41 @@ const roomsParentClass = [
   </div>
 </div>
 <style>
-  .language-switcher {
+  .menu-item-language {
     position: relative;
-    margin-right: 18px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 600;
-    z-index: 20;
   }
 
-  .language-switcher__current {
-    color: #ffffff;
-    font-size: 14px;
-    text-decoration: none;
+  .menu-item-language .language-inline__current {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 0;
   }
 
-  .language-switcher__caret {
+  .menu-item-language .language-inline__caret {
     font-size: 10px;
     opacity: 0.85;
   }
 
-  .language-switcher__menu {
+  .menu-item-language .language-inline__menu {
     list-style: none;
     margin: 8px 0 0 0;
     padding: 6px 0;
     min-width: 64px;
     position: absolute;
-    right: 0;
+    left: 0;
     top: 100%;
     display: none;
     background: rgba(0, 0, 0, 0.88);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 20;
   }
 
-  .language-switcher:hover .language-switcher__menu,
-  .language-switcher:focus-within .language-switcher__menu {
+  .menu-item-language:hover .language-inline__menu,
+  .menu-item-language:focus-within .language-inline__menu {
     display: block;
   }
 
-  .language-switcher__menu a {
+  .menu-item-language .language-inline__menu a {
     display: block;
     padding: 6px 12px;
     color: #ffffff;
@@ -172,39 +146,35 @@ const roomsParentClass = [
     font-size: 13px;
   }
 
-  .language-switcher__menu a:hover,
-  .language-switcher__menu a.is-active {
+  .menu-item-language .language-inline__menu a:hover,
+  .menu-item-language .language-inline__menu a.is-active {
     color: #d1c85f;
   }
 
-  .mobile-language-links {
-    display: none;
-  }
-
-  .mobile-language-inline {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 8px;
-  }
-
-  .mobile-language-inline a {
-    color: inherit;
-    text-decoration: none;
+  .menu-item-language .language-inline__current,
+  .menu-item-language .language-inline__menu a {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     font-weight: 600;
   }
 
-  .mobile-language-inline a.is-active {
-    text-decoration: underline;
-  }
-
   @media only screen and (max-width: 991px) {
-    .language-switcher {
-      display: none;
+    .menu-item-language .language-inline__menu {
+      position: static;
+      display: block;
+      background: transparent;
+      border: 0;
+      margin: 0;
+      padding: 0;
     }
 
-    .mobile-language-links {
-      display: list-item;
+    .menu-item-language .language-inline__menu li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .menu-item-language .language-inline__caret {
+      display: none;
     }
   }
 </style>
