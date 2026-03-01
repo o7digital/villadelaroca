@@ -18,14 +18,7 @@ const ratesPath = isSpanish ? "/es/rooms-rates/rates/" : "/rooms-rates/rates/";
 const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
 const contactPath = isSpanish ? "/es/contact/" : "/contact/";
 const roomsMenuPath = `${currentPath}#`;
-const currentLanguageLabel = isSpanish ? "Spanish" : "English";
-const switchLanguageLabel = isSpanish ? "English" : "Spanish";
-const switchLanguageClass = isSpanish ? "weglot-language-en" : "weglot-language-es";
-const switchLanguageCode = isSpanish ? "en" : "es";
-const currentWgClass = isSpanish ? "wg-es" : "wg-en";
-const switchWgClass = isSpanish ? "wg-en" : "wg-es";
-const currentDataCode = isSpanish ? "wg-es" : "wg-en";
-const switcherId = `wg-switcher-${locale}`;
+const currentLangCode = isSpanish ? "ES" : "EN";
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
 const bookingLocale = isSpanish ? "es" : "en";
 const englishHref = isSpanish ? switchHref : currentPath;
@@ -80,19 +73,20 @@ const roomsParentClass = [
             </li>
             <li class="menu-item mobile-language-links">
               <a href={currentPath}>{isSpanish ? "Idioma" : "Language"}</a>
-              <div class="mobile-language-flags" data-wg-notranslate="">
+              <div class="mobile-language-inline" data-wg-notranslate="">
                 <a
                   href={englishHref}
-                  class={`weglot-language-en${!isSpanish ? " is-active" : ""}`}
+                  class={!isSpanish ? "is-active" : ""}
                   title="English"
                   aria-label="English"
-                ></a>
+                >EN</a>
+                <span>/</span>
                 <a
                   href={spanishHref}
-                  class={`weglot-language-es${isSpanish ? " is-active" : ""}`}
+                  class={isSpanish ? "is-active" : ""}
                   title="Español"
                   aria-label="Español"
-                ></a>
+                >ES</a>
               </div>
             </li>
           </ul>
@@ -100,41 +94,16 @@ const roomsParentClass = [
       </div>
     </div>
     <div class="toggler_and_tools">
-      <aside
-        data-wg-notranslate=""
-        class="country-selector weglot-inline weglot-custom-switcher wg-0 js-language-switcher"
-        tabindex="0"
-        aria-expanded="false"
-        aria-label={`Language selected: ${currentLanguageLabel}`}
-      >
-        <input id={switcherId} class="weglot_choice" type="checkbox" name="menu" />
-        <label
-          data-l={locale}
-          tabindex="-1"
-          for={switcherId}
-          class={`wgcurrent wg-li weglot-lang weglot-language weglot-flags flag-1 ${currentWgClass}`}
-          data-code-language={currentDataCode}
-          data-name-language=""
-        >
-          <span class="wglanguage-name"></span>
-        </label>
-        <ul role="none">
-          <li
-            data-l={switchLanguageCode}
-            class={`wg-li weglot-lang weglot-language weglot-flags flag-1 ${switchWgClass}`}
-            data-code-language={switchLanguageCode}
-            role="option"
-          >
-            <a
-              title={`Language switcher : ${switchLanguageLabel}`}
-              class={switchLanguageClass}
-              role="option"
-              data-wg-notranslate=""
-              href={switchHref}
-            ></a>
-          </li>
+      <div class="language-switcher" data-wg-notranslate="">
+        <a href={isSpanish ? spanishHref : englishHref} class="language-switcher__current" aria-label={isSpanish ? "Idioma actual: Español" : "Current language: English"}>
+          {currentLangCode}
+          <span class="language-switcher__caret">&#9662;</span>
+        </a>
+        <ul class="language-switcher__menu" role="menu" aria-label="Language selector">
+          <li role="none"><a role="menuitem" href={englishHref} class={!isSpanish ? "is-active" : ""}>EN</a></li>
+          <li role="none"><a role="menuitem" href={spanishHref} class={isSpanish ? "is-active" : ""}>ES</a></li>
         </ul>
-      </aside>
+      </div>
       <div class="header_tools">
         <div class="nav_mini_tool_container">
           <a
@@ -152,3 +121,90 @@ const roomsParentClass = [
     </div>
   </div>
 </div>
+<style>
+  .language-switcher {
+    position: relative;
+    margin-right: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    z-index: 20;
+  }
+
+  .language-switcher__current {
+    color: #ffffff;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 0;
+  }
+
+  .language-switcher__caret {
+    font-size: 10px;
+    opacity: 0.85;
+  }
+
+  .language-switcher__menu {
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 6px 0;
+    min-width: 64px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: none;
+    background: rgba(0, 0, 0, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .language-switcher:hover .language-switcher__menu,
+  .language-switcher:focus-within .language-switcher__menu {
+    display: block;
+  }
+
+  .language-switcher__menu a {
+    display: block;
+    padding: 6px 12px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+  }
+
+  .language-switcher__menu a:hover,
+  .language-switcher__menu a.is-active {
+    color: #d1c85f;
+  }
+
+  .mobile-language-links {
+    display: none;
+  }
+
+  .mobile-language-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 8px;
+  }
+
+  .mobile-language-inline a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .mobile-language-inline a.is-active {
+    text-decoration: underline;
+  }
+
+  @media only screen and (max-width: 991px) {
+    .language-switcher {
+      display: none;
+    }
+
+    .mobile-language-links {
+      display: list-item;
+    }
+  }
+</style>
