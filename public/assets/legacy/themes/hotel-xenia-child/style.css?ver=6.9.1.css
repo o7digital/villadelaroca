@@ -30,6 +30,15 @@ Template: hotel-xenia
 
 /* Mobile header and language switcher polish */
 @media only screen and (max-width: 991px) {
+	/* Keep desktop nav out of the mobile header bar */
+	.header nav.primary_nav,
+	.header nav.primary_nav.hidden_on_header_stuck,
+	.header .main_nav_wrapper {
+		display: none !important;
+		visibility: hidden !important;
+		opacity: 0 !important;
+	}
+
 	.header .mainbar > [class^=container] {
 		display: flex;
 		align-items: center;
@@ -104,6 +113,14 @@ Template: hotel-xenia
 		align-items: center;
 		gap: 12px;
 		padding-left: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.secondary_nav_widgetized_area .mobile-language-flags li {
+		display: inline-flex;
+		margin: 0 !important;
+		padding: 0 !important;
 	}
 
 	.secondary_nav_widgetized_area .mobile-language-flags a {
@@ -117,10 +134,24 @@ Template: hotel-xenia
 		line-height: 0;
 	}
 
-	.secondary_nav_widgetized_area .mobile-language-flags a.is-active {
-		outline: 1px solid rgba(255, 255, 255, 0.55);
-		outline-offset: 1px;
+	.secondary_nav_widgetized_area .mobile-language-flags a.lang-flag-mobile {
+		border: 1px solid transparent;
 		border-radius: 2px;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.secondary_nav_widgetized_area .mobile-language-flags a.lang-flag-mobile.lang-flag-en {
+		background-image: url("/assets/site/flags/en.svg");
+	}
+
+	.secondary_nav_widgetized_area .mobile-language-flags a.lang-flag-mobile.lang-flag-es {
+		background-image: url("/assets/site/flags/es.svg");
+	}
+
+	.secondary_nav_widgetized_area .mobile-language-flags a.is-active {
+		border-color: rgba(255, 255, 255, 0.7);
 	}
 }
 

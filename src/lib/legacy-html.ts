@@ -10,6 +10,16 @@ export interface LegacyShellParts extends LegacyDocumentParts {
   tailHtml: string;
 }
 
+function stripWeglotFromHead(headHtml: string): string {
+  return headHtml
+    .replace(/<link[^>]+href=["'][^"']*plugins\/weglot[^"']*["'][^>]*>\s*/gi, "")
+    .replace(/<script[^>]+src=["'][^"']*plugins\/weglot[^"']*["'][^>]*>\s*<\/script>\s*/gi, "")
+    .replace(/<script[^>]+id=["']wp-weglot-js-js["'][^>]*>[\s\S]*?<\/script>\s*/gi, "")
+    .replace(/<script[^>]+id=["']weglot-data["'][^>]*>[\s\S]*?<\/script>\s*/gi, "")
+    .replace(/<style[^>]*>[\s\S]*?weglot-flags[\s\S]*?<\/style>\s*/gi, "")
+    .replace(/<style[^>]*>[\s\S]*?country-selector\.weglot[\s\S]*?<\/style>\s*/gi, "");
+}
+
 function extractMatch(input: string, regex: RegExp, label: string): string {
   const match = input.match(regex);
   if (!match || !match[1]) {
@@ -23,7 +33,7 @@ export function parseLegacyHtmlDocument(html: string): LegacyDocumentParts {
   const langMatch = html.match(/<html[^>]*\slang=["']([^"']+)["'][^>]*>/i);
   const lang = langMatch?.[1] ?? "en";
 
-  const headHtml = extractMatch(html, /<head[^>]*>([\s\S]*?)<\/head>/i, "head");
+  const headHtml = stripWeglotFromHead(extractMatch(html, /<head[^>]*>([\s\S]*?)<\/head>/i, "head"));
   const bodyOpenTag = html.match(/<body([^>]*)>/i);
   const bodyHtml = extractMatch(html, /<body[^>]*>([\s\S]*?)<\/body>/i, "body");
 
