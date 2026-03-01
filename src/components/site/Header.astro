@@ -19,8 +19,13 @@ const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
 const contactPath = isSpanish ? "/es/contact/" : "/contact/";
 const roomsMenuPath = `${currentPath}#`;
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
+const bookingLocale = isSpanish ? "es" : "en";
 const englishHref = isSpanish ? switchHref : currentPath;
 const spanishHref = isSpanish ? currentPath : switchHref;
+const activeLanguageCode = isSpanish ? "ES" : "EN";
+const alternateLanguageCode = isSpanish ? "EN" : "ES";
+const alternateLanguageHref = isSpanish ? englishHref : spanishHref;
+const alternateLanguageHreflang = isSpanish ? "en" : "es";
 
 function pageClass(base: string, active: boolean) {
   return active ? `${base} current-menu-item current_page_item active` : base;
@@ -69,47 +74,26 @@ const roomsParentClass = [
             <li id="menu-item-25" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-25", currentPage === "contact")}>
               <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
             </li>
-            <li class="menu-item mobile-language-links">
-              <a href={currentPath}>{isSpanish ? "Idioma" : "Language"}</a>
-              <div class="mobile-language-flags" data-wg-notranslate="">
-                <a
-                  href={englishHref}
-                  class={`weglot-language-en${!isSpanish ? " is-active" : ""}`}
-                  title="English"
-                  aria-label="English"
-                ></a>
-                <a
-                  href={spanishHref}
-                  class={`weglot-language-es${isSpanish ? " is-active" : ""}`}
-                  title="Español"
-                  aria-label="Español"
-                ></a>
-              </div>
-            </li>
           </ul>
         </nav>
       </div>
     </div>
     <div class="toggler_and_tools">
-      <div class="lang-switcher" data-wg-notranslate="" aria-label="Language selector">
-        <a
-          href={englishHref}
-          class={`lang-btn${!isSpanish ? " lang-btn--active" : ""}`}
-          title="English"
-          hreflang="en"
-        >EN</a>
-        <span class="lang-sep" aria-hidden="true">|</span>
-        <a
-          href={spanishHref}
-          class={`lang-btn${isSpanish ? " lang-btn--active" : ""}`}
-          title="Español"
-          hreflang="es"
-        >ES</a>
+      <div class="mobile-lang-switcher" role="navigation" aria-label={isSpanish ? "Selector de idioma" : "Language selector"}>
+        <a class="mobile-lang-current" href={currentPath} hreflang={isSpanish ? "es" : "en"} aria-current="page">
+          {activeLanguageCode}
+          <svg class="lang-chevron" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true">
+            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
+          </svg>
+        </a>
+        <a class="mobile-lang-alt" href={alternateLanguageHref} hreflang={alternateLanguageHreflang}>
+          {alternateLanguageCode}
+        </a>
       </div>
       <div class="header_tools">
         <div class="nav_mini_tool_container">
           <a
-            href="https://direct-book.com/properties/gub5966?locale=en&amp;items[0][adults]=2&amp;items[0][children]=0&amp;items[0][infants]=0&amp;currency=MXN&amp;checkInDate=2022-11-25&amp;checkOutDate=2022-11-26&amp;trackPage=yes"
+            href={`https://direct-book.com/properties/gub5966?locale=${bookingLocale}&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=MXN&checkInDate=2022-11-25&checkOutDate=2022-11-26&trackPage=yes`}
             class="btn btn-inv btn-secondary"
             style="margin-top:-20px"
           >
@@ -123,54 +107,57 @@ const roomsParentClass = [
     </div>
   </div>
 </div>
-<style>
-  /* ── Language switcher ── */
-  .lang-switcher {
+<style is:global>
+  .toggler_and_tools .mobile-lang-switcher {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin: 0 6px 0 8px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .toggler_and_tools .mobile-lang-switcher a {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-right: 14px;
-  }
-
-  .lang-btn {
-    font-family: inherit;
+    gap: 4px;
+    font-family: "Montserrat", sans-serif;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    color: #ffffff !important;
+    text-decoration: none !important;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
-    text-decoration: none;
-    line-height: 1;
-    transition: color 0.2s;
+    white-space: nowrap;
   }
 
-  .lang-btn:hover {
-    color: #d1c85f;
+  .toggler_and_tools .mobile-lang-switcher .mobile-lang-current {
+    color: #ffffff !important;
   }
 
-  .lang-btn--active {
-    color: #ffffff;
-    pointer-events: none;
+  .toggler_and_tools .mobile-lang-switcher .mobile-lang-alt {
+    color: rgba(255, 255, 255, 0.95) !important;
   }
 
-  .lang-sep {
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 11px;
-    line-height: 1;
-    user-select: none;
+  .toggler_and_tools .mobile-lang-switcher .mobile-lang-alt:hover {
+    color: rgba(209, 200, 95, 1) !important;
   }
 
-  /* Mobile — inside the nav hamburger menu */
-  .mobile-language-links {
-    display: none;
+  .toggler_and_tools .mobile-lang-switcher .lang-chevron {
+    color: rgba(255, 255, 255, 0.85);
+    transform: translateY(1px);
+  }
+
+  @media only screen and (min-width: 992px) {
+    .toggler_and_tools .mobile-lang-switcher {
+      display: none !important;
+    }
   }
 
   @media only screen and (max-width: 991px) {
-    .lang-switcher {
-      display: none;
-    }
-    .mobile-language-links {
-      display: block;
+    .toggler_and_tools .mobile-lang-switcher {
+      display: inline-flex !important;
     }
   }
 </style>
