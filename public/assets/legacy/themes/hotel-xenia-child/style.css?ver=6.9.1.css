@@ -59,6 +59,19 @@ Template: hotel-xenia
 		display: none !important;
 	}
 
+	/* Hide any dynamically injected Weglot switcher in mobile top bar */
+	.header .toggler_and_tools .country-selector,
+	.header .toggler_and_tools .weglot-inline,
+	.header .toggler_and_tools .weglot-custom-switcher {
+		display: none !important;
+		visibility: hidden !important;
+		opacity: 0 !important;
+		width: 0 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		pointer-events: none !important;
+	}
+
 	.header .main_nav_wrapper .mobile-language-links {
 		display: none !important;
 	}
