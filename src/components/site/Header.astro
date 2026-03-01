@@ -70,12 +70,10 @@ const roomsParentClass = [
             <li id="menu-item-25" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-25", currentPage === "contact")}>
               <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
             </li>
-            <li class="menu-item menu-item-language" data-wg-notranslate="">
-              <div class="language-inline" aria-label="Language selector">
-                <a href={englishHref} class={!isSpanish ? "is-active" : ""} title="English" aria-label="English">EN</a>
-                <span>/</span>
-                <a href={spanishHref} class={isSpanish ? "is-active" : ""} title="Español" aria-label="Español">ES</a>
-              </div>
+            <li class="menu-item menu-item-language" data-wg-notranslate="" aria-label="Language selector">
+              <a href={englishHref} class={`language-link ${!isSpanish ? "is-active" : ""}`} title="English" aria-label="English">EN</a>
+              <span class="language-separator" aria-hidden="true">/</span>
+              <a href={spanishHref} class={`language-link ${isSpanish ? "is-active" : ""}`} title="Español" aria-label="Español">ES</a>
             </li>
           </ul>
         </nav>
@@ -103,35 +101,47 @@ const roomsParentClass = [
   .menu-item-language {
     display: inline-flex;
     align-items: center;
+    white-space: nowrap;
+    margin-left: 4px;
   }
 
-  .menu-item-language .language-inline {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .menu-item-language .language-inline a {
+  .header nav.primary_nav ul li.menu-item-language > .language-link {
+    display: inline-block;
+    margin: 0;
+    padding: 12px 0;
     color: #ffffff;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 15px;
+    line-height: 1em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
     font-weight: 600;
   }
 
-  .menu-item-language .language-inline a.is-active,
-  .menu-item-language .language-inline a:hover {
-    color: #d1c85f;
+  .menu-item-language .language-separator {
+    margin: 0 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    line-height: 1;
   }
 
-  .menu-item-language .language-inline span {
-    opacity: 0.8;
+  .menu-item-language .language-link.is-active,
+  .menu-item-language .language-link:hover {
+    color: #d1c85f;
   }
 
   @media only screen and (max-width: 991px) {
     .menu-item-language {
       display: block;
+      margin-left: 0;
+      white-space: normal;
+    }
+
+    .header nav.primary_nav ul li.menu-item-language > .language-link {
+      margin: 0 22px;
+    }
+
+    .menu-item-language .language-separator {
+      margin: 0;
     }
   }
 </style>
