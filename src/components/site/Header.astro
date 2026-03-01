@@ -71,16 +71,24 @@ const roomsParentClass = [
               <a title={isSpanish ? "Contacto" : "Contact"} href={contactPath}>{isSpanish ? "Contacto" : "Contact"}</a>
             </li>
             <li class="menu-item menu-item-language" data-wg-notranslate="" aria-label="Language selector">
-              <button class="language-current" type="button" aria-haspopup="true">
-                {isSpanish ? "ES" : "EN"} <span class="language-caret" aria-hidden="true"></span>
-              </button>
-              <ul class="language-dropdown" role="menu">
-                <li role="none">
-                  <a href={isSpanish ? englishHref : spanishHref} role="menuitem" title={isSpanish ? "English" : "Español"} aria-label={isSpanish ? "English" : "Español"}>
-                    {isSpanish ? "EN" : "ES"}
-                  </a>
-                </li>
-              </ul>
+              <a
+                href={englishHref}
+                class={`lang-flag weglot-language-en${!isSpanish ? " is-active" : ""}`}
+                title="English"
+                aria-label="English"
+                hreflang="en"
+              >
+                <span class="sr-only">English</span>
+              </a>
+              <a
+                href={spanishHref}
+                class={`lang-flag weglot-language-es${isSpanish ? " is-active" : ""}`}
+                title="Español"
+                aria-label="Español"
+                hreflang="es"
+              >
+                <span class="sr-only">Español</span>
+              </a>
             </li>
           </ul>
         </nav>
@@ -108,97 +116,74 @@ const roomsParentClass = [
   .menu-item-language {
     display: inline-flex;
     align-items: center;
+    gap: 10px;
+    margin: 0 10px;
     position: relative;
+    z-index: 40;
   }
 
-  .header nav.primary_nav ul li.menu-item-language .language-current {
+  .header nav.primary_nav ul li.menu-item-language > .lang-flag {
     display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin: 0 22px;
-    padding: 12px 0;
-    color: #ffffff;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 1em;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-family: inherit;
-  }
-
-  .menu-item-language .language-caret {
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 5px solid rgba(255, 255, 255, 0.75);
-    margin-top: 2px;
-  }
-
-  .menu-item-language .language-current,
-  .menu-item-language .language-current:hover,
-  .menu-item-language .language-dropdown a:hover {
-    color: #d1c85f;
-  }
-
-  .menu-item-language:hover .language-caret,
-  .menu-item-language:focus-within .language-caret {
-    border-top-color: #d1c85f;
-  }
-
-  .menu-item-language .language-dropdown {
-    display: none;
-    position: absolute;
-    right: 22px;
-    top: 100%;
-    margin: 2px 0 0;
-    padding: 0;
-    list-style: none;
-    min-width: 32px;
-    z-index: 20;
-  }
-
-  .menu-item-language .language-dropdown li {
-    display: block;
-  }
-
-  .header nav.primary_nav ul li.menu-item-language .language-dropdown a {
-    display: inline-block;
+    width: 28px;
+    height: 18px;
     margin: 0;
-    padding: 6px 0;
-    color: #ffffff;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 2px;
     text-decoration: none;
-    font-size: 15px;
-    line-height: 1em;
-    text-transform: uppercase;
-    font-weight: 600;
+    overflow: hidden;
+    position: relative;
+    pointer-events: auto;
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
 
-  .menu-item-language:hover .language-dropdown,
-  .menu-item-language:focus-within .language-dropdown {
+  .menu-item-language .lang-flag::before {
+    content: "";
     display: block;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .menu-item-language .lang-flag.weglot-language-en::before {
+    background-image: url("https://cdn.weglot.com/flags/shiny/us.svg");
+  }
+
+  .menu-item-language .lang-flag.weglot-language-es::before {
+    background-image: url("https://cdn.weglot.com/flags/shiny/mx.svg");
+  }
+
+  .menu-item-language .lang-flag:hover {
+    border-color: rgba(209, 200, 95, 0.9);
+    transform: translateY(-1px);
+  }
+
+  .menu-item-language .lang-flag.is-active {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .menu-item-language .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
   }
 
   @media only screen and (max-width: 991px) {
     .menu-item-language {
-      display: block;
-    }
-
-    .header nav.primary_nav ul li.menu-item-language .language-current {
-      margin: 0 22px;
-    }
-
-    .menu-item-language .language-dropdown {
-      position: static;
+      display: flex;
       margin: 0;
-      padding-left: 22px;
+      padding: 8px 22px 12px;
     }
 
-    .header nav.primary_nav ul li.menu-item-language .language-dropdown a {
-      padding: 4px 0 10px;
+    .header nav.primary_nav ul li.menu-item-language > .lang-flag {
+      width: 30px;
+      height: 20px;
     }
   }
 </style>
