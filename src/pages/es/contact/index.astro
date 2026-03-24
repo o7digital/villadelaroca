@@ -1,10 +1,13 @@
 ---
 import LegacyRawPage from "../../../components/LegacyRawPage.astro";
 import html from "../../../raw-pages/es/contact/index.html?raw";
+import { patchContactPageHtml } from "../../../lib/contact-page";
+
+const patchedHtml = patchContactPageHtml(html);
 ---
 
 <LegacyRawPage
-  html={html}
+  html={patchedHtml}
   locale="es"
   currentPage="contact"
   currentPath="/es/contact/"
