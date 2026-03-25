@@ -285,6 +285,21 @@ label {
 #rs-demo-id {}
 /*# sourceURL=rs-plugin-settings-inline-css */
 </style>
+<style>
+.supports-webp .home-slider-item {
+    background-image: var(--slide-webp) !important;
+}
+</style>
+<script>
+!function () {
+    try {
+        var canvas = document.createElement("canvas");
+        var supportsWebP = !!(canvas.getContext && canvas.getContext("2d")) &&
+            canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0;
+        if (supportsWebP) document.documentElement.classList.add("supports-webp");
+    } catch (error) {}
+}();
+</script>
 
 </head>
 <body class="home wp-singular page-template-default page page-id-1200 wp-theme-hotel-xenia wp-child-theme-hotel-xenia-child  transparent_header wpb-js-composer js-comp-ver-6.10.0 vc_responsive">
@@ -326,7 +341,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-01.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-01.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-01.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -344,7 +359,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-02.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-02.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-02.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -362,7 +377,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-03.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-03.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-03.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -380,7 +395,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-04.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-04.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-04.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -398,7 +413,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-05.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-05.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-05.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -416,7 +431,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-06.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-06.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-06.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -434,7 +449,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-07.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-07.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-07.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -452,7 +467,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-08.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-08.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-08.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -470,7 +485,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-09.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-09.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-09.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -488,7 +503,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-10.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-10.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-10.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -506,7 +521,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-11.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-11.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-11.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -524,7 +539,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-12.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-12.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-12.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -542,7 +557,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-13.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-13.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-13.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -560,7 +575,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-14.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-14.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-14.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
@@ -578,7 +593,7 @@ label {
       <!-- ============================ SLIDE  ==========================-->
 
        <div class="stretchy_wrapper ratio_slider"> 
-		<div style="background-image: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-15.jpg);" aria-hidden="true" class="item">
+		<div style="--slide-jpg: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-15.jpg); --slide-webp: url(/assets/legacy/uploads/2026/03/home-slider/home-slider-15.webp); background-image: var(--slide-jpg);" aria-hidden="true" class="item home-slider-item">
           <div class="container">
             <div class="caption    centered">
               <div class="inner">
