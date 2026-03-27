@@ -238,6 +238,42 @@ label {
     display: block;
     width: 100%;
     height: auto;
+}
+
+.bb-image-slider {
+    position: relative;
+    width: 100%;
+    height: var(--bb-slider-height-desktop, 600px);
+    overflow: hidden;
+    background: #000;
+}
+
+.bb-image-slider__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.bb-image-slider__slide.is-active {
+    opacity: 1;
+}
+
+.bb-image-slider__slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bb-image-slider--pool .bb-image-slider__slide img {
+    object-position: center 70%;
+}
+
+@media (max-width: 767px) {
+    .bb-image-slider {
+        height: var(--bb-slider-height-mobile, 720px);
+    }
 }</style><style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1674695741155{background-color: rgba(255,255,255,0.01) !important;*background-color: rgb(255,255,255) !important;}.vc_custom_1674436723537{margin-top: 20px !important;}.vc_custom_1674685606493{margin-top: 20px !important;}.vc_custom_1675284458560{margin-top: 20px !important;}.vc_custom_1674183284289{margin-top: 20px !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>			<!-- USER DEFINED IN-LINE CSS -->
 			<style>
 				.country-selector.weglot-dropdown .wgcurrent a, .country-selector.weglot-dropdown .wgcurrent span {
@@ -249,11 +285,7 @@ label {
     margin-bottom: 10px;
     display: inline-block;
     vertical-align: middle;
-}			</style><link rel='stylesheet' id='rs-plugin-settings-css' href='../../assets/legacy/plugins/revslider/public/assets/css/rs6.css%3Fver=6.6.5.css' type='text/css' media='all' />
-<style id='rs-plugin-settings-inline-css' type='text/css'>
-#rs-demo-id {}
-/*# sourceURL=rs-plugin-settings-inline-css */
-</style>
+}			</style>
 
 </head>
 <body class="wp-singular page-template-default page page-id-11 wp-theme-hotel-xenia wp-child-theme-hotel-xenia-child  transparent_header wpb-js-composer js-comp-ver-6.10.0 vc_responsive">
@@ -287,24 +319,15 @@ label {
   <span class="lines  hidden_above_threshold"></span></a></div>			
 			</div>
 					</div>
-				<div class="black_section fade_on_scroll_off head_panel">
-		<div class="rev_slider_wrapper"><!-- START Activities 01 REVOLUTION SLIDER 6.6.5 --><p class="rs-p-wp-fix"></p>
-			<rs-module-wrap id="rev_slider_5_1_wrapper" data-source="gallery" style="visibility:hidden;background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;">
-				<rs-module id="rev_slider_5_1" style="" data-version="6.6.5">
-					<rs-slides style="overflow: hidden; position: absolute;">
-						<rs-slide style="position: absolute;" data-key="rs-5" data-title="Slide" data-in="o:0;" data-out="a:false;">
-							<img src="../../assets/legacy/plugins/revslider/public/assets/assets/dummy.png" alt="Villa de la Roca hero vista 1" title="IMG_4582" width="4032" height="3024" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="/bb/slider1/IMG_4582.webp" data-no-retina>
-<!---->						</rs-slide>
-						<rs-slide style="position: absolute;" data-key="rs-6" data-title="Slide" data-in="o:0;" data-out="a:false;">
-							<img src="../../assets/legacy/plugins/revslider/public/assets/assets/dummy.png" alt="Villa de la Roca hero vista 2" title="IMG_5142" width="4032" height="3024" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="/bb/slider1/IMG_5142.webp" data-no-retina>
-<!---->						</rs-slide>
-					</rs-slides>
-				</rs-module>
-				<script>
-					setREVStartSize({c: 'rev_slider_5_1',rl:[1240,1240,1240,480],el:[1100,1100,1100,720],gw:[1240,1240,1240,480],gh:[1100,1100,1100,720],type:'hero',justify:'',layout:'fullwidth',mh:"0"});if (window.RS_MODULES!==undefined && window.RS_MODULES.modules!==undefined && window.RS_MODULES.modules["revslider51"]!==undefined) {window.RS_MODULES.modules["revslider51"].once = false;window.revapi5 = undefined;if (window.RS_MODULES.checkMinimal!==undefined) window.RS_MODULES.checkMinimal()}
-				</script>
-			</rs-module-wrap>
-			<!-- END REVOLUTION SLIDER --></div>		</div>
+		<div class="black_section fade_on_scroll_off head_panel">
+		<div class="bb-image-slider" data-slider-delay="3000" style="--bb-slider-height-desktop:1100px;--bb-slider-height-mobile:720px;" aria-label="Slider principal de Our B&B">
+			<div class="bb-image-slider__slide is-active">
+				<img src="/bb/slider1/IMG_4582.webp" alt="Villa de la Roca hero vista 1" fetchpriority="high">
+			</div>
+			<div class="bb-image-slider__slide">
+				<img src="/bb/slider1/IMG_5142.webp" alt="Villa de la Roca hero vista 2">
+			</div>
+		</div>		</div>
 			<div class="main foo sidebar_off vc_on" data-colorset="foo">
 	 
 		<div class="content_main"> 
@@ -335,23 +358,14 @@ label {
         <span class="subtitle">Cuenta con 5 habitaciones, todas tienen cama king-size, baño privado, aire acondicionado, secador de pelo, ventiladores de techo, Minibar y servicio de limpieza diario. La tarifa incluye desayuno, menú fijo. La comida y la cena están disponibles con un costo adicional y deben solicitarse con anticipación.</span>
 
 </div></div></div></div></div><div class="vc_row wpb_row vc_row-fluid padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">
-			<!-- START bandb 02 REVOLUTION SLIDER 6.6.5 --><p class="rs-p-wp-fix"></p>
-			<rs-module-wrap id="rev_slider_2_3_wrapper" data-source="gallery" style="visibility:hidden;background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;">
-				<rs-module id="rev_slider_2_3" style="" data-version="6.6.5">
-					<rs-slides style="overflow: hidden; position: absolute;">
-						<rs-slide style="position: absolute;" data-key="rs-2" data-title="Slide" data-in="o:0;" data-out="a:false;">
-							<img decoding="async" src="../../assets/legacy/plugins/revslider/public/assets/assets/dummy.png" alt="Villa de la Roca vista villa 1" title="image00022" width="4032" height="3024" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="/bb/slider2/image00022.webp" data-no-retina>
-<!---->						</rs-slide>
-						<rs-slide style="position: absolute;" data-key="rs-7" data-title="Slide" data-in="o:0;" data-out="a:false;">
-							<img decoding="async" src="../../assets/legacy/plugins/revslider/public/assets/assets/dummy.png" alt="Villa de la Roca vista villa 2" title="IMG_5180" width="640" height="480" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="/bb/slider2/IMG_5180.webp" data-no-retina>
-<!---->						</rs-slide>
-					</rs-slides>
-				</rs-module>
-				<script>
-					setREVStartSize({c: 'rev_slider_2_3',rl:[1240,1240,1240,480],el:[600,600,600,720],gw:[1240,1240,1240,480],gh:[600,600,600,720],type:'hero',justify:'',layout:'fullwidth',mh:"0"});if (window.RS_MODULES!==undefined && window.RS_MODULES.modules!==undefined && window.RS_MODULES.modules["revslider23"]!==undefined) {window.RS_MODULES.modules["revslider23"].once = false;window.revapi2 = undefined;if (window.RS_MODULES.checkMinimal!==undefined) window.RS_MODULES.checkMinimal()}
-				</script>
-			</rs-module-wrap>
-			<!-- END REVOLUTION SLIDER -->
+			<div class="bb-image-slider" data-slider-delay="3000" style="--bb-slider-height-desktop:600px;--bb-slider-height-mobile:720px;" aria-label="Slider de Our Villa">
+				<div class="bb-image-slider__slide is-active">
+					<img src="/bb/slider2/image00022.webp" alt="Villa de la Roca vista villa 1">
+				</div>
+				<div class="bb-image-slider__slide">
+					<img src="/bb/slider2/IMG_5180.webp" alt="Villa de la Roca vista villa 2">
+				</div>
+			</div>
 </div></div></div></div><div class="vc_row wpb_row vc_row-fluid slide_actividad padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="heading_group_sc wpb_content_element subtitle_bottom   vc_custom_1675284458560  text-center">
 
 
@@ -361,23 +375,14 @@ label {
         <span class="subtitle">Ambiente familiar, alberca con cascada, asoleadero, terraza amueblada, área de bar y comedor con vista al mar.</span>
 
 </div></div></div></div></div><div class="vc_row wpb_row vc_row-fluid padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">
-			<!-- START bandb 03 REVOLUTION SLIDER 6.6.5 --><p class="rs-p-wp-fix"></p>
-			<rs-module-wrap id="rev_slider_3_4_wrapper" data-source="gallery" style="visibility:hidden;background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;">
-				<rs-module id="rev_slider_3_4" style="" data-version="6.6.5">
-					<rs-slides style="overflow: hidden; position: absolute;">
-						<rs-slide style="position: absolute;" data-key="rs-3" data-title="Slide" data-in="o:0;" data-out="a:false;">
-							<img decoding="async" src="../../assets/legacy/plugins/revslider/public/assets/assets/dummy.png" alt="Villa de la Roca tranquilidad vista 1" title="IMG_4569" width="4032" height="3024" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="/bb/slider3/IMG_4569.webp" data-no-retina>
-<!---->						</rs-slide>
-						<rs-slide style="position: absolute;" data-key="rs-8" data-title="Slide" data-in="o:0;" data-out="a:false;">
-							<img decoding="async" src="../../assets/legacy/plugins/revslider/public/assets/assets/dummy.png" alt="Villa de la Roca tranquilidad vista 2" title="IMG_5154" width="4032" height="3024" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="/bb/slider3/IMG_5154.webp" data-no-retina>
-<!---->						</rs-slide>
-					</rs-slides>
-				</rs-module>
-				<script>
-					setREVStartSize({c: 'rev_slider_3_4',rl:[1240,1240,1240,480],el:[700,700,700,720],gw:[1240,1240,1240,480],gh:[700,700,700,720],type:'hero',justify:'',layout:'fullwidth',mh:"0"});if (window.RS_MODULES!==undefined && window.RS_MODULES.modules!==undefined && window.RS_MODULES.modules["revslider34"]!==undefined) {window.RS_MODULES.modules["revslider34"].once = false;window.revapi3 = undefined;if (window.RS_MODULES.checkMinimal!==undefined) window.RS_MODULES.checkMinimal()}
-				</script>
-			</rs-module-wrap>
-			<!-- END REVOLUTION SLIDER -->
+			<div class="bb-image-slider bb-image-slider--pool" data-slider-delay="3000" style="--bb-slider-height-desktop:700px;--bb-slider-height-mobile:720px;" aria-label="Slider de privacidad y tranquilidad">
+				<div class="bb-image-slider__slide is-active">
+					<img src="/bb/slider3/IMG_4569.webp" alt="Villa de la Roca tranquilidad vista 1">
+				</div>
+				<div class="bb-image-slider__slide">
+					<img src="/bb/slider3/IMG_5154.webp" alt="Villa de la Roca tranquilidad vista 2">
+				</div>
+			</div>
 </div></div></div></div><div class="vc_row wpb_row vc_row-fluid slide_actividad padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="heading_group_sc wpb_content_element subtitle_bottom   vc_custom_1674183284289  text-center">
 
 
@@ -407,22 +412,10 @@ Casa Villa de la Roca Copyright © 2025 Todos los derechos reservados</span>
 		<div class="secondary_nav_widgetized_area">
 	</div>	</div>
 	<a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
-		<script>
-			window.RS_MODULES = window.RS_MODULES || {};
-			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
-			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
-			window.RS_MODULES.defered = true;
-			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
-			window.RS_MODULES.type = 'compiled';
-		</script>
 		<script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/assets/legacy/uploads/*","/assets/legacy/*","/assets/legacy/plugins/*","/assets/legacy/themes/hotel-xenia-child/*","/assets/legacy/themes/hotel-xenia/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
 <script type="text/html" id="wpb-modifications"></script><link href="https://fonts.googleapis.com/css?family=Roboto:400&display=swap" rel="stylesheet" property="stylesheet" media="all" type="text/css" >
-
-<script>
-		if(typeof revslider_showDoubleJqueryError === "undefined") {function revslider_showDoubleJqueryError(sliderID) {console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion.");console.log("To fix this, you can:");console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on");console.log("2. Find the double jQuery.js inclusion and remove it");return "Double Included jQuery Library";}}
-</script>
 <script type="text/javascript" src="../../assets/vendor/js/dist/hooks.min.js%3Fver=dd5603f07f9220ed27f1" id="wp-hooks-js"></script>
 <script type="text/javascript" src="../../assets/vendor/js/dist/i18n.min.js%3Fver=c26c3dc7bed366793375" id="wp-i18n-js"></script>
 <script type="text/javascript" id="wp-i18n-js-after">
@@ -431,8 +424,6 @@ wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
 //# sourceURL=wp-i18n-js-after
 /* ]]> */
 </script>
-<script type="text/javascript" src="../../assets/legacy/plugins/revslider/public/assets/js/rbtools.min.js%3Fver=6.6.5" defer async id="tp-tools-js"></script>
-<script type="text/javascript" src="../../assets/legacy/plugins/revslider/public/assets/js/rs6.min.js%3Fver=6.6.5" defer async id="revmin-js"></script>
 <script type="text/javascript" src="../../assets/legacy/themes/hotel-xenia/includes/core/assets/js/libs/totop/jquery.ui.totop.js%3Fver=6.9.1" id="plethora-totop-js"></script>
 <script type="text/javascript" src="../../assets/vendor/js/jquery/ui/core.min.js%3Fver=1.13.3" id="jquery-ui-core-js"></script>
 <script type="text/javascript" src="../../assets/vendor/js/jquery/ui/datepicker.min.js%3Fver=1.13.3" id="jquery-ui-datepicker-js"></script>
@@ -464,123 +455,21 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 //# sourceURL=https://villadelaroca.com/assets/vendor/js/wp-emoji-loader.min.js
 /* ]]> */
 </script>
-<script id="rs-initialisation-scripts">
-		var	tpj = jQuery;
-
-		var	revapi5,revapi2,revapi3;
-
-		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
-		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
-		RS_MODULES.modules["revslider51"] = {once: RS_MODULES.modules["revslider51"]!==undefined ? RS_MODULES.modules["revslider51"].once : undefined, init:function() {
-			window.revapi5 = window.revapi5===undefined || window.revapi5===null || window.revapi5.length===0  ? document.getElementById("rev_slider_5_1") : window.revapi5;
-			if(window.revapi5 === null || window.revapi5 === undefined || window.revapi5.length==0) { window.revapi5initTry = window.revapi5initTry ===undefined ? 0 : window.revapi5initTry+1; if (window.revapi5initTry<20) requestAnimationFrame(function() {RS_MODULES.modules["revslider51"].init()}); return;}
-			window.revapi5 = jQuery(window.revapi5);
-			if(window.revapi5.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_5_1"); return;}
-			revapi5.revolutionInit({
-					revapi:"revapi5",
-					sliderType:"hero",
-					DPR:"dpr",
-					sliderLayout:"fullwidth",
-					visibilityLevels:"1240,1240,1240,480",
-					gridwidth:"1240,1240,1240,480",
-					gridheight:"1100,1100,1100,720",
-					delay:3000,
-					lazyType:"smart",
-					perspective:600,
-					perspectiveType:"global",
-					editorheight:"1100,768,960,720",
-					responsiveLevels:"1240,1240,1240,480",
-					progressBar:{disableProgressBar:true},
-					navigation: {
-						onHoverStop:false
-					},
-					viewPort: {
-						global:true,
-						globalDist:"-200px",
-						enable:false
-					},
-					fallbacks: {
-						allowHTML5AutoPlayOnAndroid:true
-					},
+<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var sliders = document.querySelectorAll(".bb-image-slider");
+			sliders.forEach(function (slider) {
+				var slides = slider.querySelectorAll(".bb-image-slider__slide");
+				if (slides.length < 2) return;
+				var current = 0;
+				var delay = parseInt(slider.getAttribute("data-slider-delay") || "3000", 10);
+				window.setInterval(function () {
+					slides[current].classList.remove("is-active");
+					current = (current + 1) % slides.length;
+					slides[current].classList.add("is-active");
+				}, delay);
 			});
-			
-		}} // End of RevInitScript
-
-		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
-		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
-		RS_MODULES.modules["revslider23"] = {once: RS_MODULES.modules["revslider23"]!==undefined ? RS_MODULES.modules["revslider23"].once : undefined, init:function() {
-			window.revapi2 = window.revapi2===undefined || window.revapi2===null || window.revapi2.length===0  ? document.getElementById("rev_slider_2_3") : window.revapi2;
-			if(window.revapi2 === null || window.revapi2 === undefined || window.revapi2.length==0) { window.revapi2initTry = window.revapi2initTry ===undefined ? 0 : window.revapi2initTry+1; if (window.revapi2initTry<20) requestAnimationFrame(function() {RS_MODULES.modules["revslider23"].init()}); return;}
-			window.revapi2 = jQuery(window.revapi2);
-			if(window.revapi2.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_2_3"); return;}
-			revapi2.revolutionInit({
-					revapi:"revapi2",
-					sliderType:"hero",
-					DPR:"dpr",
-					sliderLayout:"fullwidth",
-					visibilityLevels:"1240,1240,1240,480",
-					gridwidth:"1240,1240,1240,480",
-					gridheight:"600,600,600,720",
-					delay:3000,
-					lazyType:"smart",
-					perspective:600,
-					perspectiveType:"global",
-					editorheight:"600,768,960,720",
-					responsiveLevels:"1240,1240,1240,480",
-					progressBar:{disableProgressBar:true},
-					navigation: {
-						onHoverStop:false
-					},
-					viewPort: {
-						global:true,
-						globalDist:"-200px",
-						enable:false
-					},
-					fallbacks: {
-						allowHTML5AutoPlayOnAndroid:true
-					},
-			});
-			
-		}} // End of RevInitScript
-
-		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
-		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
-		RS_MODULES.modules["revslider34"] = {once: RS_MODULES.modules["revslider34"]!==undefined ? RS_MODULES.modules["revslider34"].once : undefined, init:function() {
-			window.revapi3 = window.revapi3===undefined || window.revapi3===null || window.revapi3.length===0  ? document.getElementById("rev_slider_3_4") : window.revapi3;
-			if(window.revapi3 === null || window.revapi3 === undefined || window.revapi3.length==0) { window.revapi3initTry = window.revapi3initTry ===undefined ? 0 : window.revapi3initTry+1; if (window.revapi3initTry<20) requestAnimationFrame(function() {RS_MODULES.modules["revslider34"].init()}); return;}
-			window.revapi3 = jQuery(window.revapi3);
-			if(window.revapi3.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_3_4"); return;}
-			revapi3.revolutionInit({
-					revapi:"revapi3",
-					sliderType:"hero",
-					DPR:"dpr",
-					sliderLayout:"fullwidth",
-					visibilityLevels:"1240,1240,1240,480",
-					gridwidth:"1240,1240,1240,480",
-					gridheight:"700,700,700,720",
-					delay:3000,
-					lazyType:"smart",
-					perspective:600,
-					perspectiveType:"global",
-					editorheight:"700,768,960,720",
-					responsiveLevels:"1240,1240,1240,480",
-					progressBar:{disableProgressBar:true},
-					navigation: {
-						onHoverStop:false
-					},
-					viewPort: {
-						global:true,
-						globalDist:"-200px",
-						enable:false
-					},
-					fallbacks: {
-						allowHTML5AutoPlayOnAndroid:true
-					},
-			});
-			
-		}} // End of RevInitScript
-
-		if (window.RS_MODULES.checkMinimal!==undefined) { window.RS_MODULES.checkMinimal();};
+		});
 	</script>
 				<script type='text/javascript'>
 					function cambiarImagenJS(){
