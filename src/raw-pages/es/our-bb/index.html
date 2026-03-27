@@ -226,6 +226,12 @@ label {
     padding-top: 200px;
     padding-bottom: 70px;
     min-height: 900px;
+}
+
+.bb-intro-slider .item img {
+    display: block;
+    width: 100%;
+    height: auto;
 }</style><style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1674695741155{background-color: rgba(255,255,255,0.01) !important;*background-color: rgb(255,255,255) !important;}.vc_custom_1674436723537{margin-top: 20px !important;}.vc_custom_1674685606493{margin-top: 20px !important;}.vc_custom_1675284458560{margin-top: 20px !important;}.vc_custom_1674183284289{margin-top: 20px !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>			<!-- USER DEFINED IN-LINE CSS -->
 			<style>
 				.country-selector.weglot-dropdown .wgcurrent a, .country-selector.weglot-dropdown .wgcurrent span {
@@ -314,25 +320,14 @@ label {
         <span class="subtitle">Villa privada ubicada cerca de Playa La Ropa, con vistas panorámicas a la bahía de Zihuatanejo.</span>
 
 </div></div></div></div></div><div class="vc_row wpb_row vc_row-fluid padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">
-			<!-- START bandb 01 REVOLUTION SLIDER 6.6.5 --><p class="rs-p-wp-fix"></p>
-			<rs-module-wrap id="rev_slider_1_2_wrapper" data-source="gallery" style="visibility:hidden;background:transparent;padding:0;margin:0px auto;margin-top:0;margin-bottom:0;">
-				<rs-module id="rev_slider_1_2" style="" data-version="6.6.5">
-					<rs-slides style="overflow: hidden; position: absolute;">
-						<rs-slide style="position: absolute;" data-key="rs-1" data-title="Slide" data-in="o:0;" data-out="a:false;">
-							<img fetchpriority="high" decoding="async" src="../../assets/legacy/plugins/revslider/public/assets/assets/dummy.png" alt="Nuestro B&B en Ixtapa Zihuatanejo" title="ourb&#038;b" width="1366" height="720" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="../../assets/legacy/uploads/2022/11/ourbb.webp" data-no-retina>
-							<rs-bgvideo 
-								data-video="vc:none;w:100%;h:100%;nse:false;l:true;ptimer:false;"
-								data-ytid="iOWHdFhXcH8"
-								data-vatr="version=3&amp;enablejsapi=1&amp;html5=1&amp;hd=1&amp;wmode=opaque&amp;showinfo=0&amp;rel=0&amp;origin=https://villadelaroca.com;"
-							></rs-bgvideo>
-<!---->						</rs-slide>
-					</rs-slides>
-				</rs-module>
-				<script>
-					setREVStartSize({c: 'rev_slider_1_2',rl:[1240,1240,1240,480],el:[800,800,800,720],gw:[1240,1240,1240,480],gh:[800,800,800,720],type:'hero',justify:'',layout:'fullwidth',mh:"0"});if (window.RS_MODULES!==undefined && window.RS_MODULES.modules!==undefined && window.RS_MODULES.modules["revslider12"]!==undefined) {window.RS_MODULES.modules["revslider12"].once = false;window.revapi1 = undefined;if (window.RS_MODULES.checkMinimal!==undefined) window.RS_MODULES.checkMinimal()}
-				</script>
-			</rs-module-wrap>
-			<!-- END REVOLUTION SLIDER -->
+			<div id="bb_intro_slider" class="owl-carousel bb-intro-slider">
+				<div class="item">
+					<img src="/bb/slider1/IMG_4582.jpeg" alt="Villa de la Roca vista 1" />
+				</div>
+				<div class="item">
+					<img src="/bb/slider1/IMG_5142.jpeg" alt="Villa de la Roca vista 2" />
+				</div>
+			</div>
 </div></div></div></div><div class="vc_row wpb_row vc_row-fluid slide_actividad padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="heading_group_sc wpb_content_element subtitle_bottom   vc_custom_1674685606493  text-center">
 
 
@@ -506,41 +501,23 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 			
 		}} // End of RevInitScript
 
-		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
-		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
-		RS_MODULES.modules["revslider12"] = {once: RS_MODULES.modules["revslider12"]!==undefined ? RS_MODULES.modules["revslider12"].once : undefined, init:function() {
-			window.revapi1 = window.revapi1===undefined || window.revapi1===null || window.revapi1.length===0  ? document.getElementById("rev_slider_1_2") : window.revapi1;
-			if(window.revapi1 === null || window.revapi1 === undefined || window.revapi1.length==0) { window.revapi1initTry = window.revapi1initTry ===undefined ? 0 : window.revapi1initTry+1; if (window.revapi1initTry<20) requestAnimationFrame(function() {RS_MODULES.modules["revslider12"].init()}); return;}
-			window.revapi1 = jQuery(window.revapi1);
-			if(window.revapi1.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_1_2"); return;}
-			revapi1.revolutionInit({
-					revapi:"revapi1",
-					sliderType:"hero",
-					DPR:"dpr",
-					sliderLayout:"fullwidth",
-					visibilityLevels:"1240,1240,1240,480",
-					gridwidth:"1240,1240,1240,480",
-					gridheight:"800,800,800,720",
-					lazyType:"smart",
-					perspective:600,
-					perspectiveType:"global",
-					editorheight:"800,768,960,720",
-					responsiveLevels:"1240,1240,1240,480",
-					progressBar:{disableProgressBar:true},
-					navigation: {
-						onHoverStop:false
-					},
-					viewPort: {
-						global:true,
-						globalDist:"-200px",
-						enable:false
-					},
-					fallbacks: {
-						allowHTML5AutoPlayOnAndroid:true
-					},
-			});
-			
-		}} // End of RevInitScript
+		jQuery(function($) {
+			var $bbIntroSlider = $("#bb_intro_slider");
+			if ($bbIntroSlider.length) {
+				$bbIntroSlider.owlCarousel({
+					items: 1,
+					autoplay: true,
+					autoplayTimeout: 3000,
+					autoplaySpeed: 800,
+					autoplayHoverPause: false,
+					nav: false,
+					dots: false,
+					loop: true,
+					mouseDrag: true,
+					touchDrag: true
+				});
+			}
+		});
 
 		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
 		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
