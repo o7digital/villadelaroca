@@ -240,6 +240,12 @@ label {
     height: auto;
 }
 
+.bb-feature-video--hero {
+    height: var(--bb-slider-height-desktop, 1100px);
+    object-fit: cover;
+    background: #000;
+}
+
 .bb-image-slider {
     position: relative;
     width: 100%;
@@ -272,6 +278,10 @@ label {
 
 @media (max-width: 767px) {
     .bb-image-slider {
+        height: var(--bb-slider-height-mobile, 720px);
+    }
+
+    .bb-feature-video--hero {
         height: var(--bb-slider-height-mobile, 720px);
     }
 }</style><style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1674695741155{background-color: rgba(255,255,255,0.01) !important;*background-color: rgb(255,255,255) !important;}.vc_custom_1674436723537{margin-top: 20px !important;}.vc_custom_1674685606493{margin-top: 20px !important;}.vc_custom_1675284458560{margin-top: 20px !important;}.vc_custom_1674183284289{margin-top: 20px !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>			<!-- USER DEFINED IN-LINE CSS -->
@@ -320,14 +330,9 @@ label {
 			</div>
 					</div>
 		<div class="black_section fade_on_scroll_off head_panel">
-		<div class="bb-image-slider" data-slider-delay="3000" style="--bb-slider-height-desktop:1100px;--bb-slider-height-mobile:720px;" aria-label="Slider principal de Our B&B">
-			<div class="bb-image-slider__slide is-active">
-				<img src="/bb/slider1/IMG_4582.webp" alt="Villa de la Roca hero vista 1" fetchpriority="high">
-			</div>
-			<div class="bb-image-slider__slide">
-				<img src="/bb/slider1/IMG_5142.webp" alt="Villa de la Roca hero vista 2">
-			</div>
-		</div>		</div>
+		<video class="bb-feature-video bb-feature-video--hero" autoplay muted loop playsinline preload="metadata" style="--bb-slider-height-desktop:1100px;--bb-slider-height-mobile:720px;" aria-label="Video principal de Our B&B">
+			<source src="/bb/video/Dejavu.mp4" type="video/mp4" />
+		</video>		</div>
 			<div class="main foo sidebar_off vc_on" data-colorset="foo">
 	 
 		<div class="content_main"> 
@@ -354,10 +359,6 @@ label {
         <span class="subtitle">Contamos con 5 habitaciones, cada una con cama king size, baño privado, aire acondicionado, ventilador de techo, minibar, tocador con espejo, secador de pelo y servicio de limpieza diario. El desayuno (menú fijo) está incluido en la tarifa. La comida y la cena tienen un costo adicional y deben solicitarse con anticipación.</span>
 
 </div></div></div></div></div><div class="vc_row wpb_row vc_row-fluid padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">
-			<video class="bb-feature-video" autoplay muted loop playsinline preload="metadata">
-				<source src="/bb/video/Dejavu.mp4" type="video/mp4" />
-			</video>
-</div></div></div></div><div class="vc_row wpb_row vc_row-fluid padding_top_none padding_bottom_none"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">
 			<div class="bb-image-slider" data-slider-delay="3000" style="--bb-slider-height-desktop:600px;--bb-slider-height-mobile:720px;" aria-label="Slider de Our Villa">
 				<div class="bb-image-slider__slide is-active">
 					<img src="/bb/slider2/image00022.webp" alt="Villa de la Roca vista villa 1">
