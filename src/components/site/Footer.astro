@@ -12,18 +12,10 @@ const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
 ---
 
 <div class="footer">
-  <div class="social-floating" aria-label={isSpanish ? "Redes sociales" : "Social links"}>
-    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
-      <i class="fa fa-facebook" aria-hidden="true"></i>
-    </a>
-    <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-      <i class="fa fa-instagram" aria-hidden="true"></i>
-    </a>
-  </div>
   <div class="footer_bar dark_section">
     <div class="container-fluid" style="padding-left:20px;padding-right:20px;">
       <div class="row">
-        <div class="col-sm-12 text-left">
+        <div class="col-sm-10 text-left">
           {
             isSpanish ? (
               <span style="font-size:12px">
@@ -57,6 +49,16 @@ const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
             )
           }
         </div>
+        <div class="col-sm-2 text-right footer-social-col">
+          <div class="social-floating" aria-label={isSpanish ? "Redes sociales" : "Social links"}>
+            <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -64,18 +66,22 @@ const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
 
 <style>
   .social-floating {
-    position: fixed;
-    right: 16px;
-    bottom: 84px;
-    z-index: 9999;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 10px;
+    margin-top: 4px;
+  }
+
+  .footer-social-col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
   }
 
   .social-floating a {
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -109,9 +115,12 @@ const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
   }
 
   @media (max-width: 767px) {
+    .footer-social-col {
+      margin-top: 10px;
+      justify-content: flex-end;
+    }
+
     .social-floating {
-      right: 10px;
-      bottom: 72px;
       gap: 8px;
     }
 
