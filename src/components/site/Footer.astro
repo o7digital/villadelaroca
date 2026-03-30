@@ -7,9 +7,19 @@ interface Props {
 
 const { locale } = Astro.props;
 const isSpanish = locale === "es";
+const facebookUrl = "https://www.facebook.com/VilladelaRoca";
+const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
 ---
 
 <div class="footer">
+  <div class="social-floating" aria-label={isSpanish ? "Redes sociales" : "Social links"}>
+    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+      <i class="fa fa-facebook" aria-hidden="true"></i>
+    </a>
+    <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+      <i class="fa fa-instagram" aria-hidden="true"></i>
+    </a>
+  </div>
   <div class="footer_bar dark_section">
     <div class="container-fluid" style="padding-left:20px;padding-right:20px;">
       <div class="row">
@@ -51,3 +61,63 @@ const isSpanish = locale === "es";
     </div>
   </div>
 </div>
+
+<style>
+  .social-floating {
+    position: fixed;
+    left: 16px;
+    bottom: 84px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .social-floating a {
+    width: 46px;
+    height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #10131c !important;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    text-decoration: none !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .social-floating a i {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .social-floating a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.32);
+  }
+
+  .social-floating a[aria-label="Facebook"]:hover {
+    background-color: #1877f2;
+    color: #ffffff !important;
+  }
+
+  .social-floating a[aria-label="Instagram"]:hover {
+    background-color: #e1306c;
+    color: #ffffff !important;
+  }
+
+  @media (max-width: 767px) {
+    .social-floating {
+      left: 10px;
+      bottom: 72px;
+      gap: 8px;
+    }
+
+    .social-floating a {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>
