@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "prepare:legacy-assets": "node scripts/normalize-legacy-assets.mjs",
+    "predev": "npm run prepare:legacy-assets",
+    "prebuild": "npm run prepare:legacy-assets",
+    "prepreview": "npm run prepare:legacy-assets",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "astro dev",
     "start": "astro dev",

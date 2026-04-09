@@ -29,6 +29,10 @@ function stripWeglotFromHead(headHtml: string): string {
     .replace(weglotStyleBlock("weglot-inline"), "");
 }
 
+function normalizeLegacyAssetEncodings(html: string): string {
+  return html.replace(/%3F/gi, "?");
+}
+
 function extractMatch(input: string, regex: RegExp, label: string): string {
   const match = input.match(regex);
   if (!match || !match[1]) {
@@ -39,12 +43,13 @@ function extractMatch(input: string, regex: RegExp, label: string): string {
 }
 
 export function parseLegacyHtmlDocument(html: string): LegacyDocumentParts {
-  const langMatch = html.match(/<html[^>]*\slang=["']([^"']+)["'][^>]*>/i);
+  const normalizedHtml = normalizeLegacyAssetEncodings(html);
+  const langMatch = normalizedHtml.match(/<html[^>]*\slang=["']([^"']+)["'][^>]*>/i);
   const lang = langMatch?.[1] ?? "en";
 
-  const headHtml = stripWeglotFromHead(extractMatch(html, /<head[^>]*>([\s\S]*?)<\/head>/i, "head"));
-  const bodyOpenTag = html.match(/<body([^>]*)>/i);
-  const bodyHtml = extractMatch(html, /<body[^>]*>([\s\S]*?)<\/body>/i, "body");
+  const headHtml = stripWeglotFromHead(extractMatch(normalizedHtml, /<head[^>]*>([\s\S]*?)<\/head>/i, "head"));
+  const bodyOpenTag = normalizedHtml.match(/<body([^>]*)>/i);
+  const bodyHtml = extractMatch(normalizedHtml, /<body[^>]*>([\s\S]*?)<\/body>/i, "body");
 
   const bodyAttributes = bodyOpenTag?.[1] ?? "";
   const bodyClassMatch = bodyAttributes.match(/\sclass=["']([^"']+)["']/i);
