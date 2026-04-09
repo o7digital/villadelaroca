@@ -14,10 +14,8 @@ const isSpanish = locale === "es";
 const homePath = isSpanish ? "/es/" : "/";
 const ourBbPath = isSpanish ? "/es/our-bb/" : "/our-bb/";
 const roomPath = isSpanish ? "/es/room/room/" : "/room/room/";
-const ratesPath = isSpanish ? "/es/rooms-rates/rates/" : "/rooms-rates/rates/";
 const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
 const contactPath = isSpanish ? "/es/contact/" : "/contact/";
-const roomsMenuPath = `${currentPath}#`;
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
 const bookingLocale = isSpanish ? "es" : "en";
 const englishHref = isSpanish ? switchHref : currentPath;
@@ -31,12 +29,6 @@ function pageClass(base: string, active: boolean) {
   return active ? `${base} current-menu-item current_page_item active` : base;
 }
 
-const roomsParentClass = [
-  "menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1609 lihaschildren",
-  currentPage === "room" || currentPage === "rates" ? "current-menu-ancestor current-menu-parent" : "",
-]
-  .filter(Boolean)
-  .join(" ");
 ---
 
 <div class="header transparent">
@@ -53,20 +45,10 @@ const roomsParentClass = [
             <li id="menu-item-31" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-31", currentPage === "our-bb")}>
               <a title={isSpanish ? "Nuestro B&B" : "Our B&B"} href={ourBbPath}>{isSpanish ? "Nuestro B&B" : "Our B&B"}</a>
             </li>
-            <li id="menu-item-1609" class={roomsParentClass}>
-              <a title={isSpanish ? "Habitaciones y tarifas" : "Rooms & Rates"} href={roomsMenuPath}>
+            <li id="menu-item-1609" class={pageClass("menu-item menu-item-type-post_type menu-item-object-room menu-item-1609", currentPage === "room" || currentPage === "rates")}>
+              <a title={isSpanish ? "Habitaciones y tarifas" : "Rooms & Rates"} href={roomPath}>
                 {isSpanish ? "Habitaciones y tarifas" : "Rooms & Rates"}
               </a>
-              <ul role="menu">
-                <li id="menu-item-1020" class={pageClass("menu-item menu-item-type-post_type menu-item-object-room menu-item-1020", currentPage === "room")}>
-                  <a title={isSpanish ? "Detalles de la habitación" : "Room Details"} href={roomPath}>
-                    {isSpanish ? "Detalles de la habitación" : "Room Details"}
-                  </a>
-                </li>
-                <li id="menu-item-29" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-29", currentPage === "rates")}>
-                  <a title={isSpanish ? "Tarifas" : "Rates"} href={ratesPath}>{isSpanish ? "Tarifas" : "Rates"}</a>
-                </li>
-              </ul>
             </li>
             <li id="menu-item-1463" class={pageClass("menu-item menu-item-type-post_type menu-item-object-page menu-item-1463", currentPage === "activities")}>
               <a title={isSpanish ? "Actividades" : "Activities"} href={activitiesPath}>{isSpanish ? "Actividades" : "Activities"}</a>
