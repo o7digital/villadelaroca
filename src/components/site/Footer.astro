@@ -9,6 +9,10 @@ const { locale } = Astro.props;
 const isSpanish = locale === "es";
 const facebookUrl = "https://www.facebook.com/VilladelaRoca";
 const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
+const privacyHref = isSpanish
+  ? "/assets/legacy/uploads/2025/08/Aviso-de-Privacidad-LCQC.pdf"
+  : "/assets/legacy/uploads/2025/08/Privacy-Police-LCQC.pdf";
+const privacyLabel = isSpanish ? "Aviso de Privacidad" : "Privacy Policy";
 ---
 
 <div class="footer">
@@ -19,18 +23,14 @@ const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
           {
             isSpanish ? (
               <span style="font-size:12px">
-                <a href="/assets/legacy/uploads/2025/08/Aviso-de-Privacidad-LCQC.pdf" style="font-size:12px">Política de Privacidad </a>
+                <a href={privacyHref} style="font-size:12px">{privacyLabel}</a>
                 {" | "}
-                <a href="/assets/legacy/uploads/2025/08/Privacy-Police-LCQC.pdf" style="font-size:12px">Aviso de Privacidad </a>
-                {" "}
                 Casa Villa de la Roca Copyright © 2025 Todos los derechos reservados
               </span>
             ) : (
               <span style="font-size:12px">
-                <a href="/assets/legacy/uploads/2025/08/Aviso-de-Privacidad-LCQC.pdf" style="font-size:12px">Privacy Policy </a>
-                {" |  "}
-                <a href="/assets/legacy/uploads/2025/08/Privacy-Police-LCQC.pdf" style="font-size:12px">Aviso de Privacidad </a>
-                {"| "}
+                <a href={privacyHref} style="font-size:12px">{privacyLabel}</a>
+                {" | "}
                 Casa Villa de la Roca Copyright © 2025 All rights reserved
               </span>
             )
