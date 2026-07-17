@@ -13,6 +13,8 @@ const privacyHref = isSpanish ? "/es/privacy-policy/" : "/privacy-policy/";
 const privacyLabel = isSpanish ? "Aviso de Privacidad" : "Privacy Policy";
 ---
 
+<link rel="prefetch" href={privacyHref} as="document" />
+
 <div class="footer">
   <div class="footer_bar dark_section">
     <div class="container-fluid" style="padding-left:20px;padding-right:20px;">
@@ -21,13 +23,13 @@ const privacyLabel = isSpanish ? "Aviso de Privacidad" : "Privacy Policy";
           {
             isSpanish ? (
               <span style="font-size:12px">
-                <a href={privacyHref} style="font-size:12px">{privacyLabel}</a>
+                <a href={privacyHref} rel="prefetch" style="font-size:12px">{privacyLabel}</a>
                 {" | "}
                 Casa Villa de la Roca Copyright © 2025 Todos los derechos reservados
               </span>
             ) : (
               <span style="font-size:12px">
-                <a href={privacyHref} style="font-size:12px">{privacyLabel}</a>
+                <a href={privacyHref} rel="prefetch" style="font-size:12px">{privacyLabel}</a>
                 {" | "}
                 Casa Villa de la Roca Copyright © 2025 All rights reserved
               </span>

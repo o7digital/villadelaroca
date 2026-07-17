@@ -10,7 +10,7 @@ function privacyStyles() {
         min-height: 100vh;
         position: relative;
         overflow: hidden;
-        padding: 110px 0 72px;
+        padding: 150px 0 72px;
       }
 
       .vdr-privacy-bg::before {
@@ -48,11 +48,11 @@ function privacyStyles() {
 
       .vdr-privacy-container h1 {
         margin: 0 0 70px;
-        font-family: "Montserrat", sans-serif;
-        font-size: clamp(30px, 4vw, 44px);
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(34px, 4vw, 48px);
         line-height: 1;
         color: #050505;
-        font-weight: 900;
+        font-weight: 400;
         text-transform: uppercase;
       }
 
@@ -69,11 +69,11 @@ function privacyStyles() {
 
       .vdr-privacy-content h3 {
         margin: 30px 0 12px;
-        font-family: "Montserrat", sans-serif;
-        font-size: 20px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 24px;
         line-height: 1.2;
         color: #111;
-        font-weight: 900;
+        font-weight: 400;
         text-transform: uppercase;
       }
 
@@ -101,6 +101,31 @@ function privacyStyles() {
         text-underline-offset: 3px;
       }
 
+      body:has(.vdr-privacy-bg) .header.transparent {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+        background: rgba(0, 0, 0, 0.58) !important;
+        transform: none !important;
+      }
+
+      body:has(.vdr-privacy-bg) .header.transparent .mainbar,
+      body:has(.vdr-privacy-bg) .header.transparent.stuck .mainbar {
+        background: rgba(0, 0, 0, 0.58) !important;
+        transform: none !important;
+      }
+
+      body:has(.vdr-privacy-bg) .header.transparent.hide,
+      body:has(.vdr-privacy-bg) .header.transparent.hidden,
+      body:has(.vdr-privacy-bg) .header.transparent.header_hidden {
+        transform: none !important;
+        top: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
       @media (min-width: 768px) {
         .vdr-privacy-bg::before {
           background-position: center 24%;
@@ -111,7 +136,7 @@ function privacyStyles() {
 
       @media (max-width: 767px) {
         .vdr-privacy-bg {
-          padding-top: 96px;
+          padding-top: 126px;
         }
 
         .vdr-privacy-container h1 {
@@ -358,8 +383,9 @@ function absolutizeLegacyPaths(headHtml: string) {
 
 function replaceMeta(headHtml: string, locale: Locale) {
   const meta = pageMeta(locale);
+  const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">';
 
-  return absolutizeLegacyPaths(headHtml)
+  const updatedHead = absolutizeLegacyPaths(headHtml)
     .replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/i, `<meta name="description" content="${meta.description}" />`)
     .replace(/<meta property="og:title" content="[^"]*" \/>/i, `<meta property="og:title" content="${meta.title}" />`)
@@ -369,6 +395,8 @@ function replaceMeta(headHtml: string, locale: Locale) {
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/i, `<meta name="twitter:description" content="${meta.description}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/i, `<link rel="canonical" href="${meta.canonical}" />`)
     .replace(/<link rel="alternate" href="[^"]*" hreflang="en"\/>\s*<link rel="alternate" href="[^"]*" hreflang="es"\/>/i, meta.alternate);
+
+  return `${fonts}${updatedHead}`;
 }
 
 function buildPrivacyContent(locale: Locale) {
