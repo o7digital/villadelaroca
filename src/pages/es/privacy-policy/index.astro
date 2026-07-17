@@ -1,0 +1,19 @@
+---
+import LegacyPageShell from "../../../layouts/LegacyPageShell.astro";
+import rawHtml from "../../../raw-pages/es/index.html?raw";
+import { buildPrivacyPage } from "../../../lib/privacy-page";
+
+const page = buildPrivacyPage(rawHtml, "es");
+---
+
+<LegacyPageShell
+  lang={page.lang}
+  headHtml={page.headHtml}
+  bodyClass={page.bodyClass}
+  locale="es"
+  currentPage="privacy"
+  currentPath="/es/privacy-policy/"
+  switchHref="/privacy-policy/"
+  contentHtml={page.contentHtml}
+  tailHtml={page.tailHtml}
+/>

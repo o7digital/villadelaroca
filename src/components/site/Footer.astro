@@ -9,9 +9,7 @@ const { locale } = Astro.props;
 const isSpanish = locale === "es";
 const facebookUrl = "https://www.facebook.com/VilladelaRoca";
 const instagramUrl = "https://www.instagram.com/villadelarocazihuatanejo";
-const privacyHref = isSpanish
-  ? "/assets/legacy/uploads/2025/08/Aviso-de-Privacidad-LCQC.pdf"
-  : "/assets/legacy/uploads/2025/08/Privacy-Police-LCQC.pdf";
+const privacyHref = isSpanish ? "/es/privacy-policy/" : "/privacy-policy/";
 const privacyLabel = isSpanish ? "Aviso de Privacidad" : "Privacy Policy";
 ---
 
