@@ -2,12 +2,6 @@ import { parseLegacyHtmlForShell } from "./legacy-html";
 
 type Locale = "en" | "es";
 
-const controllerName = "CASACANTA ZIHUA SA DE CV";
-const contactEmail = "sales.reservations@lacasaquecanta.com";
-const contactPhone = "+52 (755) 555 7000";
-const contactPhoneHref = "tel:+527555557000";
-const siteUrl = "https://villadelaroca.com/";
-
 function privacyStyles() {
   return `
     <style>
@@ -16,25 +10,24 @@ function privacyStyles() {
         min-height: 100vh;
         position: relative;
         overflow: hidden;
-        padding: 138px 0 72px;
+        padding: 110px 0 72px;
       }
 
       .vdr-privacy-bg::before {
         content: "";
         position: fixed;
         inset: 0;
-        background-image: url("/assets/legacy/uploads/2022/11/logo_vdr_blanco_ok.png");
+        background-image: url("/assets/site/lcqc-logo-gris.png");
         background-repeat: no-repeat;
         background-position: center 30%;
-        background-size: clamp(360px, 116vw, 1280px);
-        filter: invert(1) grayscale(1);
-        opacity: 0.11;
+        background-size: clamp(360px, 120vw, 1400px);
+        opacity: 0.2;
         pointer-events: none;
         z-index: 0;
       }
 
       .vdr-privacy-container {
-        width: min(900px, calc(100% - 36px));
+        width: min(1280px, calc(100% - 40px));
         margin: 0 auto;
         position: relative;
         z-index: 1;
@@ -43,45 +36,45 @@ function privacyStyles() {
       }
 
       .vdr-privacy-breadcrumb {
-        margin: 0 0 18px;
-        font-size: 13px;
+        margin: 0 0 22px;
+        font-size: 14px;
         color: #536066;
       }
 
       .vdr-privacy-breadcrumb a {
         color: #26333a;
-        text-decoration: underline;
-        text-underline-offset: 3px;
+        text-decoration: none;
       }
 
       .vdr-privacy-container h1 {
-        margin: 0 0 34px;
-        font-family: "Playfair Display", serif;
-        font-size: clamp(36px, 6vw, 58px);
-        line-height: 1.08;
-        color: #202b31;
+        margin: 0 0 70px;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(30px, 4vw, 44px);
+        line-height: 1;
+        color: #050505;
+        font-weight: 900;
+        text-transform: uppercase;
       }
 
       .vdr-privacy-content {
         max-width: 760px;
+        margin: 0 auto;
       }
 
       .vdr-privacy-content p {
         margin: 0 0 15px;
-        font-size: 15px;
-        line-height: 1.78;
-      }
-
-      .vdr-privacy-content .lead {
-        font-size: 17px;
+        font-size: 18px;
+        line-height: 1.75;
       }
 
       .vdr-privacy-content h3 {
         margin: 30px 0 12px;
-        font-family: "Playfair Display", serif;
-        font-size: 25px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 20px;
         line-height: 1.2;
-        color: #202b31;
+        color: #111;
+        font-weight: 900;
+        text-transform: uppercase;
       }
 
       .vdr-privacy-content ul {
@@ -92,12 +85,13 @@ function privacyStyles() {
 
       .vdr-privacy-content li {
         margin: 7px 0;
-        line-height: 1.65;
+        font-size: 18px;
+        line-height: 1.55;
       }
 
       .vdr-privacy-content hr {
         border: 0;
-        border-top: 1px solid rgba(38, 51, 58, 0.24);
+        border-top: 1px solid rgba(38, 51, 58, 0.16);
         margin: 30px 0;
       }
 
@@ -107,21 +101,26 @@ function privacyStyles() {
         text-underline-offset: 3px;
       }
 
-      body .header.transparent {
-        background: rgba(0, 0, 0, 0.42);
-      }
-
       @media (min-width: 768px) {
         .vdr-privacy-bg::before {
           background-position: center 24%;
-          background-size: clamp(520px, 78vw, 1480px);
-          opacity: 0.12;
+          background-size: clamp(420px, 83vw, 1660px);
+          opacity: 0.22;
         }
       }
 
       @media (max-width: 767px) {
         .vdr-privacy-bg {
-          padding-top: 116px;
+          padding-top: 96px;
+        }
+
+        .vdr-privacy-container h1 {
+          margin-bottom: 42px;
+        }
+
+        .vdr-privacy-content p,
+        .vdr-privacy-content li {
+          font-size: 16px;
         }
       }
     </style>
@@ -131,7 +130,7 @@ function privacyStyles() {
 function englishContent() {
   return `
     <section class="vdr-privacy-content">
-      <p class="lead"><strong>In “Villa de la Roca”</strong>, as a property belonging to <strong>${controllerName}</strong>, we are aware of the importance of maintaining the confidentiality of personal and sensitive information of our guests and clients. We are committed to protecting your information and privacy in accordance with:</p>
+      <p><strong>In “La Casa Que Canta”</strong> (hereinafter <strong>CASACANTA ZIHUA SA DE CV</strong>), we are aware of the importance of maintaining the confidentiality of personal and sensitive information of our guests and clients. We are committed to protecting your information and privacy in accordance with:</p>
       <ul>
         <li>The <strong>Federal Law on the Protection of Personal Data Held by Private Parties</strong> (Mexico)</li>
         <li>The <strong>General Data Protection Regulation (GDPR)</strong> of the European Union</li>
@@ -139,12 +138,13 @@ function englishContent() {
       </ul>
       <p>Below we provide you with important information regarding the collection, use, and protection of your personal data.</p>
       <hr />
+
       <h3>1. Data Collection</h3>
       <p>We may collect personal information at any of the contact and interaction points we have with our clients, including:</p>
       <ul>
         <li>Our website and reservation system</li>
         <li>Information sent to or shared through our social media platforms</li>
-        <li>Our internal systems and during your visit to the property</li>
+        <li>Our internal systems and during your visit to the hotel</li>
       </ul>
       <p>This information may include:</p>
       <ul>
@@ -159,8 +159,9 @@ function englishContent() {
         <li>Feedback and comments about our services</li>
       </ul>
       <hr />
+
       <h3>2. Use of Personal and Sensitive Information</h3>
-      <p>${controllerName} uses this information to provide the services you requested or those related to a reservation, transaction, or program. We may also use your data to:</p>
+      <p>CASACANTA ZIHUA SA DE CV uses this information to provide the services you requested or those related to a reservation, transaction, or program. We may also use your data to:</p>
       <ul>
         <li>Improve our services and offer the level of hospitality you expect</li>
         <li>Ensure that our website, products, and services meet your interests</li>
@@ -175,6 +176,7 @@ function englishContent() {
       </ul>
       <p>All in accordance with applicable Mexican law, the GDPR, and the CCPA.</p>
       <hr />
+
       <h3>3. Data Transfers</h3>
       <p>We may transfer your personal data to:</p>
       <ul>
@@ -186,6 +188,7 @@ function englishContent() {
       <p><strong>Note for EU residents:</strong> We only transfer personal data outside the European Economic Area (EEA) to countries that ensure an adequate level of protection, or under Standard Contractual Clauses approved by the European Commission.</p>
       <p><strong>Note for California residents (USA):</strong> We do not sell your personal information as defined under the CCPA.</p>
       <hr />
+
       <h3>4. Security Measures</h3>
       <p>We have implemented physical, technical, and administrative safeguards to protect your personal data from unauthorized access, loss, alteration, or misuse. These include:</p>
       <ul>
@@ -194,6 +197,7 @@ function englishContent() {
         <li>Secure backups and system monitoring</li>
       </ul>
       <hr />
+
       <h3>5. ARCO Rights and Other Applicable Rights</h3>
       <p>In accordance with Mexican law, you have the right to Access, Rectify, Cancel, or Oppose the processing of your personal data (ARCO rights).</p>
       <p>Additionally, under GDPR and CCPA, you may also exercise the following rights:</p>
@@ -203,23 +207,26 @@ function englishContent() {
         <li>Right to erasure (“right to be forgotten”)</li>
         <li>Right to opt out of marketing or data sharing (California)</li>
       </ul>
-      <p>You may submit your request to exercise any of these rights by writing to our Reservations and Sales Department: <a href="mailto:${contactEmail}">${contactEmail}</a> · <a href="${contactPhoneHref}">${contactPhone}</a></p>
+      <p>You may submit your request to exercise any of these rights by writing to our Reservations and Sales Department: <a href="mailto:sales.reservations@lacasaquecanta.com">sales.reservations@lacasaquecanta.com</a> · <a href="tel:+527555557000">+52 (755) 555 7000</a></p>
       <p><strong>Response Time:</strong> Within 20 business days from the date of receipt of your request, if it is deemed admissible, the corresponding action will be taken within 15 business days following the date on which the response is communicated.</p>
       <p>We will respond through the contact method you indicate in your request and within the timeframe established by applicable law.</p>
       <hr />
+
       <h3>6. Data Retention</h3>
       <p>We retain your personal data only for as long as necessary to fulfill the purposes described above, or as required by applicable tax or legal regulations.</p>
       <hr />
+
       <h3>7. Modifications to this Privacy Notice</h3>
-      <p>This privacy notice may be updated at any time. Changes will be published on our website: <a href="${siteUrl}">www.villadelaroca.com</a> · Last update: August 2025</p>
+      <p>This privacy notice may be updated at any time. Changes will be published on our website: <a href="https://villadelaroca.com/">www.villadelaroca.com</a> · Last update: August 2025</p>
       <hr />
+
       <h3>8. Identity and Address of the Data Controller</h3>
-      <p><strong>${controllerName}</strong></p>
+      <p><strong>CASACANTA ZIHUA SA DE CV</strong></p>
       <ul>
         <li>Fiscal Address: Montes Urales 754, Floor 5, Lomas de Chapultepec I Sección, 11000 CDMX, Mexico</li>
-        <li>Property Address: Camino Escénico a Playa La Ropa, Colonia La Ropa, 40880 Zihuatanejo, Gro., Mexico</li>
+        <li>Hotel Address: Camino Escénico a Playa La Ropa, Colonia La Ropa, 40880 Zihuatanejo, Gro., Mexico</li>
       </ul>
-      <p>© All rights reserved Villa de la Roca</p>
+      <p>© All rights reserved Casacanta Zihuat</p>
     </section>
   `;
 }
@@ -227,7 +234,7 @@ function englishContent() {
 function spanishContent() {
   return `
     <section class="vdr-privacy-content">
-      <p class="lead">En <strong>Villa de la Roca</strong>, como propiedad perteneciente a <strong>${controllerName}</strong>, somos plenamente conscientes de la importancia de mantener la confidencialidad de la información personal y sensible de nuestros huéspedes y clientes. Estamos comprometidos con la protección de sus datos personales conforme a:</p>
+      <p>En <em>La Casa Que Canta</em> (en adelante <strong>CASACANTA ZIHUA SA DE CV</strong>), somos plenamente conscientes de la importancia de mantener la confidencialidad de la información personal y sensible de nuestros huéspedes y clientes. Estamos comprometidos con la protección de sus datos personales conforme a:</p>
       <ul>
         <li>La <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares</strong> (México)</li>
         <li>El <strong>Reglamento General de Protección de Datos (GDPR)</strong> de la Unión Europea</li>
@@ -235,12 +242,13 @@ function spanishContent() {
       </ul>
       <p>A continuación, ponemos a su disposición información relevante sobre la recopilación, uso, protección y transferencia de sus datos personales.</p>
       <hr />
+
       <h3>1. Recopilación de datos</h3>
       <p>Podemos recopilar datos personales a través de distintos puntos de contacto e interacción con nuestros clientes, incluyendo:</p>
       <ul>
         <li>Nuestro sitio web y sistema de reservaciones</li>
         <li>Información enviada o compartida a través de nuestras redes sociales</li>
-        <li>Nuestros sistemas internos y durante su estancia en la propiedad</li>
+        <li>Nuestros sistemas internos y durante su estancia en el hotel</li>
       </ul>
       <p>La información recabada puede incluir:</p>
       <ul>
@@ -256,8 +264,9 @@ function spanishContent() {
         <li>Opiniones o comentarios sobre nuestros servicios</li>
       </ul>
       <hr />
+
       <h3>2. Uso de la información personal y sensible</h3>
-      <p>${controllerName} utiliza esta información para brindarle los servicios solicitados o relacionados con su reservación, transacción o la adquisición de productos o paquetes. También podemos usar sus datos para:</p>
+      <p>CASACANTA ZIHUA SA DE CV utiliza esta información para brindarle los servicios solicitados o relacionados con su reservación, transacción o la adquisición de productos o paquetes. También podemos usar sus datos para:</p>
       <ul>
         <li>Mejorar nuestros servicios y ofrecer el nivel de hospitalidad que espera</li>
         <li>Asegurar que nuestro sitio web, productos y servicios sean de su interés</li>
@@ -271,6 +280,7 @@ function spanishContent() {
         <li>Nuestro interés legítimo (mejora de servicios)</li>
       </ul>
       <hr />
+
       <h3>3. Transferencia de datos</h3>
       <p>Podemos transferir sus datos personales a:</p>
       <ul>
@@ -280,6 +290,7 @@ function spanishContent() {
       </ul>
       <p>Si no manifiesta su oposición, se entenderá que acepta estas transferencias.</p>
       <hr />
+
       <h3>4. Medidas de seguridad</h3>
       <p>Hemos implementado medidas de seguridad físicas, técnicas y administrativas para proteger sus datos personales contra accesos no autorizados, pérdida, alteración o uso indebido. Entre ellas:</p>
       <ul>
@@ -288,6 +299,7 @@ function spanishContent() {
         <li>Copias de seguridad y monitoreo de sistemas</li>
       </ul>
       <hr />
+
       <h3>5. Derechos ARCO y otros derechos aplicables</h3>
       <p>De acuerdo con la legislación mexicana, usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales (derechos ARCO).</p>
       <p>Adicionalmente, bajo GDPR y CCPA, también puede ejercer los siguientes derechos:</p>
@@ -297,21 +309,24 @@ function spanishContent() {
         <li>Derecho de supresión (“derecho al olvido”)</li>
         <li>Derecho a oponerse a marketing o compartición de datos (California)</li>
       </ul>
-      <p>Para ejercer sus derechos, contacte a nuestro Departamento de Reservas y Ventas: <a href="mailto:${contactEmail}">${contactEmail}</a> · <a href="${contactPhoneHref}">${contactPhone}</a></p>
+      <p>Para ejercer sus derechos, contacte a nuestro Departamento de Reservas y Ventas: <a href="mailto:sales.reservations@lacasaquecanta.com">sales.reservations@lacasaquecanta.com</a> · <a href="tel:+527555557000">+52 (755) 555 7000</a></p>
       <hr />
+
       <h3>6. Conservación de datos</h3>
       <p>Conservamos sus datos personales sólo el tiempo necesario para cumplir con los fines descritos o según lo exijan las normas fiscales o legales aplicables.</p>
       <hr />
+
       <h3>7. Modificaciones a este aviso de privacidad</h3>
-      <p>Este aviso de privacidad puede ser actualizado en cualquier momento. Los cambios se publicarán en <a href="${siteUrl}">www.villadelaroca.com</a>. Última actualización: Agosto 2025.</p>
+      <p>Este aviso de privacidad puede ser actualizado en cualquier momento. Los cambios se publicarán en <a href="https://villadelaroca.com/">www.villadelaroca.com</a>. Última actualización: Agosto 2025.</p>
       <hr />
+
       <h3>8. Identidad y domicilio del responsable</h3>
-      <p><strong>${controllerName}</strong></p>
+      <p><strong>CASACANTA ZIHUA SA DE CV</strong></p>
       <ul>
         <li>Domicilio fiscal: Montes Urales 754, Piso 5, Lomas de Chapultepec I Sección, 11000 CDMX, México</li>
-        <li>Domicilio de la propiedad: Camino Escénico a Playa La Ropa, Colonia La Ropa, 40880 Zihuatanejo, Gro., México</li>
+        <li>Domicilio del hotel: Camino Escénico a Playa La Ropa, Colonia La Ropa, 40880 Zihuatanejo, Gro., México</li>
       </ul>
-      <p>© Todos los derechos reservados Villa de la Roca</p>
+      <p>© Todos los derechos reservados Casacanta Zihuat</p>
     </section>
   `;
 }
@@ -320,7 +335,7 @@ function pageMeta(locale: Locale) {
   if (locale === "es") {
     return {
       title: "Aviso de Privacidad - Villa de la Roca",
-      description: "Aviso de Privacidad de Villa de la Roca, propiedad perteneciente a La Casa Que Canta.",
+      description: "Aviso de Privacidad de La Casa Que Canta para Villa de la Roca.",
       canonical: "https://villadelaroca.com/es/privacy-policy/",
       alternate: '<link rel="alternate" href="/privacy-policy/" hreflang="en"/><link rel="alternate" href="/es/privacy-policy/" hreflang="es"/>',
     };
@@ -328,16 +343,23 @@ function pageMeta(locale: Locale) {
 
   return {
     title: "Privacy Policy - Villa de la Roca",
-    description: "Privacy Policy for Villa de la Roca, a property belonging to La Casa Que Canta.",
+    description: "La Casa Que Canta privacy policy for Villa de la Roca.",
     canonical: "https://villadelaroca.com/privacy-policy/",
     alternate: '<link rel="alternate" href="/privacy-policy/" hreflang="en"/><link rel="alternate" href="/es/privacy-policy/" hreflang="es"/>',
   };
 }
 
+function absolutizeLegacyPaths(headHtml: string) {
+  return headHtml
+    .replace(/(href|src)=(["'])((?:\.\.\/)+)?assets\//g, "$1=$2/assets/")
+    .replace(/(href|src)=(["'])((?:\.\.\/)+)?feed\//g, "$1=$2/feed/")
+    .replace(/(href|src)=(["'])((?:\.\.\/)+)?comments\//g, "$1=$2/comments/");
+}
+
 function replaceMeta(headHtml: string, locale: Locale) {
   const meta = pageMeta(locale);
 
-  return headHtml
+  return absolutizeLegacyPaths(headHtml)
     .replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/i, `<meta name="description" content="${meta.description}" />`)
     .replace(/<meta property="og:title" content="[^"]*" \/>/i, `<meta property="og:title" content="${meta.title}" />`)
@@ -361,7 +383,7 @@ function buildPrivacyContent(locale: Locale) {
       <div class="vdr-privacy-container">
         <nav class="vdr-privacy-breadcrumb" aria-label="Breadcrumb">
           <a href="${homeHref}">${homeLabel}</a>
-          <span> / </span>
+          <span> › </span>
           <span>${pageLabel}</span>
         </nav>
         <h1>${pageLabel}</h1>
@@ -379,5 +401,6 @@ export function buildPrivacyPage(rawHtml: string, locale: Locale) {
     lang: locale,
     headHtml: replaceMeta(shell.headHtml, locale),
     contentHtml: buildPrivacyContent(locale),
+    tailHtml: absolutizeLegacyPaths(shell.tailHtml),
   };
 }
