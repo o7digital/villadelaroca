@@ -16,8 +16,6 @@ const ourBbPath = isSpanish ? "/es/our-bb/" : "/our-bb/";
 const roomPath = isSpanish ? "/es/room/room/" : "/room/room/";
 const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
 const contactPath = isSpanish ? "/es/contact/" : "/contact/";
-const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
-const bookingLocale = isSpanish ? "es" : "en";
 const englishHref = isSpanish ? switchHref : currentPath;
 const spanishHref = isSpanish ? currentPath : switchHref;
 const activeLanguageCode = isSpanish ? "ES" : "EN";
@@ -73,15 +71,7 @@ function pageClass(base: string, active: boolean) {
         </a>
       </div>
       <div class="header_tools">
-        <div class="nav_mini_tool_container">
-          <a
-            href={`https://direct-book.com/properties/gub5966?locale=${bookingLocale}&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=MXN&checkInDate=2022-11-25&checkOutDate=2022-11-26&trackPage=yes`}
-            class="btn btn-inv btn-secondary"
-            style="margin-top:-20px"
-          >
-            {bookLabel}
-          </a>
-        </div>
+        <!-- Direct-book button temporarily hidden during Beds24 migration. Restore from directbook.md. -->
       </div>
       <a class="menu-toggler  hidden_above_threshold">
         <span class="lines  hidden_above_threshold"></span>
