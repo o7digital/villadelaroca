@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap");
+
+:root {
+  --vdr-ink: #1d2528;
+  --vdr-green: #315447;
+  --vdr-green-dark: #213d34;
+  --vdr-sand: #f4f0e8;
+  --vdr-line: #ddd7cc;
+}
+
+html,
+body.colorbody {
+  background: #fbfaf7 !important;
+  color: var(--vdr-ink) !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
+}
+
+body.colorbody {
+  padding: 0 0 20px !important;
+}
+
+.container,
+.container2 {
+  width: 100% !important;
+  max-width: 1080px !important;
+}
+
+.b24fullcontainer-top,
+.b24fullcontainer-ownerrow1,
+.b24fullcontainer-proprow1,
+.b24fullcontainer-proprow11,
+.b24fullcontainer-ownerrow11,
+.b24fullcontainer-footer {
+  display: none !important;
+}
+
+#b24scroller-fullcontainer,
+.b24fullcontainer-rooms {
+  background: transparent !important;
+}
+
+#b24scroller-container,
+.b24fullcontainer-rooms > .container {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+#b24scroller {
+  margin: 0 0 20px !important;
+  padding: 24px !important;
+  border: 1px solid var(--vdr-line) !important;
+  border-radius: 2px !important;
+  background: #f6f3ed !important;
+  box-shadow: none !important;
+}
+
+label,
+.control-label {
+  margin-bottom: 8px !important;
+  color: #53605d !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.form-control,
+.input-group-addon,
+select.form-control,
+input.form-control,
+textarea.form-control {
+  min-height: 46px !important;
+  border-color: #cfc8bc !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  color: var(--vdr-ink) !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+}
+
+.input-group-addon {
+  min-height: auto !important;
+  color: var(--vdr-green) !important;
+}
+
+.form-control:focus {
+  border-color: var(--vdr-green) !important;
+  box-shadow: 0 0 0 2px rgba(49, 84, 71, 0.12) !important;
+}
+
+.b24panel-room {
+  overflow: hidden !important;
+  margin-bottom: 18px !important;
+  border: 1px solid var(--vdr-line) !important;
+  border-radius: 2px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+.b24-roompanel-heading {
+  padding: 18px 22px !important;
+  border-color: var(--vdr-line) !important;
+  background: var(--vdr-green-dark) !important;
+  color: #fff !important;
+}
+
+.at_roomnametext {
+  color: #fff !important;
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+}
+
+#roomnametext658909 {
+  font-size: 0 !important;
+}
+
+#roomnametext658909::after {
+  content: "Private suites";
+  font-size: 22px !important;
+}
+
+.colorbody-es #roomnametext658909::after {
+  content: "Suites privadas";
+}
+
+#roomid662936 {
+  display: none !important;
+}
+
+#roomnametext715668 {
+  font-size: 0 !important;
+}
+
+#roomnametext715668::after {
+  content: "Entire villa · five bedrooms";
+  font-size: 22px !important;
+}
+
+.colorbody-es #roomnametext715668::after {
+  content: "Villa completa · cinco habitaciones";
+}
+
+.b24panel-room .panel-body {
+  padding: 24px !important;
+  background: #fff !important;
+}
+
+.b24-offer-pic,
+.b24-offer-summary {
+  display: none !important;
+}
+
+.b24-offer-select {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+}
+
+.b24-multipricebox,
+.b24-form-inline {
+  float: none !important;
+  text-align: left !important;
+}
+
+.roomofferqtyselectlabel {
+  display: block !important;
+  margin-bottom: 8px !important;
+  color: #53605d !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+.b24-roomprice,
+.ajaxroomprice {
+  color: var(--vdr-green-dark) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.at_bookingbut,
+.b24-multirombutton,
+.btn-primary,
+.btn-success,
+button.button {
+  min-height: 46px !important;
+  padding: 12px 24px !important;
+  border: 1px solid var(--vdr-green) !important;
+  border-radius: 0 !important;
+  background: var(--vdr-green) !important;
+  color: #fff !important;
+  font-family: "Montserrat", Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+}
+
+.at_bookingbut:hover,
+.b24-multirombutton:hover,
+.btn-primary:hover,
+.btn-success:hover,
+button.button:hover {
+  border-color: var(--vdr-green-dark) !important;
+  background: var(--vdr-green-dark) !important;
+}
+
+a,
+.fakelink {
+  color: var(--vdr-green) !important;
+}
+
+.monthcalendarhead {
+  background: var(--vdr-green-dark) !important;
+  color: #fff !important;
+}
+
+.monthcalendar td {
+  border-color: #ece7df !important;
+}
+
+.alert-danger {
+  border-color: #dcb7aa !important;
+  background: #fbefeb !important;
+  color: #7c392c !important;
+}
+
+#b24bookshoppingcart {
+  padding: 20px !important;
+  border: 1px solid var(--vdr-line) !important;
+  background: #f6f3ed !important;
+}
+
+@media (max-width: 767px) {
+  body.colorbody {
+    padding: 12px !important;
+  }
+
+  #b24scroller {
+    padding: 16px 10px !important;
+  }
+
+  .b24panel-room .panel-body,
+  .b24-roompanel-heading {
+    padding: 16px !important;
+  }
+
+  .b24-selector-checkin,
+  .b24-selector-checkout {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,19 @@
+---
+import LegacyPageShell from "../../../layouts/LegacyPageShell.astro";
+import rawHtml from "../../../raw-pages/es/index.html?raw";
+import { buildBookingPage } from "../../../lib/booking-page";
+
+const page = buildBookingPage(rawHtml, "es");
+---
+
+<LegacyPageShell
+  lang={page.lang}
+  headHtml={page.headHtml}
+  bodyClass={page.bodyClass}
+  locale="es"
+  currentPage="booking"
+  currentPath="/es/reservar/"
+  switchHref="/book/"
+  contentHtml={page.contentHtml}
+  tailHtml={page.tailHtml}
+/>

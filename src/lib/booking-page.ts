@@ -1,0 +1,597 @@
+import { parseLegacyHtmlForShell } from "./legacy-html";
+
+type Locale = "en" | "es";
+
+const HERO_IMAGE = "/assets/legacy/uploads/2023/01/ourbnb_top2.webp";
+const SUITES_IMAGE = "/assets/legacy/uploads/2023/01/vdlr_suite_02.webp";
+const VILLA_IMAGE = "/assets/legacy/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp";
+
+function absolutizeLegacyPaths(html: string) {
+  return html
+    .replace(/(href|src)=(["'])((?:\.\.\/)+)?assets\//g, "$1=$2/assets/")
+    .replace(/(href|src)=(["'])((?:\.\.\/)+)?feed\//g, "$1=$2/feed/")
+    .replace(/(href|src)=(["'])((?:\.\.\/)+)?comments\//g, "$1=$2/comments/");
+}
+
+function pageMeta(locale: Locale) {
+  if (locale === "es") {
+    return {
+      title: "Reservar - Villa de la Roca Zihuatanejo",
+      description: "Consulta disponibilidad y reserva suites o la villa completa en Villa de la Roca, Playa La Ropa, Zihuatanejo.",
+      canonical: "https://villadelaroca.com/es/reservar/",
+    };
+  }
+
+  return {
+    title: "Book Your Stay - Villa de la Roca Zihuatanejo",
+    description: "Check availability and book private suites or the entire Villa de la Roca in Playa La Ropa, Zihuatanejo.",
+    canonical: "https://villadelaroca.com/book/",
+  };
+}
+
+function replaceMeta(headHtml: string, locale: Locale) {
+  const meta = pageMeta(locale);
+  const alternates = '<link rel="alternate" href="/book/" hreflang="en"/><link rel="alternate" href="/es/reservar/" hreflang="es"/>';
+
+  return absolutizeLegacyPaths(headHtml)
+    .replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`)
+    .replace(/<meta name="description" content="[^"]*" \/>/i, `<meta name="description" content="${meta.description}" />`)
+    .replace(/<meta property="og:title" content="[^"]*" \/>/i, `<meta property="og:title" content="${meta.title}" />`)
+    .replace(/<meta property="og:description" content="[^"]*" \/>/i, `<meta property="og:description" content="${meta.description}" />`)
+    .replace(/<meta property="og:url" content="[^"]*" \/>/i, `<meta property="og:url" content="${meta.canonical}" />`)
+    .replace(/<meta name="twitter:title" content="[^"]*" \/>/i, `<meta name="twitter:title" content="${meta.title}" />`)
+    .replace(/<meta name="twitter:description" content="[^"]*" \/>/i, `<meta name="twitter:description" content="${meta.description}" />`)
+    .replace(/<link rel="canonical" href="[^"]*" \/>/i, `<link rel="canonical" href="${meta.canonical}" />`)
+    .replace(/<link rel="alternate" href="[^"]*" hreflang="en"\/>\s*<link rel="alternate" href="[^"]*" hreflang="es"\/>/i, alternates);
+}
+
+function bookingStyles() {
+  return `
+    <style>
+      :root {
+        --vdr-ink: #1d2528;
+        --vdr-green: #315447;
+        --vdr-green-dark: #213d34;
+        --vdr-gold: #c4a767;
+        --vdr-sand: #f4f0e8;
+        --vdr-white: #ffffff;
+      }
+
+      body:has(.vdr-booking-page) {
+        background: var(--vdr-sand);
+      }
+
+      body:has(.vdr-booking-page) .header.transparent {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10000;
+        background: linear-gradient(180deg, rgba(8, 16, 15, 0.72), rgba(8, 16, 15, 0)) !important;
+      }
+
+      body:has(.vdr-booking-page) .header.transparent .mainbar,
+      body:has(.vdr-booking-page) .header.transparent.stuck .mainbar {
+        background: transparent !important;
+      }
+
+      body:has(.vdr-booking-page) .social-floating {
+        display: none !important;
+      }
+
+      .vdr-booking-page {
+        color: var(--vdr-ink);
+        background: var(--vdr-sand);
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .vdr-booking-hero {
+        min-height: min(610px, 72vh);
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background: #1f3e38 url("${HERO_IMAGE}") center 53% / cover no-repeat;
+      }
+
+      .vdr-booking-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(180deg, rgba(9, 20, 18, 0.14) 25%, rgba(9, 20, 18, 0.83) 100%);
+      }
+
+      .vdr-booking-hero__inner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 190px 0 68px;
+        color: var(--vdr-white);
+      }
+
+      .vdr-booking-eyebrow {
+        margin: 0 0 16px;
+        color: #f0d99e;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .vdr-booking-hero h1 {
+        max-width: 760px;
+        margin: 0;
+        color: var(--vdr-white);
+        font-family: "Playfair Display", serif;
+        font-size: clamp(46px, 7vw, 82px);
+        font-weight: 500;
+        line-height: 0.98;
+        letter-spacing: -0.025em;
+        text-shadow: 0 3px 28px rgba(0, 0, 0, 0.25);
+        text-transform: none !important;
+      }
+
+      .vdr-booking-hero p:last-child {
+        max-width: 650px;
+        margin: 24px 0 0;
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: 1.65;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .vdr-booking-body {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 72px 0 88px;
+      }
+
+      .vdr-booking-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.7fr);
+        gap: 64px;
+        align-items: end;
+        margin-bottom: 38px;
+      }
+
+      .vdr-booking-intro h2 {
+        margin: 0;
+        color: var(--vdr-ink);
+        font-family: "Playfair Display", serif;
+        font-size: clamp(34px, 4.5vw, 54px);
+        font-weight: 500;
+        line-height: 1.08;
+        text-transform: none !important;
+      }
+
+      .vdr-booking-intro p {
+        margin: 0;
+        color: #52605d;
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .vdr-stay-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin: 0 0 36px;
+      }
+
+      .vdr-stay-option {
+        display: grid !important;
+        grid-template-columns: 168px minmax(0, 1fr) !important;
+        width: 100% !important;
+        min-height: 154px;
+        padding: 0 !important;
+        overflow: hidden;
+        border: 1px solid rgba(49, 84, 71, 0.2);
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--vdr-ink);
+        text-align: left;
+        cursor: pointer;
+        appearance: none;
+        box-shadow: 0 10px 34px rgba(24, 45, 39, 0.06);
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+
+      .vdr-stay-option:hover {
+        transform: translateY(-2px);
+        border-color: rgba(49, 84, 71, 0.55);
+        box-shadow: 0 16px 36px rgba(24, 45, 39, 0.11);
+      }
+
+      .vdr-stay-option.is-active {
+        border-color: var(--vdr-green);
+        background: var(--vdr-white);
+        box-shadow: 0 0 0 2px var(--vdr-green), 0 16px 38px rgba(24, 45, 39, 0.13);
+      }
+
+      .vdr-stay-option img {
+        width: 100%;
+        height: 154px;
+        min-height: 154px;
+        object-fit: cover;
+      }
+
+      .vdr-stay-option__copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 22px 24px;
+      }
+
+      .vdr-stay-option__title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        font-family: "Playfair Display", serif;
+        font-size: 25px;
+        font-weight: 600;
+      }
+
+      .vdr-stay-option__title::after {
+        content: "";
+        width: 9px;
+        height: 9px;
+        margin-left: auto;
+        border: 1px solid #71807a;
+        border-radius: 50%;
+        background: transparent;
+        box-shadow: 0 0 0 4px #fff;
+      }
+
+      .vdr-stay-option.is-active .vdr-stay-option__title::after {
+        border-color: var(--vdr-green);
+        background: var(--vdr-green);
+      }
+
+      .vdr-stay-option__detail {
+        color: #66716e;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .vdr-engine-shell {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(49, 84, 71, 0.2);
+        border-radius: 3px;
+        background: var(--vdr-white);
+        box-shadow: 0 20px 60px rgba(26, 49, 42, 0.1);
+      }
+
+      .vdr-engine-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 24px 30px;
+        border-bottom: 1px solid #e9e5dc;
+        background: #fff;
+      }
+
+      .vdr-engine-heading h3 {
+        margin: 0;
+        color: var(--vdr-ink);
+        font-family: "Playfair Display", serif;
+        font-size: 27px;
+        font-weight: 600;
+      }
+
+      .vdr-secure-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #66716e;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .vdr-secure-note svg {
+        width: 16px;
+        height: 16px;
+        color: var(--vdr-green);
+      }
+
+      .vdr-engine-frame-wrap {
+        position: relative;
+        min-height: 700px;
+        padding: 20px;
+        background: #fbfaf7;
+      }
+
+      .vdr-engine-loading {
+        position: absolute;
+        inset: 20px;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        background: #fbfaf7;
+        color: #65716e;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: opacity 180ms ease, visibility 180ms ease;
+      }
+
+      .vdr-engine-frame-wrap.is-loaded .vdr-engine-loading {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .vdr-engine-frame {
+        display: block;
+        width: 100%;
+        height: 1120px;
+        border: 0;
+        background: #fff;
+      }
+
+      .vdr-engine-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px 30px;
+        border-top: 1px solid #e9e5dc;
+        color: #6b7672;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .vdr-engine-footer a {
+        color: var(--vdr-green-dark);
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      @media (max-width: 900px) {
+        .vdr-booking-intro {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .vdr-stay-option {
+          grid-template-columns: 130px minmax(0, 1fr) !important;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .vdr-booking-hero {
+          min-height: 520px;
+          background-position: 58% center;
+        }
+
+        .vdr-booking-hero__inner {
+          width: min(100% - 30px, 1180px);
+          padding: 155px 0 46px;
+        }
+
+        .vdr-booking-body {
+          width: min(100% - 24px, 1180px);
+          padding: 48px 0 62px;
+        }
+
+        .vdr-stay-options {
+          grid-template-columns: 1fr;
+        }
+
+        .vdr-stay-option {
+          grid-template-columns: 118px minmax(0, 1fr) !important;
+          min-height: 132px;
+        }
+
+        .vdr-stay-option img {
+          height: 132px;
+          min-height: 132px;
+        }
+
+        .vdr-stay-option__copy {
+          padding: 17px 18px;
+        }
+
+        .vdr-stay-option__title {
+          font-size: 21px;
+        }
+
+        .vdr-engine-heading,
+        .vdr-engine-footer {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 20px;
+        }
+
+        .vdr-engine-frame-wrap {
+          min-height: 780px;
+          padding: 0;
+        }
+
+        .vdr-engine-loading {
+          inset: 0;
+        }
+
+        .vdr-engine-frame {
+          height: 1420px;
+        }
+      }
+    </style>
+  `;
+}
+
+function bookingCopy(locale: Locale) {
+  if (locale === "es") {
+    return {
+      eyebrow: "Reservación oficial",
+      title: "Reserva tu estancia frente al Pacífico",
+      heroText: "Elige tus fechas y descubre la tranquilidad de Villa de la Roca, a unos pasos de Playa La Ropa.",
+      introTitle: "Una experiencia íntima en Zihuatanejo",
+      introText: "Selecciona una suite privada o disfruta la villa completa. La disponibilidad, las tarifas y el pago seguro se gestionan directamente con nuestro sistema de reservaciones.",
+      suites: "Suites privadas",
+      suitesDetail: "Cinco suites · desayuno incluido",
+      villa: "Villa completa",
+      villaDetail: "Uso privado · cinco habitaciones",
+      dates: "Elige tus fechas",
+      secure: "Reserva segura",
+      loading: "Cargando disponibilidad",
+      powered: "Disponibilidad y pagos procesados de forma segura por Beds24.",
+      fallback: "Abrir el motor de reserva",
+      frameTitle: "Disponibilidad y reservación de Villa de la Roca",
+    };
+  }
+
+  return {
+    eyebrow: "Official reservations",
+    title: "Book your stay by the Pacific",
+    heroText: "Choose your dates and discover the quiet beauty of Villa de la Roca, just steps from Playa La Ropa.",
+    introTitle: "An intimate stay in Zihuatanejo",
+    introText: "Choose a private suite or enjoy the entire villa. Live availability, rates and secure payment are handled directly by our reservation system.",
+    suites: "Private suites",
+    suitesDetail: "Five suites · breakfast included",
+    villa: "Entire villa",
+    villaDetail: "Private use · five bedrooms",
+    dates: "Choose your dates",
+    secure: "Secure booking",
+    loading: "Loading availability",
+    powered: "Availability and payments are securely processed by Beds24.",
+    fallback: "Open reservation system",
+    frameTitle: "Villa de la Roca availability and booking",
+  };
+}
+
+function buildBookingContent(locale: Locale) {
+  const copy = bookingCopy(locale);
+  const lang = locale === "es" ? "es" : "en";
+
+  return `
+    ${bookingStyles()}
+    <main class="vdr-booking-page">
+      <section class="vdr-booking-hero">
+        <div class="vdr-booking-hero__inner">
+          <p class="vdr-booking-eyebrow">${copy.eyebrow}</p>
+          <h1>${copy.title}</h1>
+          <p>${copy.heroText}</p>
+        </div>
+      </section>
+
+      <section class="vdr-booking-body" id="availability">
+        <div class="vdr-booking-intro">
+          <h2>${copy.introTitle}</h2>
+          <p>${copy.introText}</p>
+        </div>
+
+        <div class="vdr-stay-options" role="group" aria-label="${locale === "es" ? "Tipo de estancia" : "Stay type"}">
+          <button class="vdr-stay-option is-active" type="button" data-stay="suites" data-propid="316599" aria-pressed="true">
+            <img src="${SUITES_IMAGE}" alt="${copy.suites}" width="1200" height="900" />
+            <span class="vdr-stay-option__copy">
+              <span class="vdr-stay-option__title">${copy.suites}</span>
+              <span class="vdr-stay-option__detail">${copy.suitesDetail}</span>
+            </span>
+          </button>
+          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" aria-pressed="false">
+            <img src="${VILLA_IMAGE}" alt="${copy.villa}" width="1401" height="800" />
+            <span class="vdr-stay-option__copy">
+              <span class="vdr-stay-option__title">${copy.villa}</span>
+              <span class="vdr-stay-option__detail">${copy.villaDetail}</span>
+            </span>
+          </button>
+        </div>
+
+        <section class="vdr-engine-shell" aria-labelledby="vdr-engine-title">
+          <header class="vdr-engine-heading">
+            <h3 id="vdr-engine-title">${copy.dates}</h3>
+            <span class="vdr-secure-note">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5V10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              ${copy.secure}
+            </span>
+          </header>
+          <div class="vdr-engine-frame-wrap" data-booking-frame-wrap>
+            <div class="vdr-engine-loading" aria-live="polite">${copy.loading}</div>
+            <iframe
+              class="vdr-engine-frame"
+              data-booking-frame
+              data-lang="${lang}"
+              title="${copy.frameTitle}"
+              loading="eager"
+              allow="payment"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+          <footer class="vdr-engine-footer">
+            <span>${copy.powered}</span>
+            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;referer=BookingLink&amp;lang=${lang}" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
+          </footer>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var frame = document.querySelector("[data-booking-frame]");
+        var frameWrap = document.querySelector("[data-booking-frame-wrap]");
+        var externalLink = document.querySelector("[data-external-booking]");
+        var options = Array.prototype.slice.call(document.querySelectorAll("[data-propid]"));
+        if (!frame || !frameWrap || !externalLink || !options.length) return;
+
+        var pageParams = new URLSearchParams(window.location.search);
+        var initialStay = pageParams.get("stay") === "villa" ? "villa" : "suites";
+        var passthrough = ["checkin", "checkout", "numnight", "numadult", "numchild"];
+
+        function bookingUrl(propid, referer) {
+          var params = new URLSearchParams();
+          params.set("propid", propid);
+          params.set("referer", referer);
+          params.set("lang", frame.getAttribute("data-lang") || "en");
+          params.set("cssfile", window.location.origin + "/booking-engine.css");
+          passthrough.forEach(function (name) {
+            var value = pageParams.get(name);
+            if (value) params.set(name, value);
+          });
+          return "https://beds24.com/booking.php?" + params.toString();
+        }
+
+        function selectStay(stay, updateAddress) {
+          var selected = options.find(function (option) { return option.getAttribute("data-stay") === stay; }) || options[0];
+          var propid = selected.getAttribute("data-propid");
+          options.forEach(function (option) {
+            var active = option === selected;
+            option.classList.toggle("is-active", active);
+            option.setAttribute("aria-pressed", active ? "true" : "false");
+          });
+          frameWrap.classList.remove("is-loaded");
+          frame.src = bookingUrl(propid, "iFrame");
+          externalLink.href = bookingUrl(propid, "BookingLink");
+
+          if (updateAddress && window.history && window.history.replaceState) {
+            pageParams.set("stay", selected.getAttribute("data-stay"));
+            window.history.replaceState({}, "", window.location.pathname + "?" + pageParams.toString() + "#availability");
+          }
+        }
+
+        options.forEach(function (option) {
+          option.addEventListener("click", function () {
+            selectStay(option.getAttribute("data-stay"), true);
+          });
+        });
+        frame.addEventListener("load", function () { frameWrap.classList.add("is-loaded"); });
+        selectStay(initialStay, false);
+      })();
+    </script>
+  `;
+}
+
+export function buildBookingPage(rawHtml: string, locale: Locale) {
+  const shell = parseLegacyHtmlForShell(rawHtml);
+
+  return {
+    ...shell,
+    lang: locale,
+    headHtml: replaceMeta(shell.headHtml, locale),
+    contentHtml: buildBookingContent(locale),
+    tailHtml: absolutizeLegacyPaths(shell.tailHtml),
+  };
+}

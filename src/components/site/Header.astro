@@ -1,6 +1,6 @@
 ---
 type Locale = "en" | "es";
-type PageKey = "home" | "our-bb" | "room" | "rates" | "activities" | "contact" | "privacy";
+type PageKey = "home" | "our-bb" | "room" | "rates" | "activities" | "contact" | "privacy" | "booking";
 
 interface Props {
   locale: Locale;
@@ -17,9 +17,7 @@ const roomPath = isSpanish ? "/es/room/room/" : "/room/room/";
 const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
 const contactPath = isSpanish ? "/es/contact/" : "/contact/";
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
-const bookingUrl = isSpanish
-  ? "https://beds24.com/booking.php?propid=316599&referer=BookingLink&lang=es"
-  : "https://beds24.com/booking.php?propid=316599&referer=BookingLink&lang=en";
+const bookingUrl = isSpanish ? "/es/reservar/" : "/book/";
 const englishHref = isSpanish ? switchHref : currentPath;
 const spanishHref = isSpanish ? currentPath : switchHref;
 const activeLanguageCode = isSpanish ? "ES" : "EN";
@@ -80,8 +78,7 @@ function pageClass(base: string, active: boolean) {
             href={bookingUrl}
             class="btn btn-inv btn-secondary"
             style="margin-top:-20px"
-            target="_blank"
-            rel="noopener noreferrer"
+            aria-current={currentPage === "booking" ? "page" : undefined}
           >
             {bookLabel}
           </a>
