@@ -523,7 +523,7 @@ function buildBookingContent(locale: Locale) {
           </div>
           <footer class="vdr-engine-footer">
             <span>${copy.powered}</span>
-            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;referer=BookingLink&amp;lang=${lang}" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
+            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;referer=BookingLink&amp;lang=${lang}&amp;cur=MXN" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
           </footer>
         </section>
       </section>
@@ -546,6 +546,7 @@ function buildBookingContent(locale: Locale) {
           params.set("propid", propid);
           params.set("referer", referer);
           params.set("lang", frame.getAttribute("data-lang") || "en");
+          params.set("cur", "MXN");
           params.set("cssfile", window.location.origin + "/booking-engine.css");
           passthrough.forEach(function (name) {
             var value = pageParams.get(name);
