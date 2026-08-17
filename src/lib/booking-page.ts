@@ -263,6 +263,35 @@ function bookingStyles() {
         box-shadow: 0 20px 60px rgba(26, 49, 42, 0.1);
       }
 
+      .vdr-suite-gallery {
+        margin: -16px 0 36px;
+        padding: 28px;
+        border: 1px solid rgba(49, 84, 71, 0.2);
+        background: #fff;
+      }
+
+      .vdr-suite-gallery[hidden] { display: none; }
+
+      .vdr-suite-gallery h3 {
+        margin: 0 0 18px;
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .vdr-suite-gallery__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .vdr-suite-gallery img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+      }
+
       .vdr-engine-heading {
         display: flex;
         align-items: center;
@@ -379,6 +408,15 @@ function bookingStyles() {
 
         .vdr-stay-options {
           grid-template-columns: 1fr;
+        }
+
+        .vdr-suite-gallery {
+          margin-top: -18px;
+          padding: 18px;
+        }
+
+        .vdr-suite-gallery__grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .vdr-stay-option {
@@ -501,6 +539,13 @@ function buildBookingContent(locale: Locale) {
           </button>
         </div>
 
+        <section class="vdr-suite-gallery" data-suite-gallery hidden aria-labelledby="vdr-suite-gallery-title">
+          <h3 id="vdr-suite-gallery-title">${locale === "es" ? "Conoce nuestras suites" : "Explore our suites"}</h3>
+          <div class="vdr-suite-gallery__grid">
+            ${Array.from({ length: 8 }, (_, index) => `<img src="/room/${index + 1}.webp" alt="${copy.suites} ${index + 1}" loading="lazy" />`).join("")}
+          </div>
+        </section>
+
         <section class="vdr-engine-shell" aria-labelledby="vdr-engine-title">
           <header class="vdr-engine-heading">
             <h3 id="vdr-engine-title">${copy.dates}</h3>
@@ -534,6 +579,7 @@ function buildBookingContent(locale: Locale) {
         var frame = document.querySelector("[data-booking-frame]");
         var frameWrap = document.querySelector("[data-booking-frame-wrap]");
         var externalLink = document.querySelector("[data-external-booking]");
+        var suiteGallery = document.querySelector("[data-suite-gallery]");
         var options = Array.prototype.slice.call(document.querySelectorAll("[data-propid]"));
         if (!frame || !frameWrap || !externalLink || !options.length) return;
 
@@ -564,6 +610,7 @@ function buildBookingContent(locale: Locale) {
             option.setAttribute("aria-pressed", active ? "true" : "false");
           });
           frameWrap.classList.remove("is-loaded");
+          if (suiteGallery) suiteGallery.hidden = selected.getAttribute("data-stay") !== "suites";
           frame.src = bookingUrl(propid, "iFrame");
           externalLink.href = bookingUrl(propid, "BookingLink");
 

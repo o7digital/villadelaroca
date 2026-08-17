@@ -147,24 +147,9 @@ textarea.form-control {
   background: #fff !important;
 }
 
+.b24-offer-pic,
 .b24-offer-summary {
   display: none !important;
-}
-
-/* Keep the suite imagery supplied in Beds24 visible alongside each offer. */
-.b24-offer-pic {
-  display: block !important;
-  float: none !important;
-  width: min(100%, 300px) !important;
-  margin: 0 0 20px !important;
-}
-
-.b24-offer-pic img {
-  display: block;
-  width: 100% !important;
-  height: auto !important;
-  border-radius: 2px;
-  object-fit: cover;
 }
 
 .b24-offer-select {
