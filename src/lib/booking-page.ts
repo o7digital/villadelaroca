@@ -276,16 +276,20 @@ function bookingStyles() {
         background: #17231f;
       }
 
+      .vdr-suite-slider__track {
+        display: flex;
+        transition: transform 350ms ease;
+      }
+
       .vdr-suite-slide {
-        display: none;
+        display: block;
+        flex: 0 0 100%;
         width: 100%;
         padding: 0;
         border: 0;
         background: none;
         cursor: zoom-in;
       }
-
-      .vdr-suite-slide.is-active { display: block; }
 
       .vdr-suite-slide img {
         display: block;
@@ -594,7 +598,9 @@ function buildBookingContent(locale: Locale) {
 
         <section class="vdr-suite-gallery" data-suite-gallery hidden aria-labelledby="vdr-suite-gallery-title">
           <div class="vdr-suite-slider" data-suite-slider>
-            ${Array.from({ length: 8 }, (_, index) => `<button class="vdr-suite-slide${index === 0 ? " is-active" : ""}" type="button" data-suite-slide aria-label="${copy.suites} ${index + 1}"><img src="/room/${index + 1}.webp" alt="${copy.suites} ${index + 1}" loading="lazy" /></button>`).join("")}
+            <div class="vdr-suite-slider__track" data-suite-track>
+              ${Array.from({ length: 8 }, (_, index) => `<button class="vdr-suite-slide" type="button" data-suite-slide aria-label="${copy.suites} ${index + 1}"><img src="/room/${index + 1}.webp" alt="${copy.suites} ${index + 1}" loading="lazy" /></button>`).join("")}
+            </div>
             <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-suite-prev aria-label="Previous photo">‹</button>
             <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-suite-next aria-label="Next photo">›</button>
             <span class="vdr-suite-slider__count" data-suite-count>1 / 8</span>
@@ -646,6 +652,7 @@ function buildBookingContent(locale: Locale) {
         var searchForm = document.querySelector("[data-booking-search]");
         var priceOutput = document.querySelector("[data-booking-price]");
         var slides = Array.prototype.slice.call(document.querySelectorAll("[data-suite-slide]"));
+        var slideTrack = document.querySelector("[data-suite-track]");
         var lightbox = document.querySelector("[data-suite-lightbox]");
         var lightboxImage = document.querySelector("[data-suite-lightbox-image]");
         var slideIndex = 0;
@@ -699,7 +706,7 @@ function buildBookingContent(locale: Locale) {
 
         function showSlide(index) {
           slideIndex = (index + slides.length) % slides.length;
-          slides.forEach(function (slide, i) { slide.classList.toggle("is-active", i === slideIndex); });
+          slideTrack.style.transform = "translateX(-" + (slideIndex * 100) + "%)";
           var count = document.querySelector("[data-suite-count]");
           if (count) count.textContent = (slideIndex + 1) + " / " + slides.length;
         }
