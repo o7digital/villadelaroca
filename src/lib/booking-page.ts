@@ -741,6 +741,16 @@ function buildBookingContent(locale: Locale) {
         });
         frame.addEventListener("load", function () { frameWrap.classList.add("is-loaded"); });
         selectStay(initialStay, false);
+        var dateInputs = searchForm.querySelectorAll("input[type=date]");
+        var today = new Date();
+        var checkinDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+        var checkoutDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3);
+        function formatDate(date) {
+          return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
+        }
+        dateInputs[0].value = pageParams.get("checkin") || formatDate(checkinDate);
+        dateInputs[1].value = pageParams.get("checkout") || formatDate(checkoutDate);
+        searchForm.dispatchEvent(new Event("submit", { cancelable: true }));
       })();
     </script>
   `;
