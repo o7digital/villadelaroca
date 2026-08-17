@@ -290,7 +290,7 @@ function bookingStyles() {
       .vdr-suite-slide img {
         display: block;
         width: 100%;
-        height: min(54vw, 620px);
+        height: min(34vw, 460px);
         object-fit: cover;
       }
 
@@ -302,9 +302,9 @@ function bookingStyles() {
         height: 48px;
         border: 0;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.92);
-        color: var(--vdr-green-dark);
-        font-size: 30px;
+        background: var(--vdr-green-dark);
+        color: #fff;
+        font-size: 38px;
         line-height: 1;
         cursor: pointer;
         transform: translateY(-50%);
@@ -469,7 +469,7 @@ function bookingStyles() {
         }
 
         .vdr-suite-gallery { margin-top: -18px; }
-        .vdr-suite-slide img { height: 68vw; }
+        .vdr-suite-slide img { height: 64vw; }
         .vdr-search-form { grid-template-columns: 1fr; }
 
         .vdr-stay-option {
