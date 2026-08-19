@@ -5,6 +5,8 @@ type Locale = "en" | "es";
 const HERO_IMAGE = "/assets/legacy/uploads/2023/01/ourbnb_top2.webp";
 const SUITES_IMAGE = "/assets/legacy/uploads/2023/01/vdlr_suite_02.webp";
 const VILLA_IMAGE = "/assets/legacy/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp";
+const SUITE_GALLERY_COUNT = 8;
+const VILLA_GALLERY_IMAGES = ["/slider/1.webp", "/slider/2.webp", "/slider/3.webp", "/slider/4.webp", "/slider/5.webp", "/slider/6.webp", "/slider/7.webp", "/slider/8.webp"];
 
 function absolutizeLegacyPaths(html: string) {
   return html
@@ -596,14 +598,24 @@ function buildBookingContent(locale: Locale) {
           </button>
         </div>
 
-        <section class="vdr-suite-gallery" data-suite-gallery hidden aria-labelledby="vdr-suite-gallery-title">
-          <div class="vdr-suite-slider" data-suite-slider>
-            <div class="vdr-suite-slider__track" data-suite-track>
-              ${Array.from({ length: 8 }, (_, index) => `<button class="vdr-suite-slide" type="button" data-suite-slide aria-label="${copy.suites} ${index + 1}"><img src="/room/${index + 1}.webp" alt="${copy.suites} ${index + 1}" loading="lazy" /></button>`).join("")}
+        <section class="vdr-suite-gallery" data-gallery="suites" aria-labelledby="vdr-suite-gallery-title">
+          <div class="vdr-suite-slider" data-gallery-slider>
+            <div class="vdr-suite-slider__track" data-gallery-track>
+              ${Array.from({ length: SUITE_GALLERY_COUNT }, (_, index) => `<button class="vdr-suite-slide" type="button" data-gallery-slide aria-label="${copy.suites} ${index + 1}"><img src="/room/${index + 1}.webp" alt="${copy.suites} ${index + 1}" loading="lazy" /></button>`).join("")}
             </div>
-            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-suite-prev aria-label="Previous photo">‹</button>
-            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-suite-next aria-label="Next photo">›</button>
-            <span class="vdr-suite-slider__count" data-suite-count>1 / 8</span>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-gallery-prev aria-label="Previous photo">‹</button>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-gallery-next aria-label="Next photo">›</button>
+            <span class="vdr-suite-slider__count" data-gallery-count>1 / ${SUITE_GALLERY_COUNT}</span>
+          </div>
+        </section>
+        <section class="vdr-suite-gallery" data-gallery="villa" hidden aria-labelledby="vdr-villa-gallery-title">
+          <div class="vdr-suite-slider" data-gallery-slider>
+            <div class="vdr-suite-slider__track" data-gallery-track>
+              ${VILLA_GALLERY_IMAGES.map((src, index) => `<button class="vdr-suite-slide" type="button" data-gallery-slide aria-label="${copy.villa} ${index + 1}"><img src="${src}" alt="${copy.villa} ${index + 1}" loading="lazy" /></button>`).join("")}
+            </div>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-gallery-prev aria-label="Previous photo">‹</button>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-gallery-next aria-label="Next photo">›</button>
+            <span class="vdr-suite-slider__count" data-gallery-count>1 / ${VILLA_GALLERY_IMAGES.length}</span>
           </div>
         </section>
         <dialog class="vdr-suite-lightbox" data-suite-lightbox><button type="button" data-suite-close aria-label="Close">×</button><img data-suite-lightbox-image alt="" /></dialog>
@@ -648,14 +660,11 @@ function buildBookingContent(locale: Locale) {
         var frame = document.querySelector("[data-booking-frame]");
         var frameWrap = document.querySelector("[data-booking-frame-wrap]");
         var externalLink = document.querySelector("[data-external-booking]");
-        var suiteGallery = document.querySelector("[data-suite-gallery]");
+        var galleries = Array.prototype.slice.call(document.querySelectorAll("[data-gallery]"));
         var searchForm = document.querySelector("[data-booking-search]");
         var priceOutput = document.querySelector("[data-booking-price]");
-        var slides = Array.prototype.slice.call(document.querySelectorAll("[data-suite-slide]"));
-        var slideTrack = document.querySelector("[data-suite-track]");
         var lightbox = document.querySelector("[data-suite-lightbox]");
         var lightboxImage = document.querySelector("[data-suite-lightbox-image]");
-        var slideIndex = 0;
         var options = Array.prototype.slice.call(document.querySelectorAll("[data-propid]"));
         if (!frame || !frameWrap || !externalLink || !options.length) return;
 
@@ -689,7 +698,9 @@ function buildBookingContent(locale: Locale) {
             option.classList.toggle("is-active", active);
             option.setAttribute("aria-pressed", active ? "true" : "false");
           });
-          if (suiteGallery) suiteGallery.hidden = selected.getAttribute("data-stay") !== "suites";
+          galleries.forEach(function (gallery) {
+            gallery.hidden = gallery.getAttribute("data-gallery") !== selected.getAttribute("data-stay");
+          });
           externalLink.href = bookingUrl(propid, "BookingLink");
 
           if (updateAddress && window.history && window.history.replaceState) {
@@ -704,21 +715,27 @@ function buildBookingContent(locale: Locale) {
           });
         });
 
-        function showSlide(index) {
-          slideIndex = (index + slides.length) % slides.length;
-          slideTrack.style.transform = "translateX(-" + (slideIndex * 100) + "%)";
-          var count = document.querySelector("[data-suite-count]");
-          if (count) count.textContent = (slideIndex + 1) + " / " + slides.length;
-        }
+        galleries.forEach(function (gallery) {
+          var track = gallery.querySelector("[data-gallery-track]");
+          var slides = Array.prototype.slice.call(gallery.querySelectorAll("[data-gallery-slide]"));
+          var count = gallery.querySelector("[data-gallery-count]");
+          var slideIndex = 0;
 
-        document.querySelector("[data-suite-prev]").addEventListener("click", function () { showSlide(slideIndex - 1); });
-        document.querySelector("[data-suite-next]").addEventListener("click", function () { showSlide(slideIndex + 1); });
-        slides.forEach(function (slide) {
-          slide.addEventListener("click", function () {
-            var image = slide.querySelector("img");
-            lightboxImage.src = image.currentSrc || image.src;
-            lightboxImage.alt = image.alt;
-            lightbox.showModal();
+          function showSlide(index) {
+            slideIndex = (index + slides.length) % slides.length;
+            track.style.transform = "translateX(-" + (slideIndex * 100) + "%)";
+            if (count) count.textContent = (slideIndex + 1) + " / " + slides.length;
+          }
+
+          gallery.querySelector("[data-gallery-prev]").addEventListener("click", function () { showSlide(slideIndex - 1); });
+          gallery.querySelector("[data-gallery-next]").addEventListener("click", function () { showSlide(slideIndex + 1); });
+          slides.forEach(function (slide) {
+            slide.addEventListener("click", function () {
+              var image = slide.querySelector("img");
+              lightboxImage.src = image.currentSrc || image.src;
+              lightboxImage.alt = image.alt;
+              lightbox.showModal();
+            });
           });
         });
         document.querySelector("[data-suite-close]").addEventListener("click", function () { lightbox.close(); });
