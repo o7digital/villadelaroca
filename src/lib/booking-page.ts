@@ -341,21 +341,6 @@ function bookingStyles() {
       .vdr-suite-lightbox img { display: block; width: 100%; max-height: 88vh; object-fit: contain; }
       .vdr-suite-lightbox button { position: absolute; top: 12px; right: 12px; width: 42px; height: 42px; border: 0; border-radius: 50%; background: #fff; font-size: 25px; cursor: pointer; }
 
-      .vdr-search-form {
-        display: grid;
-        grid-template-columns: 1fr 1fr auto;
-        gap: 14px;
-        align-items: end;
-        padding: 24px;
-        border: 1px solid #ded8ce;
-        background: #f7f4ee;
-      }
-
-      .vdr-search-form label { display: grid; gap: 7px; color: #53605d; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-      .vdr-search-form input { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid #cfc8bc; background: #fff; color: var(--vdr-ink); font: inherit; }
-      .vdr-search-form button { min-height: 48px; padding: 0 26px; border: 0; background: var(--vdr-green); color: #fff; font: 700 12px "Montserrat", sans-serif; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
-      .vdr-search-price { min-height: 24px; margin: 14px 0 0; color: var(--vdr-green-dark); font-size: 18px; font-weight: 700; }
-
       .vdr-engine-heading {
         display: flex;
         align-items: center;
@@ -476,7 +461,6 @@ function bookingStyles() {
 
         .vdr-suite-gallery { margin-top: -18px; }
         .vdr-suite-slide img { height: 64vw; }
-        .vdr-search-form { grid-template-columns: 1fr; }
 
         .vdr-stay-option {
           grid-template-columns: 118px minmax(0, 1fr) !important;
@@ -620,13 +604,6 @@ function buildBookingContent(locale: Locale) {
         </section>
         <dialog class="vdr-suite-lightbox" data-suite-lightbox><button type="button" data-suite-close aria-label="Close">×</button><img data-suite-lightbox-image alt="" /></dialog>
 
-        <form class="vdr-search-form" data-booking-search>
-          <label>${locale === "es" ? "Fecha de entrada" : "Check-in"}<input type="date" name="checkin" required /></label>
-          <label>${locale === "es" ? "Fecha de salida" : "Check-out"}<input type="date" name="checkout" required /></label>
-          <button type="submit">${locale === "es" ? "Buscar" : "Search"}</button>
-        </form>
-        <p class="vdr-search-price" data-booking-price aria-live="polite"></p>
-
         <section class="vdr-engine-shell" aria-labelledby="vdr-engine-title">
           <header class="vdr-engine-heading">
             <h3 id="vdr-engine-title">${copy.dates}</h3>
@@ -661,8 +638,6 @@ function buildBookingContent(locale: Locale) {
         var frameWrap = document.querySelector("[data-booking-frame-wrap]");
         var externalLink = document.querySelector("[data-external-booking]");
         var galleries = Array.prototype.slice.call(document.querySelectorAll("[data-gallery]"));
-        var searchForm = document.querySelector("[data-booking-search]");
-        var priceOutput = document.querySelector("[data-booking-price]");
         var lightbox = document.querySelector("[data-suite-lightbox]");
         var lightboxImage = document.querySelector("[data-suite-lightbox-image]");
         var options = Array.prototype.slice.call(document.querySelectorAll("[data-propid]"));
@@ -670,7 +645,21 @@ function buildBookingContent(locale: Locale) {
 
         var pageParams = new URLSearchParams(window.location.search);
         var initialStay = pageParams.get("stay") === "villa" ? "villa" : "suites";
-        var passthrough = ["checkin", "checkout", "numnight", "numadult", "numchild"];
+        var passthrough = ["numnight", "numadult", "numchild"];
+
+        function formatDate(date) {
+          return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
+        }
+
+        function currentDates() {
+          var today = new Date();
+          var checkinDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+          var checkoutDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3);
+          return {
+            checkin: pageParams.get("checkin") || formatDate(checkinDate),
+            checkout: pageParams.get("checkout") || formatDate(checkoutDate),
+          };
+        }
 
         function bookingUrl(propid, referer, dates) {
           var params = new URLSearchParams();
@@ -702,6 +691,8 @@ function buildBookingContent(locale: Locale) {
             gallery.hidden = gallery.getAttribute("data-gallery") !== selected.getAttribute("data-stay");
           });
           externalLink.href = bookingUrl(propid, "BookingLink");
+          frameWrap.classList.remove("is-loaded");
+          frame.src = bookingUrl(propid, "iFrame", currentDates());
 
           if (updateAddress && window.history && window.history.replaceState) {
             pageParams.set("stay", selected.getAttribute("data-stay"));
@@ -740,34 +731,8 @@ function buildBookingContent(locale: Locale) {
         });
         document.querySelector("[data-suite-close]").addEventListener("click", function () { lightbox.close(); });
 
-        searchForm.addEventListener("submit", function (event) {
-          event.preventDefault();
-          var data = new FormData(searchForm);
-          var dates = { checkin: data.get("checkin"), checkout: data.get("checkout") };
-          if (!dates.checkin || !dates.checkout || dates.checkout <= dates.checkin) return;
-          var selected = options.find(function (option) { return option.classList.contains("is-active"); }) || options[0];
-          var propid = selected.getAttribute("data-propid");
-          var roomid = selected.getAttribute("data-stay") === "villa" ? "715668" : "658909";
-          priceOutput.textContent = "…";
-          fetch("/api/booking-price?roomid=" + roomid + "&checkin=" + dates.checkin + "&checkout=" + dates.checkout)
-            .then(function (response) { return response.json(); })
-            .then(function (price) { priceOutput.textContent = price.mxn + " MXN (" + price.usd + " USD)"; })
-            .catch(function () { priceOutput.textContent = ""; });
-          frameWrap.classList.remove("is-loaded");
-          frame.src = bookingUrl(propid, "iFrame", dates);
-        });
         frame.addEventListener("load", function () { frameWrap.classList.add("is-loaded"); });
         selectStay(initialStay, false);
-        var dateInputs = searchForm.querySelectorAll("input[type=date]");
-        var today = new Date();
-        var checkinDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-        var checkoutDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3);
-        function formatDate(date) {
-          return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
-        }
-        dateInputs[0].value = pageParams.get("checkin") || formatDate(checkinDate);
-        dateInputs[1].value = pageParams.get("checkout") || formatDate(checkoutDate);
-        searchForm.dispatchEvent(new Event("submit", { cancelable: true }));
       })();
     </script>
   `;
