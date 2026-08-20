@@ -359,6 +359,16 @@ function bookingStyles() {
         font-weight: 600;
       }
 
+      .vdr-engine-hint {
+        margin: 0;
+        padding: 12px 30px;
+        border-bottom: 1px solid #e9e5dc;
+        background: #f7f4ee;
+        color: #52605d;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
       .vdr-secure-note {
         display: inline-flex;
         align-items: center;
@@ -517,6 +527,7 @@ function bookingCopy(locale: Locale) {
       villa: "Villa completa",
       villaDetail: "Uso privado · cinco habitaciones",
       dates: "Elige tus fechas",
+      hint: "Selecciona la cantidad de habitaciones abajo para ver el botón de reservar y pagar.",
       secure: "Reserva segura",
       loading: "Cargando disponibilidad",
       powered: "Disponibilidad y pagos procesados de forma segura por Beds24.",
@@ -536,6 +547,7 @@ function bookingCopy(locale: Locale) {
     villa: "Entire villa",
     villaDetail: "Private use · five bedrooms",
     dates: "Choose your dates",
+    hint: "Select the number of rooms below to reveal the booking and payment button.",
     secure: "Secure booking",
     loading: "Loading availability",
     powered: "Availability and payments are securely processed by Beds24.",
@@ -612,6 +624,7 @@ function buildBookingContent(locale: Locale) {
               ${copy.secure}
             </span>
           </header>
+          <p class="vdr-engine-hint">${copy.hint}</p>
           <div class="vdr-engine-frame-wrap" data-booking-frame-wrap>
             <div class="vdr-engine-loading" aria-live="polite">${copy.loading}</div>
             <iframe
