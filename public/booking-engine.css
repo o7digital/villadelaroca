@@ -54,6 +54,12 @@ body.colorbody {
   box-shadow: none !important;
 }
 
+/* Keep only the final booking action in the shopping-cart summary. */
+#b24scroller .multiplebookbutton,
+#b24scroller .multiplebookbuttondisable {
+  display: none !important;
+}
+
 label,
 .control-label {
   margin-bottom: 8px !important;
@@ -149,6 +155,11 @@ textarea.form-control {
 
 .b24-offer-pic,
 .b24-offer-summary {
+  display: none !important;
+}
+
+/* Dates are already selected in the main controls above the room offers. */
+.b24-offer-cal {
   display: none !important;
 }
 
