@@ -54,6 +54,12 @@ body.colorbody {
   box-shadow: none !important;
 }
 
+/* Keep only the final booking action in the shopping-cart summary. */
+#b24scroller .multiplebookbutton,
+#b24scroller .multiplebookbuttondisable {
+  display: none !important;
+}
+
 label,
 .control-label {
   margin-bottom: 8px !important;
