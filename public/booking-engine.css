@@ -152,6 +152,11 @@ textarea.form-control {
   display: none !important;
 }
 
+/* Dates are already selected in the main controls above the room offers. */
+.b24-offer-cal {
+  display: none !important;
+}
+
 .b24-offer-select {
   width: 100% !important;
   margin: 0 !important;

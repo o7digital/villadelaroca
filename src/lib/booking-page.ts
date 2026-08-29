@@ -7,8 +7,8 @@ const SUITES_IMAGE = "/assets/legacy/uploads/2023/01/vdlr_suite_02.webp";
 const VILLA_IMAGE = "/assets/legacy/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp";
 const SUITE_GALLERY_COUNT = 8;
 const VILLA_GALLERY_IMAGES = ["/slider/1.webp", "/slider/2.webp", "/slider/3.webp", "/slider/4.webp", "/slider/5.webp", "/slider/6.webp", "/slider/7.webp", "/slider/8.webp"];
-const BOOKING_HINT_EN = "To continue to payment, choose a number in the “Quantity” dropdown below (the “check availability” link only shows the calendar).";
-const BOOKING_HINT_ES = "Para continuar al pago, elige un número en el menú “Cantidad” de abajo (el enlace “Comprobar disponibilidad” solo muestra el calendario).";
+const BOOKING_HINT_EN = "To continue to payment, choose a number in the “Quantity” dropdown below.";
+const BOOKING_HINT_ES = "Para continuar al pago, elige un número en el menú “Cantidad” de abajo.";
 
 function absolutizeLegacyPaths(html: string) {
   return html
