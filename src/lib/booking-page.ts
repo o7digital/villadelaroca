@@ -7,9 +7,8 @@ const SUITES_IMAGE = "/assets/legacy/uploads/2023/01/vdlr_suite_02.webp";
 const VILLA_IMAGE = "/assets/legacy/uploads/2022/11/xxl_982-villa-de-la-roca-b-and-b-ixtapa-zihuatanejo.webp";
 const SUITE_GALLERY_COUNT = 8;
 const VILLA_GALLERY_IMAGES = ["/slider/1.webp", "/slider/2.webp", "/slider/3.webp", "/slider/4.webp", "/slider/5.webp", "/slider/6.webp", "/slider/7.webp", "/slider/8.webp"];
-// The Beds24 widget has its own language switch, independent of this page's locale, so the hint is shown in both languages.
 const BOOKING_HINT_EN = "To continue to payment, choose a number in the “Quantity” dropdown below (the “check availability” link only shows the calendar).";
-const BOOKING_HINT_ES = "Para continuar al pago, elige un número en el menú “Quantity” de abajo (el enlace “check availability” solo muestra el calendario).";
+const BOOKING_HINT_ES = "Para continuar al pago, elige un número en el menú “Cantidad” de abajo (el enlace “Comprobar disponibilidad” solo muestra el calendario).";
 
 function absolutizeLegacyPaths(html: string) {
   return html
@@ -530,12 +529,15 @@ function bookingCopy(locale: Locale) {
       villa: "Villa completa",
       villaDetail: "Uso privado · cinco habitaciones",
       dates: "Elige tus fechas",
-      hint: BOOKING_HINT_ES + " / " + BOOKING_HINT_EN,
+      hint: BOOKING_HINT_ES,
       secure: "Reserva segura",
       loading: "Cargando disponibilidad",
       powered: "Disponibilidad y pagos procesados de forma segura por Beds24.",
       fallback: "Abrir el motor de reserva",
       frameTitle: "Disponibilidad y reservación de Villa de la Roca",
+      previousPhoto: "Foto anterior",
+      nextPhoto: "Foto siguiente",
+      close: "Cerrar",
     };
   }
 
@@ -550,12 +552,15 @@ function bookingCopy(locale: Locale) {
     villa: "Entire villa",
     villaDetail: "Private use · five bedrooms",
     dates: "Choose your dates",
-    hint: BOOKING_HINT_EN + " / " + BOOKING_HINT_ES,
+    hint: BOOKING_HINT_EN,
     secure: "Secure booking",
     loading: "Loading availability",
     powered: "Availability and payments are securely processed by Beds24.",
     fallback: "Open reservation system",
     frameTitle: "Villa de la Roca availability and booking",
+    previousPhoto: "Previous photo",
+    nextPhoto: "Next photo",
+    close: "Close",
   };
 }
 
@@ -602,8 +607,8 @@ function buildBookingContent(locale: Locale) {
             <div class="vdr-suite-slider__track" data-gallery-track>
               ${Array.from({ length: SUITE_GALLERY_COUNT }, (_, index) => `<button class="vdr-suite-slide" type="button" data-gallery-slide aria-label="${copy.suites} ${index + 1}"><img src="/room/${index + 1}.webp" alt="${copy.suites} ${index + 1}" loading="lazy" /></button>`).join("")}
             </div>
-            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-gallery-prev aria-label="Previous photo">‹</button>
-            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-gallery-next aria-label="Next photo">›</button>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-gallery-prev aria-label="${copy.previousPhoto}">‹</button>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-gallery-next aria-label="${copy.nextPhoto}">›</button>
             <span class="vdr-suite-slider__count" data-gallery-count>1 / ${SUITE_GALLERY_COUNT}</span>
           </div>
         </section>
@@ -612,12 +617,12 @@ function buildBookingContent(locale: Locale) {
             <div class="vdr-suite-slider__track" data-gallery-track>
               ${VILLA_GALLERY_IMAGES.map((src, index) => `<button class="vdr-suite-slide" type="button" data-gallery-slide aria-label="${copy.villa} ${index + 1}"><img src="${src}" alt="${copy.villa} ${index + 1}" loading="lazy" /></button>`).join("")}
             </div>
-            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-gallery-prev aria-label="Previous photo">‹</button>
-            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-gallery-next aria-label="Next photo">›</button>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--prev" type="button" data-gallery-prev aria-label="${copy.previousPhoto}">‹</button>
+            <button class="vdr-suite-slider__nav vdr-suite-slider__nav--next" type="button" data-gallery-next aria-label="${copy.nextPhoto}">›</button>
             <span class="vdr-suite-slider__count" data-gallery-count>1 / ${VILLA_GALLERY_IMAGES.length}</span>
           </div>
         </section>
-        <dialog class="vdr-suite-lightbox" data-suite-lightbox><button type="button" data-suite-close aria-label="Close">×</button><img data-suite-lightbox-image alt="" /></dialog>
+        <dialog class="vdr-suite-lightbox" data-suite-lightbox><button type="button" data-suite-close aria-label="${copy.close}">×</button><img data-suite-lightbox-image alt="" /></dialog>
 
         <section class="vdr-engine-shell" aria-labelledby="vdr-engine-title">
           <header class="vdr-engine-heading">
