@@ -587,14 +587,14 @@ function buildBookingContent(locale: Locale) {
         </div>
 
         <div class="vdr-stay-options" role="group" aria-label="${locale === "es" ? "Tipo de estancia" : "Stay type"}">
-          <button class="vdr-stay-option is-active" type="button" data-stay="suites" data-roomid="658909" aria-pressed="true">
+          <button class="vdr-stay-option is-active" type="button" data-stay="suites" data-propid="316599" data-roomid="658909" aria-pressed="true">
             <img src="${SUITES_IMAGE}" alt="${copy.suites}" width="1200" height="900" />
             <span class="vdr-stay-option__copy">
               <span class="vdr-stay-option__title">${copy.suites}</span>
               <span class="vdr-stay-option__detail">${copy.suitesDetail}</span>
             </span>
           </button>
-          <button class="vdr-stay-option" type="button" data-stay="villa" data-roomid="715668" aria-pressed="false">
+          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" data-roomid="715668" aria-pressed="false">
             <img src="${VILLA_IMAGE}" alt="${copy.villa}" width="1401" height="800" />
             <span class="vdr-stay-option__copy">
               <span class="vdr-stay-option__title">${copy.villa}</span>
@@ -648,7 +648,7 @@ function buildBookingContent(locale: Locale) {
           </div>
           <footer class="vdr-engine-footer">
             <span>${copy.powered}</span>
-            <a data-external-booking href="https://beds24.com/booking.php?roomid=658909&amp;referer=BookingLink&amp;lang=${lang}&amp;cur=MXN" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
+            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;roomid=658909&amp;referer=BookingLink&amp;lang=${lang}&amp;cur=MXN" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
           </footer>
         </section>
       </section>
@@ -683,8 +683,9 @@ function buildBookingContent(locale: Locale) {
           };
         }
 
-        function bookingUrl(roomid, referer, dates) {
+        function bookingUrl(propid, roomid, referer, dates) {
           var params = new URLSearchParams();
+          params.set("propid", propid);
           params.set("roomid", roomid);
           params.set("referer", referer);
           params.set("lang", frame.getAttribute("data-lang") || "en");
@@ -703,6 +704,7 @@ function buildBookingContent(locale: Locale) {
 
         function selectStay(stay, updateAddress) {
           var selected = options.find(function (option) { return option.getAttribute("data-stay") === stay; }) || options[0];
+          var propid = selected.getAttribute("data-propid");
           var roomid = selected.getAttribute("data-roomid");
           options.forEach(function (option) {
             var active = option === selected;
@@ -712,9 +714,9 @@ function buildBookingContent(locale: Locale) {
           galleries.forEach(function (gallery) {
             gallery.hidden = gallery.getAttribute("data-gallery") !== selected.getAttribute("data-stay");
           });
-          externalLink.href = bookingUrl(roomid, "BookingLink");
+          externalLink.href = bookingUrl(propid, roomid, "BookingLink");
           frameWrap.classList.remove("is-loaded");
-          frame.src = bookingUrl(roomid, "iFrame", currentDates());
+          frame.src = bookingUrl(propid, roomid, "iFrame", currentDates());
 
           if (updateAddress && window.history && window.history.replaceState) {
             pageParams.set("stay", selected.getAttribute("data-stay"));
