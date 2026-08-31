@@ -685,13 +685,12 @@ function buildBookingContent(locale: Locale) {
 
         function bookingUrl(propid, roomid, referer, dates, roomScoped) {
           var params = new URLSearchParams();
-          // The Full Villa Beds24 property exposes both a generic "5 Rooms"
-          // room and the bookable "Villa 5 Bedsroom" room. Scope that stay to
-          // its mapped room only so availability and the cart never combine
-          // both room types. Beds24 room IDs are globally unique.
+          // The Full Villa Beds24 property exposes two room types. Use Beds24's
+          // individual-room flow and explicitly preselect only the bookable
+          // Full Villa room so the other room type never enters the cart.
           if (!roomScoped) params.set("propid", propid);
           params.set("roomid", roomid);
-          if (roomScoped) params.set("multiroom", "0");
+          if (roomScoped) params.set("br1-" + roomid, "Book");
           params.set("referer", referer);
           params.set("lang", frame.getAttribute("data-lang") || "en");
           params.set("cur", "MXN");
