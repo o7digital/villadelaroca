@@ -594,7 +594,7 @@ function buildBookingContent(locale: Locale) {
               <span class="vdr-stay-option__detail">${copy.suitesDetail}</span>
             </span>
           </button>
-          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" data-roomid="715668" aria-pressed="false">
+          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" data-roomid="715668" data-room-scope="true" aria-pressed="false">
             <img src="${VILLA_IMAGE}" alt="${copy.villa}" width="1401" height="800" />
             <span class="vdr-stay-option__copy">
               <span class="vdr-stay-option__title">${copy.villa}</span>
@@ -683,10 +683,15 @@ function buildBookingContent(locale: Locale) {
           };
         }
 
-        function bookingUrl(propid, roomid, referer, dates) {
+        function bookingUrl(propid, roomid, referer, dates, roomScoped) {
           var params = new URLSearchParams();
-          params.set("propid", propid);
+          // The Full Villa Beds24 property exposes both a generic "5 Rooms"
+          // room and the bookable "Villa 5 Bedsroom" room. Scope that stay to
+          // its mapped room only so availability and the cart never combine
+          // both room types. Beds24 room IDs are globally unique.
+          if (!roomScoped) params.set("propid", propid);
           params.set("roomid", roomid);
+          if (roomScoped) params.set("multiroom", "0");
           params.set("referer", referer);
           params.set("lang", frame.getAttribute("data-lang") || "en");
           params.set("cur", "MXN");
@@ -706,6 +711,7 @@ function buildBookingContent(locale: Locale) {
           var selected = options.find(function (option) { return option.getAttribute("data-stay") === stay; }) || options[0];
           var propid = selected.getAttribute("data-propid");
           var roomid = selected.getAttribute("data-roomid");
+          var roomScoped = selected.getAttribute("data-room-scope") === "true";
           options.forEach(function (option) {
             var active = option === selected;
             option.classList.toggle("is-active", active);
@@ -714,9 +720,9 @@ function buildBookingContent(locale: Locale) {
           galleries.forEach(function (gallery) {
             gallery.hidden = gallery.getAttribute("data-gallery") !== selected.getAttribute("data-stay");
           });
-          externalLink.href = bookingUrl(propid, roomid, "BookingLink");
+          externalLink.href = bookingUrl(propid, roomid, "BookingLink", null, roomScoped);
           frameWrap.classList.remove("is-loaded");
-          frame.src = bookingUrl(propid, roomid, "iFrame", currentDates());
+          frame.src = bookingUrl(propid, roomid, "iFrame", currentDates(), roomScoped);
 
           if (updateAddress && window.history && window.history.replaceState) {
             pageParams.set("stay", selected.getAttribute("data-stay"));
