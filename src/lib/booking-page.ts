@@ -686,11 +686,10 @@ function buildBookingContent(locale: Locale) {
         function bookingUrl(propid, roomid, referer, dates, roomScoped) {
           var params = new URLSearchParams();
           // The Full Villa Beds24 property exposes two room types. Use Beds24's
-          // individual-room flow and explicitly preselect only the bookable
-          // Full Villa room so the other room type never enters the cart.
+          // individual-room flow so only the mapped villa is shown, while
+          // leaving the arrival and departure fields available to the guest.
           if (!roomScoped) params.set("propid", propid);
           params.set("roomid", roomid);
-          if (roomScoped) params.set("br1-" + roomid, "Book");
           params.set("referer", referer);
           params.set("lang", frame.getAttribute("data-lang") || "en");
           params.set("cur", "MXN");
@@ -721,7 +720,7 @@ function buildBookingContent(locale: Locale) {
           });
           externalLink.href = bookingUrl(propid, roomid, "BookingLink", null, roomScoped);
           frameWrap.classList.remove("is-loaded");
-          frame.src = bookingUrl(propid, roomid, "iFrame", currentDates(), roomScoped);
+          frame.src = bookingUrl(propid, roomid, "iFrame", roomScoped ? null : currentDates(), roomScoped);
 
           if (updateAddress && window.history && window.history.replaceState) {
             pageParams.set("stay", selected.getAttribute("data-stay"));
