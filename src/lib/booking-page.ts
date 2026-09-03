@@ -372,6 +372,33 @@ function bookingStyles() {
         font-weight: 600;
       }
 
+      .vdr-guest-selectors {
+        display: flex;
+        gap: 18px;
+        padding: 18px 30px;
+        border-bottom: 1px solid #e9e5dc;
+        background: #fff;
+      }
+
+      .vdr-guest-field {
+        display: grid;
+        gap: 7px;
+        min-width: 150px;
+        color: var(--vdr-ink);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .vdr-guest-field select {
+        height: 42px;
+        padding: 0 36px 0 12px;
+        border: 1px solid #cfc9bd;
+        border-radius: 2px;
+        background: #fff;
+        color: var(--vdr-ink);
+        font: inherit;
+      }
+
       .vdr-secure-note {
         display: inline-flex;
         align-items: center;
@@ -500,6 +527,15 @@ function bookingStyles() {
           padding: 20px;
         }
 
+        .vdr-guest-selectors {
+          padding: 16px 20px;
+        }
+
+        .vdr-guest-field {
+          flex: 1;
+          min-width: 0;
+        }
+
         .vdr-engine-frame-wrap {
           min-height: 780px;
           padding: 0;
@@ -530,6 +566,8 @@ function bookingCopy(locale: Locale) {
       villa: "Villa completa",
       villaDetail: "Uso privado · cinco habitaciones",
       dates: "Elige tus fechas",
+      adults: "Adultos",
+      children: "Niños",
       hint: BOOKING_HINT_ES,
       secure: "Reserva segura",
       loading: "Cargando disponibilidad",
@@ -553,6 +591,8 @@ function bookingCopy(locale: Locale) {
     villa: "Entire villa",
     villaDetail: "Private use · five bedrooms",
     dates: "Choose your dates",
+    adults: "Adults",
+    children: "Children",
     hint: BOOKING_HINT_EN,
     secure: "Secure booking",
     loading: "Loading availability",
@@ -633,6 +673,20 @@ function buildBookingContent(locale: Locale) {
               ${copy.secure}
             </span>
           </header>
+          <div class="vdr-guest-selectors">
+            <label class="vdr-guest-field">
+              <span>${copy.adults}</span>
+              <select data-numadult aria-label="${copy.adults}">
+                ${Array.from({ length: 10 }, (_, index) => `<option value="${index + 1}"${index === 1 ? " selected" : ""}>${index + 1}</option>`).join("")}
+              </select>
+            </label>
+            <label class="vdr-guest-field">
+              <span>${copy.children}</span>
+              <select data-numchild aria-label="${copy.children}">
+                ${Array.from({ length: 11 }, (_, index) => `<option value="${index}"${index === 0 ? " selected" : ""}>${index}</option>`).join("")}
+              </select>
+            </label>
+          </div>
           <p class="vdr-engine-hint">${copy.hint}</p>
           <div class="vdr-engine-frame-wrap" data-booking-frame-wrap>
             <div class="vdr-engine-loading" aria-live="polite">${copy.loading}</div>
@@ -648,7 +702,7 @@ function buildBookingContent(locale: Locale) {
           </div>
           <footer class="vdr-engine-footer">
             <span>${copy.powered}</span>
-            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;roomid=658909&amp;referer=BookingLink&amp;lang=${lang}&amp;cur=MXN" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
+            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;roomid=658909&amp;referer=BookingLink&amp;lang=${lang}&amp;cur=MXN&amp;numadult=2&amp;numchild=0" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
           </footer>
         </section>
       </section>
@@ -659,15 +713,19 @@ function buildBookingContent(locale: Locale) {
         var frame = document.querySelector("[data-booking-frame]");
         var frameWrap = document.querySelector("[data-booking-frame-wrap]");
         var externalLink = document.querySelector("[data-external-booking]");
+        var adultsSelect = document.querySelector("[data-numadult]");
+        var childrenSelect = document.querySelector("[data-numchild]");
         var galleries = Array.prototype.slice.call(document.querySelectorAll("[data-gallery]"));
         var lightbox = document.querySelector("[data-suite-lightbox]");
         var lightboxImage = document.querySelector("[data-suite-lightbox-image]");
         var options = Array.prototype.slice.call(document.querySelectorAll("[data-roomid]"));
-        if (!frame || !frameWrap || !externalLink || !options.length) return;
+        if (!frame || !frameWrap || !externalLink || !adultsSelect || !childrenSelect || !options.length) return;
 
         var pageParams = new URLSearchParams(window.location.search);
         var initialStay = pageParams.get("stay") === "villa" ? "villa" : "suites";
-        var passthrough = ["numnight", "numadult", "numchild"];
+        var passthrough = ["numnight"];
+        adultsSelect.value = pageParams.get("numadult") || "2";
+        childrenSelect.value = pageParams.get("numchild") || "0";
 
         function formatDate(date) {
           return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
@@ -694,6 +752,8 @@ function buildBookingContent(locale: Locale) {
           params.set("lang", frame.getAttribute("data-lang") || "en");
           params.set("cur", "MXN");
           params.set("cssfile", "${BOOKING_ENGINE_CSS_URL}");
+          params.set("numadult", adultsSelect.value);
+          params.set("numchild", childrenSelect.value);
           if (dates) {
             params.set("checkin", dates.checkin);
             params.set("checkout", dates.checkout);
@@ -731,6 +791,14 @@ function buildBookingContent(locale: Locale) {
         options.forEach(function (option) {
           option.addEventListener("click", function () {
             selectStay(option.getAttribute("data-stay"), true);
+          });
+        });
+
+        [adultsSelect, childrenSelect].forEach(function (select) {
+          select.addEventListener("change", function () {
+            pageParams.set("numadult", adultsSelect.value);
+            pageParams.set("numchild", childrenSelect.value);
+            selectStay(pageParams.get("stay") === "villa" ? "villa" : "suites", true);
           });
         });
 
