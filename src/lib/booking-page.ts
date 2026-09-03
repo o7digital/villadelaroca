@@ -389,6 +389,22 @@ function bookingStyles() {
         font-weight: 700;
       }
 
+      .vdr-guest-field > span {
+        display: block !important;
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        clip: auto !important;
+        opacity: 1 !important;
+        color: var(--vdr-ink) !important;
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        text-indent: 0 !important;
+        text-transform: none !important;
+        visibility: visible !important;
+      }
+
       .vdr-guest-field select {
         height: 42px;
         padding: 0 36px 0 12px;
