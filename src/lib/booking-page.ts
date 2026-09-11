@@ -643,14 +643,14 @@ function buildBookingContent(locale: Locale) {
         </div>
 
         <div class="vdr-stay-options" role="group" aria-label="${locale === "es" ? "Tipo de estancia" : "Stay type"}">
-          <button class="vdr-stay-option is-active" type="button" data-stay="suites" data-propid="316599" data-roomid="658909" aria-pressed="true">
+          <button class="vdr-stay-option is-active" type="button" data-stay="suites" data-propid="316599" data-roomid="658909" data-max-adults="2" data-max-children="3" aria-pressed="true">
             <img src="${SUITES_IMAGE}" alt="${copy.suites}" width="1200" height="900" />
             <span class="vdr-stay-option__copy">
               <span class="vdr-stay-option__title">${copy.suites}</span>
               <span class="vdr-stay-option__detail">${copy.suitesDetail}</span>
             </span>
           </button>
-          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" data-roomid="715668" data-room-scope="true" aria-pressed="false">
+          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" data-roomid="715668" data-room-scope="true" data-max-adults="10" data-max-children="6" aria-pressed="false">
             <img src="${VILLA_IMAGE}" alt="${copy.villa}" width="1401" height="800" />
             <span class="vdr-stay-option__copy">
               <span class="vdr-stay-option__title">${copy.villa}</span>
@@ -743,6 +743,15 @@ function buildBookingContent(locale: Locale) {
         adultsSelect.value = pageParams.get("numadult") || "2";
         childrenSelect.value = pageParams.get("numchild") || "0";
 
+        function limitGuests(select, maximum, fallback) {
+          var value = select.value === "" ? fallback : Number(select.value);
+          Array.prototype.forEach.call(select.options, function (option) {
+            option.disabled = Number(option.value) > maximum;
+            option.hidden = option.disabled;
+          });
+          select.value = String(Math.min(value, maximum));
+        }
+
         function formatDate(date) {
           return date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
         }
@@ -770,6 +779,11 @@ function buildBookingContent(locale: Locale) {
           params.set("cssfile", "${BOOKING_ENGINE_CSS_URL}");
           params.set("numadult", adultsSelect.value);
           params.set("numchild", childrenSelect.value);
+          // In Beds24's quantity-based flow, the general guest parameters do
+          // not prefill the occupants of each room. Seed the first room's
+          // offer-1 fields too; additional rooms retain their own selectors.
+          params.set("naa1-1-" + roomid, adultsSelect.value);
+          params.set("ncc1-1-" + roomid, childrenSelect.value);
           if (dates) {
             params.set("checkin", dates.checkin);
             params.set("checkout", dates.checkout);
@@ -786,6 +800,10 @@ function buildBookingContent(locale: Locale) {
           var propid = selected.getAttribute("data-propid");
           var roomid = selected.getAttribute("data-roomid");
           var roomScoped = selected.getAttribute("data-room-scope") === "true";
+          limitGuests(adultsSelect, Number(selected.getAttribute("data-max-adults")), 2);
+          limitGuests(childrenSelect, Number(selected.getAttribute("data-max-children")), 0);
+          pageParams.set("numadult", adultsSelect.value);
+          pageParams.set("numchild", childrenSelect.value);
           options.forEach(function (option) {
             var active = option === selected;
             option.classList.toggle("is-active", active);
