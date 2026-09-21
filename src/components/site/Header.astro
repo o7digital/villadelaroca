@@ -17,6 +17,7 @@ const roomPath = isSpanish ? "/es/room/room/" : "/room/room/";
 const activitiesPath = isSpanish ? "/es/activities/" : "/activities/";
 const contactPath = isSpanish ? "/es/contact/" : "/contact/";
 const bookLabel = isSpanish ? "Reserve ahora" : "Book Now!";
+const bookingUrl = isSpanish ? "/es/reservar/" : "/book/";
 const englishHref = isSpanish ? switchHref : currentPath;
 const spanishHref = isSpanish ? currentPath : switchHref;
 const activeLanguageCode = isSpanish ? "ES" : "EN";
@@ -73,13 +74,14 @@ function pageClass(base: string, active: boolean) {
       </div>
       <div class="header_tools">
         <div class="nav_mini_tool_container">
-          <span
-            class="btn btn-inv btn-secondary booking-disabled"
+          <a
+            href={bookingUrl}
+            class="btn btn-inv btn-secondary"
             style="margin-top:-20px"
-            aria-disabled="true"
+            aria-current={currentPage === "booking" ? "page" : undefined}
           >
             {bookLabel}
-          </span>
+          </a>
         </div>
       </div>
       <a class="menu-toggler  hidden_above_threshold">
@@ -89,12 +91,6 @@ function pageClass(base: string, active: boolean) {
   </div>
 </div>
 <style is:global>
-  .toggler_and_tools .booking-disabled {
-    cursor: not-allowed;
-    opacity: 0.55;
-    pointer-events: none;
-  }
-
   .toggler_and_tools .mobile-lang-switcher {
     display: inline-flex;
     flex-direction: column;
