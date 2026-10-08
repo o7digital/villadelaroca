@@ -579,6 +579,7 @@ function bookingCopy(locale: Locale) {
       introText: "Selecciona una suite privada o disfruta la villa completa. La disponibilidad, las tarifas y el pago seguro se gestionan directamente con nuestro sistema de reservaciones.",
       suites: "Suites privadas",
       suitesDetail: "Cinco suites · desayuno incluido",
+      occupancy: "Por suite: tarifa para 2 adultos. Máximo 3 personas, con solo 1 persona adicional (adulto o niño) con un cargo de 50 USD o su equivalente en pesos.",
       villa: "Villa completa",
       villaDetail: "Uso privado · cinco habitaciones",
       dates: "Elige tus fechas",
@@ -604,6 +605,7 @@ function bookingCopy(locale: Locale) {
     introText: "Choose a private suite or enjoy the entire villa. Live availability, rates and secure payment are handled directly by our reservation system.",
     suites: "Private suites",
     suitesDetail: "Five suites · breakfast included",
+    occupancy: "Per suite: rate includes 2 adults. Maximum 3 guests, with only 1 additional guest (adult or child) charged USD 50 or the equivalent in pesos.",
     villa: "Entire villa",
     villaDetail: "Private use · five bedrooms",
     dates: "Choose your dates",
@@ -643,7 +645,7 @@ function buildBookingContent(locale: Locale) {
         </div>
 
         <div class="vdr-stay-options" role="group" aria-label="${locale === "es" ? "Tipo de estancia" : "Stay type"}">
-          <button class="vdr-stay-option is-active" type="button" data-stay="suites" data-propid="316599" data-roomid="658909" data-max-adults="2" data-max-children="3" aria-pressed="true">
+          <button class="vdr-stay-option is-active" type="button" data-stay="suites" data-propid="316599" data-roomid="658909" data-max-adults="3" data-max-children="1" data-max-guests="3" aria-pressed="true">
             <img src="${SUITES_IMAGE}" alt="${copy.suites}" width="1200" height="900" />
             <span class="vdr-stay-option__copy">
               <span class="vdr-stay-option__title">${copy.suites}</span>
@@ -703,6 +705,7 @@ function buildBookingContent(locale: Locale) {
               </select>
             </label>
           </div>
+          <p class="vdr-engine-hint" data-suite-occupancy>${copy.occupancy}</p>
           <p class="vdr-engine-hint">${copy.hint}</p>
           <div class="vdr-engine-frame-wrap" data-booking-frame-wrap>
             <div class="vdr-engine-loading" aria-live="polite">${copy.loading}</div>
@@ -801,7 +804,9 @@ function buildBookingContent(locale: Locale) {
           var roomid = selected.getAttribute("data-roomid");
           var roomScoped = selected.getAttribute("data-room-scope") === "true";
           limitGuests(adultsSelect, Number(selected.getAttribute("data-max-adults")), 2);
-          limitGuests(childrenSelect, Number(selected.getAttribute("data-max-children")), 0);
+          var maxGuests = Number(selected.getAttribute("data-max-guests")) || Infinity;
+          limitGuests(childrenSelect, Math.min(Number(selected.getAttribute("data-max-children")), maxGuests - Number(adultsSelect.value)), 0);
+          document.querySelector("[data-suite-occupancy]").hidden = selected.getAttribute("data-stay") !== "suites";
           pageParams.set("numadult", adultsSelect.value);
           pageParams.set("numchild", childrenSelect.value);
           options.forEach(function (option) {
