@@ -580,7 +580,7 @@ function bookingCopy(locale: Locale) {
       suites: "Suites privadas",
       suitesDetail: "Cinco suites · desayuno incluido",
       occupancy: "Por suite: máximo 2 adultos y 2 niños. Cargo adicional de 50 USD por niño y por noche o su equivalente en pesos.",
-      villaOccupancy: "Villa completa: máximo 20 adultos y 5 niños. Cargo adicional de 50 USD por niño y por noche o su equivalente en pesos.",
+      villaOccupancy: "Villa completa: máximo 10 adultos y 5 niños. Cargo adicional de 50 USD por niño y por noche o su equivalente en pesos.",
       villa: "Villa completa",
       villaDetail: "Uso privado · cinco habitaciones",
       dates: "Elige tus fechas",
@@ -607,7 +607,7 @@ function bookingCopy(locale: Locale) {
     suites: "Private suites",
     suitesDetail: "Five suites · breakfast included",
     occupancy: "Per suite: maximum 2 adults and 2 children. Additional charge of USD 50 per child per night or the equivalent in pesos.",
-    villaOccupancy: "Entire villa: maximum 20 adults and 5 children. Additional charge of USD 50 per child per night or the equivalent in pesos.",
+    villaOccupancy: "Entire villa: maximum 10 adults and 5 children. Additional charge of USD 50 per child per night or the equivalent in pesos.",
     villa: "Entire villa",
     villaDetail: "Private use · five bedrooms",
     dates: "Choose your dates",
@@ -654,7 +654,7 @@ function buildBookingContent(locale: Locale) {
               <span class="vdr-stay-option__detail">${copy.suitesDetail}</span>
             </span>
           </button>
-          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" data-roomid="715668" data-room-scope="true" data-max-adults="20" data-max-children="5" data-max-guests="25" aria-pressed="false">
+          <button class="vdr-stay-option" type="button" data-stay="villa" data-propid="318544" data-roomid="715668" data-room-scope="true" data-max-adults="10" data-max-children="5" data-max-guests="15" aria-pressed="false">
             <img src="${VILLA_IMAGE}" alt="${copy.villa}" width="1401" height="800" />
             <span class="vdr-stay-option__copy">
               <span class="vdr-stay-option__title">${copy.villa}</span>
@@ -697,7 +697,7 @@ function buildBookingContent(locale: Locale) {
             <label class="vdr-guest-field">
               <span>${copy.adults}</span>
               <select data-numadult aria-label="${copy.adults}">
-                ${Array.from({ length: 20 }, (_, index) => `<option value="${index + 1}"${index === 1 ? " selected" : ""}>${index + 1}</option>`).join("")}
+                ${Array.from({ length: 10 }, (_, index) => `<option value="${index + 1}"${index === 1 ? " selected" : ""}>${index + 1}</option>`).join("")}
               </select>
             </label>
             <label class="vdr-guest-field">
