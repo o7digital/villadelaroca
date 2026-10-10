@@ -17,11 +17,11 @@
 .vdr-calendar .vdr-calendar__day { min-width: 0; height: 64px; padding: 8px 2px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; border: 1px solid transparent; border-radius: 5px; background: #f6f7f4; color: #243d33; font-size: 14px; font-weight: 600; transition: background 120ms; }
 .vdr-calendar__day small { font-size: 10px; font-weight: 500; color: #5b6b62; }
 .vdr-calendar .vdr-calendar__day:not(:disabled):hover { border-color: #315447; background: #e4ece4; }
-.vdr-calendar .vdr-calendar__day.is-unavailable { background: #faf9f7; color: #b2b5ae; }
+.vdr-calendar .vdr-calendar__day.is-unavailable { background: #faf9f7; color: #b2b5ae !important; }
 .vdr-calendar__day.is-unavailable > span { text-decoration: line-through; }
 .vdr-calendar .vdr-calendar__day.is-unavailable small { color: #b2b5ae; }
 .vdr-calendar .vdr-calendar__day.is-in-range { background: #e0e9e1; border-radius: 2px; }
-.vdr-calendar .vdr-calendar__day.is-selected, .vdr-calendar .vdr-calendar__day.is-selected:hover { background: #213d34; color: white; border-color: #213d34; }
+.vdr-calendar .vdr-calendar__day.is-selected, .vdr-calendar .vdr-calendar__day.is-selected:hover { background: #213d34; color: white !important; border-color: #213d34; }
 .vdr-calendar .vdr-calendar__day.is-selected small { color: #f0d99e; }
 .vdr-calendar__legend { display: flex; gap: 18px; flex-wrap: wrap; margin: 18px 0 22px; font-size: 11px; color: #66716e; }
 .vdr-calendar__legend span::before { content: ''; display: inline-block; width: 9px; height: 9px; border-radius: 2px; background: #213d34; margin-right: 6px; }
