@@ -6,6 +6,7 @@
 .vdr-calendar button { appearance: none; cursor: pointer; font-family: inherit; }
 .vdr-calendar button::before, .vdr-calendar button::after { content: none !important; display: none !important; }
 .vdr-calendar .vdr-calendar__day > span { color: inherit !important; }
+.vdr-calendar .vdr-calendar__day:not(.is-selected):not(.is-unavailable) > span { color: #243d33 !important; }
 .vdr-calendar__nav button { width: 40px; height: 40px; padding: 0; border: 1px solid #d7dfd9; border-radius: 50%; background: white; color: #213d34; font-size: 22px; }
 .vdr-calendar button:focus-visible { outline: 3px solid #c4a767; outline-offset: 3px; }
 .vdr-calendar button:disabled { cursor: default; }
