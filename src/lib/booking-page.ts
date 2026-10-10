@@ -631,7 +631,6 @@ function buildBookingContent(locale: Locale) {
 
   return `
     ${bookingStyles()}
-    <link rel="stylesheet" href="/booking-calendar.css" />
     <main class="vdr-booking-page">
       <section class="vdr-booking-hero">
         <div class="vdr-booking-hero__inner">
@@ -710,7 +709,6 @@ function buildBookingContent(locale: Locale) {
           </div>
           <p class="vdr-engine-hint" data-suite-occupancy>${copy.occupancy}</p>
           <p class="vdr-engine-hint" data-villa-occupancy hidden>${copy.villaOccupancy}</p>
-          <section class="vdr-calendar" data-premium-calendar data-lang="${lang}" aria-label="${copy.dates}"></section>
           <p class="vdr-engine-hint">${copy.hint}</p>
           <div class="vdr-engine-frame-wrap" data-booking-frame-wrap>
             <div class="vdr-engine-loading" aria-live="polite">${copy.loading}</div>
@@ -891,7 +889,6 @@ function buildBookingContent(locale: Locale) {
         selectStay(initialStay, false);
       })();
     </script>
-    <script type="module" src="/booking-calendar.js"></script>
   `;
 }
 

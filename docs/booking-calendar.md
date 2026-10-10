@@ -1,5 +1,11 @@
 # Booking calendar
 
+## Temporary production fallback
+
+The premium selector is disabled on both booking pages because the production calendar endpoint returns HTTP 503 (`API_UNAVAILABLE`). Previously its error handler rendered an empty calendar as disabled dates with dashes, obscuring the working native selector. The existing Beds24 iframe now handles dates, live availability and prices directly for suites and the full villa in both languages. Guest limits and the checkout integration are unchanged. No Beds24 settings or credentials were changed. Re-enable the premium markup and assets only after validating live calendar and quote responses against the native engine.
+
+## Premium implementation (currently disabled)
+
 The English `/book/` and Spanish `/es/reservar/` pages now contain a site-owned date range selector above the existing Beds24 iframe. It never accesses the iframe DOM. The booking engine, quantity selection, guest details and payments remain in Beds24.
 
 ## Server configuration
