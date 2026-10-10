@@ -631,6 +631,7 @@ function buildBookingContent(locale: Locale) {
 
   return `
     ${bookingStyles()}
+    <link rel="stylesheet" href="/booking-calendar.css" />
     <main class="vdr-booking-page">
       <section class="vdr-booking-hero">
         <div class="vdr-booking-hero__inner">
@@ -709,6 +710,7 @@ function buildBookingContent(locale: Locale) {
           </div>
           <p class="vdr-engine-hint" data-suite-occupancy>${copy.occupancy}</p>
           <p class="vdr-engine-hint" data-villa-occupancy hidden>${copy.villaOccupancy}</p>
+          <section class="vdr-calendar" data-premium-calendar data-lang="${lang}" aria-label="${copy.dates}"></section>
           <p class="vdr-engine-hint">${copy.hint}</p>
           <div class="vdr-engine-frame-wrap" data-booking-frame-wrap>
             <div class="vdr-engine-loading" aria-live="polite">${copy.loading}</div>
@@ -724,7 +726,7 @@ function buildBookingContent(locale: Locale) {
           </div>
           <footer class="vdr-engine-footer">
             <span>${copy.powered}</span>
-            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;roomid=658909&amp;referer=BookingLink&amp;lang=${lang}&amp;cur=MXN&amp;numadult=2&amp;numchild=0" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
+            <a data-external-booking href="https://beds24.com/booking.php?propid=316599&amp;roomid=658909&amp;referer=BookingLink&amp;lang=${lang}&amp;cur=USD&amp;numadult=2&amp;numchild=0" target="_blank" rel="noopener noreferrer">${copy.fallback} ↗</a>
           </footer>
         </section>
       </section>
@@ -781,7 +783,7 @@ function buildBookingContent(locale: Locale) {
           params.set("roomid", roomid);
           params.set("referer", referer);
           params.set("lang", frame.getAttribute("data-lang") || "en");
-          params.set("cur", "MXN");
+          params.set("cur", "USD");
           params.set("cssfile", "${BOOKING_ENGINE_CSS_URL}");
           params.set("numadult", adultsSelect.value);
           params.set("numchild", childrenSelect.value);
@@ -824,6 +826,7 @@ function buildBookingContent(locale: Locale) {
           externalLink.href = bookingUrl(propid, roomid, "BookingLink", null, roomScoped);
           frameWrap.classList.remove("is-loaded");
           frame.src = bookingUrl(propid, roomid, "iFrame", roomScoped ? null : currentDates(), roomScoped);
+          window.dispatchEvent(new CustomEvent("vdr:stay-change"));
 
           if (updateAddress && window.history && window.history.replaceState) {
             pageParams.set("stay", selected.getAttribute("data-stay"));
@@ -870,10 +873,25 @@ function buildBookingContent(locale: Locale) {
         });
         document.querySelector("[data-suite-close]").addEventListener("click", function () { lightbox.close(); });
 
+        window.addEventListener("vdr:dates-confirmed", function (event) {
+          var verified = event.detail;
+          var url = new URL(verified.bookingUrl);
+          if (url.origin !== "https://beds24.com" || url.pathname !== "/booking.php") return;
+          url.searchParams.set("cssfile", "${BOOKING_ENGINE_CSS_URL}");
+          frameWrap.classList.remove("is-loaded");
+          frame.src = url.toString();
+          url.searchParams.set("referer", "BookingLink");
+          externalLink.href = url.toString();
+          pageParams.set("checkin", verified.arrival);
+          pageParams.set("checkout", verified.departure);
+          pageParams.set("numnight", String(verified.nights));
+        });
+
         frame.addEventListener("load", function () { frameWrap.classList.add("is-loaded"); });
         selectStay(initialStay, false);
       })();
     </script>
+    <script type="module" src="/booking-calendar.js"></script>
   `;
 }
 
