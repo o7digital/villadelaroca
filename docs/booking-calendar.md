@@ -6,6 +6,8 @@ The English `/book/` and Spanish `/es/reservar/` pages now contain a site-owned 
 
 Vercel serves `api/booking.mjs` alongside the static Astro output. Configure a sensitive production `BEDS24_REFRESH_TOKEN`, or `BEDS24_API_TOKEN` for a directly usable access/long-life token. Refresh tokens are exchanged server-side through `GET /authentication/token`; the access token is cached until shortly before expiry. Neither credentials nor upstream errors are returned to browsers. Only GET requests are sent to Beds24, even when the site's verification endpoint is called with POST.
 
+An invite code is a setup credential, not the refresh token. Exchange it once using `GET /authentication/setup` with the `code` header, preserve the complete response, and save its `refreshToken` as the sensitive `BEDS24_REFRESH_TOKEN` variable before redeploying. Verify that the returned refresh token can generate access tokens on successive calls to `/authentication/token`. Do not keep a consumed invite code as the runtime credential, expose the exchange to public visitors, or log any authentication response.
+
 The configured token only needs read access to inventory and properties. Room mappings are an allowlist: suites `316599/658909` (five units), villa `318544/715668` (one unit). Villa availability additionally requires five available units in the suite calendar; no dependency is changed.
 
 ## Prices and restrictions
